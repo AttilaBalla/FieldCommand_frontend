@@ -1,4 +1,6 @@
-class SwrNet extends React.Component {
+import React from "react";
+
+export class SwrNet extends React.Component {
 	content;
 	
 	constructor(props) {
@@ -8,7 +10,7 @@ class SwrNet extends React.Component {
 
 	componentWillMount() {
 
-        fetch("/swrstatus")
+        fetch("http://localhost:8080/swrstatus")
       	.then(res => res.json())
       	.then(
         (result) => {
