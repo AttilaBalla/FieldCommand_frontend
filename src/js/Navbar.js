@@ -1,4 +1,4 @@
-import { SwrNet } from './swrnet.js';
+import { Swrnet } from './Swrnet.js';
 import React from "react";
 import '../css/navbar.css';
 
@@ -52,7 +52,7 @@ export class Navbar extends React.Component {
                     <a className = "navbar-brand" href="/"><img src="/img/fc_icon.png" width="55" height="55" alt="logo"/></a>
                     <NavbarLinks/>
                     <UsernamePanel username="XAttus"/>
-                    <SwrNet/>
+                    <Swrnet/>
                 </nav>
         </div>
     }

@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import ReactDOM from "react-dom";
-import './css/App.css';
-import { Navbar } from "./js/navbar.js";
-import registerServiceWorker from "./js/registerServiceWorker";
+import '../css/App.css';
+import { Navbar } from "./Navbar.js";
+import { Banner } from "./Banner.js";
 
 class App extends Component {
     render() {
         return (
             <div className="App">
                 <Navbar/>
+                <Banner/>
             </div>
     );
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+export default App;
