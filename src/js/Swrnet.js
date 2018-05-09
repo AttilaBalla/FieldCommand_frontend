@@ -36,7 +36,7 @@ export class Swrnet extends React.Component {
 
 			this.content =
 			<div>
-				<img className="mr-2" src="/img/swrnetlogo_on.png" width="80" height="20"/>
+				<img className="mr-2" src="/img/swrnetlogo_on.png" width="80" height="20" alt=""/>
 				{count}
 			</div>;
 
@@ -44,7 +44,7 @@ export class Swrnet extends React.Component {
 			// noinspection CheckTagEmptyBody
             this.content =
 			<div>
-				<img className="mr-2" src="/img/swrnetlogo_off.png" width="80" height="20"/>
+				<img className="mr-2" src="/img/swrnetlogo_off.png" width="80" height="20" alt=""/>
 				<i className="fa fa-exclamation-triangle ml-1 mt-1 text-danger" aria-hidden="true"></i>
 			</div>;
 		}

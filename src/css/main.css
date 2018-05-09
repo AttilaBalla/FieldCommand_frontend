@@ -83,6 +83,10 @@ body {
     background-position: center;
 }
 
+.core_container div.col-3 {
+    padding: 0;
+}
+
 .text_box {
     display: block;
     background: rgba(240, 240, 240, 0.9);

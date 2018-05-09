@@ -17,7 +17,7 @@ function UsernamePanel(props) {
     )
 }
 
-function NavbarLinks(props) {
+function NavbarLinks() {
 
     return (
     <ul className="navbar-nav main_navbar">
@@ -47,13 +47,15 @@ export class Navbar extends React.Component {
     }
 
     render() {
-        return  <div id="navbar_bg">
+        return(
+            <div id="navbar_bg">
                 <nav className="navbar navbar-expand-sm">
                     <a className = "navbar-brand" href="/"><img src="/img/fc_icon.png" width="55" height="55" alt="logo"/></a>
                     <NavbarLinks/>
                     <UsernamePanel username="XAttus"/>
                     <Swrnet/>
                 </nav>
-        </div>
+            </div>
+        )
     }
 }
