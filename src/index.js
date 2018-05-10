@@ -1,16 +1,15 @@
 import React from 'react';
 import { render } from 'react-dom';
 import {BrowserRouter as Router, Route } from 'react-router-dom';
-import { About, Home } from './js/App';
+import { Main } from './js/App';
 import './css/main.css';
 import registerServiceWorker from './js/registerServiceWorker';
 
 render(
     <Router>
-        <div>
-            <Route exact path="/" component={Home}/>
-            <Route exact path="/about" component={About}/>
-        </div>
+        <switch>
+            <Route exact path="(/|/about)" component={Main}/>
+        </switch>
     </Router>,
     document.getElementById('root'),
     registerServiceWorker()

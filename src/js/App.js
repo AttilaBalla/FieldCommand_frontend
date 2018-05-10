@@ -1,32 +1,25 @@
 import React, { Component } from 'react';
-import '../css/sidebar.css';
+import {BrowserRouter as Router, Route } from 'react-router-dom';
 import { Navbar } from "./Navbar.js";
-import { Banner } from "./Banner.js";
 import { HomeContainer } from "./core/Cores.js";
 import { AboutContainer } from "./core/Cores.js";
 import { Footer } from "./Footer";
+import '../css/sidebar.css';
 
-export class Home extends Component {
+export class Main extends Component {
+
     render() {
         return (
-            <div className="Home">
+            <div>
                 <Navbar/>
-                <Banner/>
-                <HomeContainer/>
+                <Router>
+                    <switch>
+                        <Route exact path='/' component={HomeContainer}/>
+                        <Route exact path='/about' component={AboutContainer}/>
+                    </switch>
+                </Router>
                 <Footer/>
             </div>
-    );
+    )
   }
-}
-
-export class About extends Component {
-    render() {
-        return (
-            <div className="About">
-                <Navbar/>
-                <AboutContainer/>
-                <Footer/>
-            </div>
-        )
-    }
 }

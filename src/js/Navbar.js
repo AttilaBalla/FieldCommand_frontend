@@ -23,19 +23,19 @@ function NavbarLinks() {
     return (
     <ul className="navbar-nav main_navbar">
         <li className="nav-item">
-            <Link className="nav-link" to="/"> <i className="fa fa-bars"></i>Home</Link>
+            <Link className="nav-link" to="/"> <i className="fa fa-bars"></i>News</Link>
         </li>
         <li className="nav-item">
             <Link className="nav-link" to="/about"><i className="fa fa-info"></i>About</Link>
         </li>
         <li className="nav-item">
-            <a className="nav-link" href="#"><i className="fa fa-download"></i> Releases</a>
+            <Link className="nav-link" to="/"><i className="fa fa-download"></i>Releases</Link>
         </li>
         <li className="nav-item">
-            <a className="nav-link" href="#"><i className="fa fa-clipboard"></i> Game Reports</a>
+            <Link className="nav-link" to="/"><i className="fa fa-clipboard"></i>Game Reports</Link>
         </li>
         <li className="nav-item">
-            <a className="nav-link" href="#"><i className="fa fa-cog"></i>Administration</a>
+            <Link className="nav-link" to="/"> <i className="fa fa-cog"></i>Adminsitration</Link>
         </li>
     </ul>)
 }
