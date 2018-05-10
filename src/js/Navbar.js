@@ -1,5 +1,6 @@
 import { Swrnet } from './Swrnet.js';
 import React from "react";
+import { Link } from 'react-router-dom';
 import '../css/navbar.css';
 
 function UsernamePanel(props) {
@@ -22,10 +23,10 @@ function NavbarLinks() {
     return (
     <ul className="navbar-nav main_navbar">
         <li className="nav-item">
-            <a className="nav-link" href="#"><i className="fa fa-bars"></i>News</a>
+            <Link className="nav-link" to="/"> <i className="fa fa-bars"></i>Home</Link>
         </li>
         <li className="nav-item">
-            <a className="nav-link" href="#"><i className="fa fa-info"></i> About</a>
+            <Link className="nav-link" to="/about"><i className="fa fa-info"></i>About</Link>
         </li>
         <li className="nav-item">
             <a className="nav-link" href="#"><i className="fa fa-download"></i> Releases</a>

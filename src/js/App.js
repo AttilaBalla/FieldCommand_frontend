@@ -2,20 +2,31 @@ import React, { Component } from 'react';
 import '../css/sidebar.css';
 import { Navbar } from "./Navbar.js";
 import { Banner } from "./Banner.js";
-import { Core } from "./core/Core.js";
-import {Footer} from "./Footer";
+import { HomeContainer } from "./core/Cores.js";
+import { AboutContainer } from "./core/Cores.js";
+import { Footer } from "./Footer";
 
-class App extends Component {
+export class Home extends Component {
     render() {
         return (
-            <div className="App">
+            <div className="Home">
                 <Navbar/>
                 <Banner/>
-                <Core/>
+                <HomeContainer/>
                 <Footer/>
             </div>
     );
   }
 }
 
-export default App;
+export class About extends Component {
+    render() {
+        return (
+            <div className="About">
+                <Navbar/>
+                <AboutContainer/>
+                <Footer/>
+            </div>
+        )
+    }
+}

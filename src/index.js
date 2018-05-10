@@ -12,5 +12,6 @@ render(
             <Route exact path="/about" component={About}/>
         </div>
     </Router>,
-    document.getElementById('root')
+    document.getElementById('root'),
+    registerServiceWorker()
 );
