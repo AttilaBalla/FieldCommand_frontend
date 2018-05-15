@@ -51,7 +51,7 @@ export class Navbar extends React.Component {
         return(
             <div id="navbar_bg">
                 <nav className="navbar navbar-expand-sm">
-                    <a className = "navbar-brand" href="/"><img src="/img/fc_icon.png" width="55" height="55" alt="logo"/></a>
+                    <Link className = "navbar-brand" to="/"><img src="/img/fc_icon.png" width="55" height="55" alt="logo"/></Link>
                     <NavbarLinks/>
                     <UsernamePanel username="XAttus"/>
                     <Swrnet/>

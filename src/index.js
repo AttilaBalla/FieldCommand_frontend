@@ -6,10 +6,9 @@ import './css/main.css';
 import registerServiceWorker from './js/registerServiceWorker';
 
 render(
+
     <Router>
-        <switch>
-            <Route exact path="(/|/about)" component={Main}/>
-        </switch>
+        <Main/>
     </Router>,
     document.getElementById('root'),
     registerServiceWorker()
