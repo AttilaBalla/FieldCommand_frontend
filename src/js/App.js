@@ -1,21 +1,23 @@
-import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
-import { Navbar } from "./Navbar.js";
-import { HomeContainer, AboutContainer } from "./core/Cores";
-
-import { Footer } from "./Footer";
+import React from 'react';
+import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import '../css/sidebar.css';
+import {Login} from "./util/Login";
+import {Main} from "../js/core/Cores.js"
+import {Provider} from "./util/UserProvider";
 
-export class Main extends Component {
-
+export class App extends React.Component {
     render() {
-        return (
-            <div>
-                <Navbar/>
-                    <Route exact path='/' component={HomeContainer}/>
-                    <Route exact path='/about' component={AboutContainer}/>
-                <Footer/>
-            </div>
-    )
-  }
+        return(
+            <Provider>
+                <Router>
+                    <Switch>
+                        <Route exact path='/login' component={Login}/>
+                        <Route path='/' component={Main}/>
+                    </Switch>
+                </Router>
+            </Provider>
+        )
+    }
 }
+
+
