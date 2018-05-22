@@ -1,12 +1,13 @@
 import React from "react";
 import '../../css/login.css';
 import { login } from './APIUtils';
+import {ServerErrorIndicator} from "./ServerErrorIndicator";
 
 function LoginInput(props) {
 
     const componentClasses = ["input_field"];
 
-    if(props.error) {
+    if(props.error === "unauthorized") {
         componentClasses.push("input_field_error")
     }
 
@@ -23,7 +24,9 @@ export class Login extends React.Component {
         super(props);
 
         this.state = {
-            username: "", password: "", inputError: false
+            username: "",
+            password: "",
+            loginStatus: false
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -38,16 +41,16 @@ export class Login extends React.Component {
 
             }).catch(error => {
                 if(error.status === 401) {
-                    this.setState({inputError: true});
+                    this.setState({loginStatus: "unauthorized"});
 
                     setTimeout(() => {
                         this.setState({
-                            inputError: false
+                            loginStatus: ""
                         })
                     }, 2000);
 
                 } else {
-                    console.log("internal error!");
+                    this.setState({loginStatus: "serverError"})
                 }
         })
 
@@ -59,21 +62,25 @@ export class Login extends React.Component {
     }
 
     render() {
+
         return (
             <div className="login_container">
                 <form onSubmit={this.handleSubmit}>
                     <img src="/img/fc.png" width="200" height="200" alt=""/>
-                    <h5>FIELDCOMMAND LOGIN</h5>
-                    <LoginInput error={this.state.inputError}>
+                    <h5>
+                        FIELDCOMMAND LOGIN
+                        <ServerErrorIndicator error={this.state.loginStatus}/>
+                    </h5>
+                    <LoginInput error={this.state.loginStatus}>
                         <label>
                             <span className="fa fa-user" aria-hidden="true"/>
-                            <input className="login_field" type="text" name="username" value={this.state.username} onChange={this.handleChange} placeholder="Username" required="true" />
+                            <input className="login_field" type="text" name="username" onChange={this.handleChange} placeholder="Username" required="true" />
                         </label>
                     </LoginInput>
-                    <LoginInput error={this.state.inputError}>
+                    <LoginInput error={this.state.loginStatus}>
                         <label>
                             <span className="fa fa-lock" aria-hidden="true"/>
-                            <input className="login_field" type="password" name="password" value={this.state.password} onChange={this.handleChange} placeholder="Password" required="true" />
+                            <input className="login_field" type="password" name="password" onChange={this.handleChange} placeholder="Password" required="true" />
                         </label>
                     </LoginInput>
                     <button className="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
