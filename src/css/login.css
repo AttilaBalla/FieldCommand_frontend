@@ -22,6 +22,16 @@
     margin: 20px 0 20px 0;
 }
 
+.input_field_error input {
+    border-bottom: thin solid orangered;
+    transition: border-bottom-color 1ms;
+}
+
+.input_field_error span {
+    color: orangered;
+    transition: color 1ms
+}
+
 .input_field span {
     position: absolute;
     top: 13px;
@@ -31,7 +41,7 @@
     width: 90%;
 }
 
-.login_container input {
+.login_field {
     width: 100%;
     color: white;
     background-color: unset;
@@ -40,6 +50,11 @@
     border-radius: 0;
     border: none;
     border-bottom: thin solid lightgray;
+    transition: border-bottom-color 1000ms;
+}
+
+.fa {
+    transition: color 1000ms;
 }
 
 .login_container input:focus {
