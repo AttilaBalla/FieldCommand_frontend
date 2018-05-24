@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 
 export const sidebarTypes = {
     TITLE: {
@@ -23,7 +23,7 @@ export const sidebarTypes = {
     USERS: {
         classElement: "nav-item sidebar_button",
         icon: "fa fa-user",
-        text: "users"
+        text: "Users"
     }
 };
 
@@ -60,7 +60,7 @@ export function SidebarItem(props) {
             break;
     }
 
-    if(classElement.contains("sidebar_title")) {
+    if(classElement.includes("sidebar_title")) {
         return(
             <li className={classElement}>
                 {text}
@@ -69,7 +69,7 @@ export function SidebarItem(props) {
     } else {
         return(
             <li className={classElement}>
-                <span className={icon}></span>
+                <span className={"mr-2 " + icon}></span>
                 {text}
             </li>
         )

@@ -24,6 +24,7 @@ body {
 .core_container {
     max-width: 1600px;
     margin: 0 auto 0 auto;
+    padding: 0;
     box-shadow: 0 15px 30px rgba(50, 50, 60, 0.75)
 }
 
@@ -117,7 +118,7 @@ body {
 
 .sidebar_button, .sidebar_title {
     color: white;
-    padding: 15px;
+    padding: 15px 25px 15px 25px;
     transition: background-color 0.5s;
     transition-timing-function: ease;
 }

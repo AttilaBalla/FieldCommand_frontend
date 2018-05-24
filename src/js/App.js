@@ -1,6 +1,5 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import '../css/sidebar.css';
 import {Login} from "./util/Login";
 import {Main} from "../js/core/Cores.js"
 import {Provider} from "./util/UserProvider";

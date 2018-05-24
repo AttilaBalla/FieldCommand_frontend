@@ -6,6 +6,10 @@ import { Banner } from "./banners/Banner";
 import Route from "react-router-dom/es/Route";
 import {Navbar} from "../Navbar";
 import {Footer} from "../Footer";
+import {AdminSidebar} from "./administration/AdminSidebar";
+import '../../css/sidebar.css';
+import '../../css/admin.css';
+
 
 export class Main extends Component {
 
@@ -15,6 +19,7 @@ export class Main extends Component {
                 <Navbar/>
                 <Route exact path='/' component={HomeContainer}/>
                 <Route exact path='/about' component={AboutContainer}/>
+                <Route exact path='/administration' component={AdminContainer}/>
                 <Footer/>
             </div>
         )
@@ -52,7 +57,7 @@ class AdminContainer extends React.Component {
     render() {
         return (
             <div className="container-fluid core_container">
-
+                <AdminSidebar/>
             </div>
         )
     }

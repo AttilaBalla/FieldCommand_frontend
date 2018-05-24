@@ -35,7 +35,7 @@ function NavbarLinks() {
             <Link className="nav-link" to="/"><i className="fa fa-clipboard"></i>Game Reports</Link>
         </li>
         <li className="nav-item">
-            <Link className="nav-link" to="/"> <i className="fa fa-cog"></i>Adminsitration</Link>
+            <Link className="nav-link" to="/administration"> <i className="fa fa-cog"></i>Adminsitration</Link>
         </li>
     </ul>)
 }
