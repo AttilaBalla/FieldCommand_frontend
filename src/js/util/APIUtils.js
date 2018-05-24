@@ -1,5 +1,6 @@
-const ACCESS_TOKEN = 'accessToken';
-export const API_BASE_URL = 'http://localhost:8080/api';
+import {ACCESS_TOKEN} from "../Constants";
+import {API_BASE_URL} from "../Constants";
+
 
 const request = (options) => {
     const headers = new Headers({
@@ -32,9 +33,22 @@ export function login(loginRequest) {
     });
 }
 
+
 export function retrieveSwrStatus() {
     return request({
-        url: API_BASE_URL + "/swrstatus",
+        url: API_BASE_URL + "/swrStatus",
+        method: 'GET'
+    });
+}
+
+
+export function getCurrentUser() {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+
+    return request({
+        url: API_BASE_URL + "/user/currentUser",
         method: 'GET'
     });
 }

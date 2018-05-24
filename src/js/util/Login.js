@@ -2,6 +2,7 @@ import React from "react";
 import '../../css/login.css';
 import { login } from './APIUtils';
 import {ServerErrorIndicator} from "./ServerErrorIndicator";
+import {ACCESS_TOKEN} from "../Constants";
 
 function LoginInput(props) {
 
@@ -36,7 +37,7 @@ export class Login extends React.Component {
         event.preventDefault();
         login({"username": this.state.username, "password": this.state.password})
             .then(response => {
-                localStorage.setItem("ACCESS_TOKEN", response.accessToken);
+                localStorage.setItem(ACCESS_TOKEN, response.accessToken);
                 console.log("logged in!");
 
             }).catch(error => {

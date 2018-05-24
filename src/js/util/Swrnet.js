@@ -16,7 +16,6 @@ export class Swrnet extends React.Component {
       	.then(
         (result) => {
 		  	this.setState(result);
-		  	console.log(this.state);
         },
         (error) => {
           	this.setState({

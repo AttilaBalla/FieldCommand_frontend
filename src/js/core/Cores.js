@@ -21,27 +21,38 @@ export class Main extends Component {
     }
 }
 
-export class HomeContainer extends React.Component {
+class HomeContainer extends React.Component {
 
     render() {
         return (
-            <div>
+            <React.Fragment>
                 <Banner/>
                 <div className="row core_container">
                     <Newsfeed/>
                     <Timeline/>
                 </div>
-            </div>
+            </React.Fragment>
         )
     }
 }
 
-export class AboutContainer extends React.Component {
+class AboutContainer extends React.Component {
 
     render() {
         return (
             <div className="container-fluid">
                 <AboutContent/>
+            </div>
+        )
+    }
+}
+
+class AdminContainer extends React.Component {
+
+    render() {
+        return (
+            <div className="container-fluid core_container">
+
             </div>
         )
     }
