@@ -6,9 +6,10 @@ import { Banner } from "./banners/Banner";
 import Route from "react-router-dom/es/Route";
 import {Navbar} from "../Navbar";
 import {Footer} from "../Footer";
-import {AdminSidebar} from "./administration/AdminSidebar";
+import {Administration} from "./administration/Administration";
 import '../../css/sidebar.css';
 import '../../css/admin.css';
+
 
 
 export class Main extends Component {
@@ -57,7 +58,7 @@ class AdminContainer extends React.Component {
     render() {
         return (
             <div className="container-fluid core_container">
-                <AdminSidebar/>
+                <Administration/>
             </div>
         )
     }

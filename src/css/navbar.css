@@ -51,11 +51,6 @@
     box-shadow: 0 0 7px rgb(14, 117, 177);
 }
 
-.highlighted {
-    background-color: rgb(17, 150, 228);
-    box-shadow: 0 0 7px rgb(25, 171, 255);
-}
-
 .side_navbar a:hover {
     text-decoration: none;
 }

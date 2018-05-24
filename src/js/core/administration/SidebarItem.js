@@ -27,51 +27,68 @@ export const sidebarTypes = {
     }
 };
 
-export function SidebarItem(props) {
+export class SidebarItem extends React.Component{
 
-    let classElement, icon, text = "";
+    constructor(props) {
+        super(props);
 
-    switch(props.itemType) {
-        case sidebarTypes.TITLE:
-            classElement = sidebarTypes.TITLE.classElement;
-            text = sidebarTypes.TITLE.text;
-            break;
-        case sidebarTypes.GENERAL:
-            classElement = sidebarTypes.GENERAL.classElement;
-            icon = sidebarTypes.GENERAL.icon;
-            text = sidebarTypes.GENERAL.text;
-            break;
-        case sidebarTypes.GAMEREPORTS:
-            classElement = sidebarTypes.GAMEREPORTS.classElement;
-            icon = sidebarTypes.GAMEREPORTS.icon;
-            text = sidebarTypes.GAMEREPORTS.text;
-            break;
-        case sidebarTypes.RELEASES:
-            classElement = sidebarTypes.RELEASES.classElement;
-            icon = sidebarTypes.RELEASES.icon;
-            text = sidebarTypes.RELEASES.text;
-            break;
-        case sidebarTypes.USERS:
-            classElement = sidebarTypes.USERS.classElement;
-            icon = sidebarTypes.USERS.icon;
-            text = sidebarTypes.USERS.text;
-            break;
-        default:
-            break;
+        this.classElement = "";
+        this.icon = "";
+        this.text = "";
+
+        this.handleClick = this.handleClick.bind(this);
     }
 
-    if(classElement.includes("sidebar_title")) {
-        return(
-            <li className={classElement}>
-                {text}
-            </li>
-        )
-    } else {
-        return(
-            <li className={classElement}>
-                <span className={"mr-2 " + icon}></span>
-                {text}
-            </li>
-        )
+    componentWillMount() {
+        switch (this.props.itemType) {
+            case sidebarTypes.TITLE:
+                this.classElement = sidebarTypes.TITLE.classElement;
+                this.text = sidebarTypes.TITLE.text;
+                break;
+            case sidebarTypes.GENERAL:
+                this.classElement = sidebarTypes.GENERAL.classElement;
+                this.icon = sidebarTypes.GENERAL.icon;
+                this.text = sidebarTypes.GENERAL.text;
+                break;
+            case sidebarTypes.GAMEREPORTS:
+                this.classElement = sidebarTypes.GAMEREPORTS.classElement;
+                this.icon = sidebarTypes.GAMEREPORTS.icon;
+                this.text = sidebarTypes.GAMEREPORTS.text;
+                break;
+            case sidebarTypes.RELEASES:
+                this.classElement = sidebarTypes.RELEASES.classElement;
+                this.icon = sidebarTypes.RELEASES.icon;
+                this.text = sidebarTypes.RELEASES.text;
+                break;
+            case sidebarTypes.USERS:
+                this.classElement = sidebarTypes.USERS.classElement;
+                this.icon = sidebarTypes.USERS.icon;
+                this.text = sidebarTypes.USERS.text;
+                break;
+            default:
+                break;
+        }
+    }
+
+    handleClick() {
+        this.props.onClick(this.props.itemType);
+    }
+
+    render() {
+
+        if (this.classElement.includes("sidebar_title")) {
+            return (
+                <li className={this.classElement}>
+                    {this.text}
+                </li>
+            )
+        } else {
+            return (
+                <li onClick={this.handleClick} className={this.classElement + " " + this.props.highlighted}>
+                    <span className={"mr-2 " + this.icon}></span>
+                    {this.text}
+                </li>
+            )
+        }
     }
 }
