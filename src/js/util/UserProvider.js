@@ -7,12 +7,10 @@ export class Provider extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: null,
+            username: null,
             notFound: false,
             serverError: false
         };
-
-        //this.loadUser = this.loadUser.bind(this);
     }
 
     loadUser() {
@@ -20,7 +18,8 @@ export class Provider extends React.Component {
         getCurrentUser()
             .then(response => {
                 this.setState({
-                    user: response,
+                    username: response["username"],
+                    // put more user related stuff in here later as needed
                 });
             }).catch(error => {
             if(error.status === 404) {
@@ -43,7 +42,7 @@ export class Provider extends React.Component {
         return(
             <UserContext.Provider value={
                 {
-                    user: this.state.user, // expose state to other components like this
+                    username:this.state.username, // expose data to other components
                 }
             }>
                 {this.props.children}

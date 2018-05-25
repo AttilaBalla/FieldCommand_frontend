@@ -2,10 +2,10 @@ import { Swrnet } from './util/Swrnet.js';
 import React from "react";
 import { Link } from 'react-router-dom';
 import '../css/navbar.css';
+import {UserContext} from "./util/UserProvider";
 
 function UsernamePanel(props) {
     return(
-        <div className="navbar-nav ml-auto navbar_right">
         <div className="dropdown show mr-5">
             <a className="dropdown-toggle" href="#" role="button" id="user_actions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span className="mr-1 username">{props.username}</span>
@@ -14,11 +14,15 @@ function UsernamePanel(props) {
                 <a className="dropdown-item" href="#"><span><i className="fa fa-sign-out"></i></span>Log out</a>
             </div>
         </div>
-        </div>
     )
 }
 
-function NavbarLinks() {
+function NavbarLinks(props) {
+
+    const adminLink = (props.username ) ?
+    <li className="nav-item">
+        <Link className="nav-link" to="/administration"> <i className="fa fa-cog"></i>Adminsitration</Link>
+    </li> : "";
 
     return (
     <ul className="navbar-nav main_navbar">
@@ -34,9 +38,7 @@ function NavbarLinks() {
         <li className="nav-item">
             <Link className="nav-link" to="/"><i className="fa fa-clipboard"></i>Game Reports</Link>
         </li>
-        <li className="nav-item">
-            <Link className="nav-link" to="/administration"> <i className="fa fa-cog"></i>Adminsitration</Link>
-        </li>
+        {adminLink}
     </ul>)
 }
 
@@ -49,14 +51,28 @@ export class Navbar extends React.Component {
 
     render() {
         return(
-            <div id="navbar_bg">
-                <nav className="navbar navbar-expand-sm">
-                    <Link className = "navbar-brand" to="/"><img src="/img/fc_icon.png" width="55" height="55" alt="logo"/></Link>
-                    <NavbarLinks/>
-                    <UsernamePanel username="XAttus"/>
-                    <Swrnet/>
-                </nav>
-            </div>
+            <UserContext.Consumer>
+                {value => {
+                    const {username} = value;
+                    console.log(value);
+                    console.log(username);
+
+                    let userPanel = (username) ? <UsernamePanel username={username}/> : "";
+
+                    return(
+                    <div id="navbar_bg">
+                        <nav className="navbar navbar-expand-sm">
+                            <Link className = "navbar-brand" to="/"><img src="/img/fc_icon.png" width="55" height="55" alt="logo"/></Link>
+                            <NavbarLinks username={username}/>
+                            <div className="navbar-nav ml-auto navbar_right">
+                                {userPanel}
+                                <Swrnet/>
+                            </div>
+                        </nav>
+                    </div>
+                    )
+                }}
+            </UserContext.Consumer>
         )
     }
 }
