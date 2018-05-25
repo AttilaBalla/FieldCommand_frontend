@@ -21,6 +21,10 @@ body {
     font-size: 13px;
 }
 
+.row {
+    margin: auto;
+}
+
 .core_container {
     max-width: 1600px;
     margin: 0 auto 0 auto;

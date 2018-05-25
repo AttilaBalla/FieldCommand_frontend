@@ -64,10 +64,10 @@
     border-bottom: solid rgb(14, 117, 177);
     outline: none;
 }
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
+.login_container input:-webkit-autofill,
+.login_container input:-webkit-autofill:hover,
+.login_container input:-webkit-autofill:focus,
+.login_container input:-webkit-autofill:active {
     background-color: #2b435e !important;
     -webkit-box-shadow: 0 0 0 30px #2b435e inset;
     -webkit-text-fill-color: white;
