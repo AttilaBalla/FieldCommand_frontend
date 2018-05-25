@@ -30,7 +30,7 @@ export class Swrnet extends React.Component {
 		if(this.state["successful"]) {
 
 			const count = this.state["count"] > 0 ? (
-				<span className="text-success">{this.state["count"]}</span>
+				<span className="text-success">{this.state["count"]}<i className="fa fa-user ml-1 mt-1" aria-hidden="true"></i></span>
 			) : (
 				<span>{this.state["count"]}<i className="fa fa-user ml-1 mt-1" aria-hidden="true"></i></span>
 			);
