@@ -1,6 +1,6 @@
 import React from "react";
 import {getCurrentUser} from "./APIUtils";
-import {ACCESS_TOKEN} from "../Constants";
+import {ACCESS_TOKEN} from "./Constants";
 
 export const UserContext = React.createContext();
 export class Provider extends React.Component {
@@ -8,7 +8,7 @@ export class Provider extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: null,
+            user: null,
             notFound: false,
             serverError: false
         };
@@ -18,7 +18,7 @@ export class Provider extends React.Component {
 
     logout() {
         localStorage.removeItem(ACCESS_TOKEN);
-        this.setState({username: null});
+        this.setState({user: null});
     }
 
     loadUser() {
@@ -29,8 +29,7 @@ export class Provider extends React.Component {
                 .then(response => {
                     console.log(response);
                     this.setState({
-                        username: response["username"],
-                        // put more user related stuff in here later as needed
+                        user: response,
                     });
                 }).catch(error => {
                 if (error.status === 404) {
@@ -60,7 +59,7 @@ export class Provider extends React.Component {
         return(
             <UserContext.Provider value={
                 {
-                    username:this.state.username, // expose data to other components
+                    user:this.state.user, // expose data to other components
                     logout: this.logout,
                 }
             }>

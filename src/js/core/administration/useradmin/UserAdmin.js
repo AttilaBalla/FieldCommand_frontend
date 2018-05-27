@@ -1,6 +1,6 @@
 import React from "react";
 import {sendEmailInvite} from "../../../util/APIUtils";
-import {Alert, alertTypes} from "./Alert";
+import {Alert, alertTypes} from "../../../util/Alert";
 
 export class UserAdmin extends React.Component {
 

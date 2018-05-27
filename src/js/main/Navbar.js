@@ -1,14 +1,14 @@
-import { Swrnet } from './util/Swrnet.js';
+import { Swrnet } from '../util/Swrnet.js';
 import React from "react";
 import { Link } from 'react-router-dom';
-import '../css/navbar.css';
-import {UserContext} from "./util/UserProvider";
+import '../../css/navbar.css';
+import {UserContext} from "../util/UserProvider";
 
 function UsernamePanel(props) {
 
     return(
         <div className="dropdown show mr-5">
-            <a className="dropdown-toggle" href="#" role="button" id="user_actions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a className="dropdown-toggle" href="" role="button" id="user_actions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span className="mr-1 username">{props.username}</span>
             </a>
             <div className="dropdown-menu" aria-labelledby="user_actions">
@@ -55,15 +55,17 @@ export class Navbar extends React.Component {
         return(
             <UserContext.Consumer>
                 {value => {
-                    const {username, logout} = value;
+                    //console.log(value.user);
+                    const {user, logout} = value;
 
-                    let userPanel = (username) ? <UsernamePanel username={username} logout={logout}/> : "";
+                    let userName = (user) ? user.username : "";
+                    let userPanel = (userName) ? <UsernamePanel username={userName} logout={logout}/> : "";
 
                     return(
                     <div id="navbar_bg">
                         <nav className="navbar navbar-expand-sm">
                             <Link className = "navbar-brand" to="/"><img src="/img/fc_icon.png" width="55" height="55" alt="logo"/></Link>
-                            <NavbarLinks username={username}/>
+                            <NavbarLinks username={userName}/>
                             <div className="navbar-nav ml-auto navbar_right">
                                 {userPanel}
                                 <Swrnet/>

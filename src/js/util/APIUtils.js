@@ -1,5 +1,5 @@
-import {ACCESS_TOKEN} from "../Constants";
-import {API_BASE_URL} from "../Constants";
+import {ACCESS_TOKEN} from "./Constants";
+import {API_BASE_URL} from "./Constants";
 
 
 const request = (options) => {

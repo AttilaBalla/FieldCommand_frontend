@@ -27,6 +27,8 @@ export function Alert(props) {
         case alertTypes.ERROR:
             classElement = alertTypes.ERROR.classElement;
             break;
+        default:
+            break;
     }
 
     return(

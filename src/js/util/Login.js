@@ -2,7 +2,7 @@ import React from "react";
 import '../../css/login.css';
 import { login } from './APIUtils';
 import {ServerErrorIndicator} from "./ServerErrorIndicator";
-import {ACCESS_TOKEN} from "../Constants";
+import {ACCESS_TOKEN} from "./Constants";
 
 function LoginInput(props) {
 
