@@ -2,7 +2,6 @@ import React from "react";
 import '../../css/login.css';
 import { login } from './APIUtils';
 import {ServerErrorIndicator} from "./ServerErrorIndicator";
-import {Redirect} from "react-router-dom";
 import {ACCESS_TOKEN} from "../Constants";
 
 function LoginInput(props) {
@@ -29,29 +28,20 @@ export class Login extends React.Component {
             username: "",
             password: "",
             loginStatus: false,
-            redirect: false
         };
+
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
-    setRedirect() {
-        this.setState({redirect: true});
-    }
-
-    renderRedirect() {
-        if(this.state.redirect) {
-            return <Redirect to="/"/>
-        }
-    }
-
     handleSubmit(event) {
         event.preventDefault();
+
         login({"username": this.state.username, "password": this.state.password})
             .then(response => {
                 localStorage.setItem(ACCESS_TOKEN, response.accessToken);
                 console.log("logged in!");
-                this.setRedirect();
+                window.location.replace(window.location["origin"]);
 
             }).catch(error => {
                 if (error.status === 401) {
@@ -78,31 +68,28 @@ export class Login extends React.Component {
     render() {
 
         return (
-            <React.Fragment>
-                {this.renderRedirect()}
-                <div className="login_container">
-                    <form onSubmit={this.handleSubmit}>
-                        <img src="/img/fc.png" width="200" height="200" alt=""/>
-                        <h5>
-                            FIELDCOMMAND LOGIN
-                            <ServerErrorIndicator error={this.state.loginStatus}/>
-                        </h5>
-                        <LoginInput error={this.state.loginStatus}>
-                            <label>
-                                <span className="fa fa-user" aria-hidden="true"/>
-                                <input className="login_field" type="text" name="username" onChange={this.handleChange} placeholder="Username" required="true" />
-                            </label>
-                        </LoginInput>
-                        <LoginInput error={this.state.loginStatus}>
-                            <label>
-                                <span className="fa fa-lock" aria-hidden="true"/>
-                                <input className="login_field" type="password" name="password" onChange={this.handleChange} placeholder="Password" required="true" />
-                            </label>
-                        </LoginInput>
-                        <button className="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
-                    </form>
-                </div>
-            </React.Fragment>
+            <div className="login_container">
+                <form onSubmit={this.handleSubmit}>
+                    <img src="/img/fc.png" width="200" height="200" alt=""/>
+                    <h5>
+                        FIELDCOMMAND LOGIN
+                        <ServerErrorIndicator error={this.state.loginStatus}/>
+                    </h5>
+                    <LoginInput error={this.state.loginStatus}>
+                        <label>
+                            <span className="fa fa-user" aria-hidden="true"/>
+                            <input className="login_field" type="text" name="username" onChange={this.handleChange} placeholder="Username" required="true" />
+                        </label>
+                    </LoginInput>
+                    <LoginInput error={this.state.loginStatus}>
+                        <label>
+                            <span className="fa fa-lock" aria-hidden="true"/>
+                            <input className="login_field" type="password" name="password" onChange={this.handleChange} placeholder="Password" required="true" />
+                        </label>
+                    </LoginInput>
+                    <button className="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+                </form>
+            </div>
         )
 
     }

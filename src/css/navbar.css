@@ -49,6 +49,7 @@
     color: white;
     background-color: rgb(14, 117, 177);
     box-shadow: 0 0 7px rgb(14, 117, 177);
+    border-radius: .25rem;
 }
 
 .side_navbar a:hover {
@@ -63,4 +64,9 @@
 .dropdown a {
     color: lightgray;
     text-decoration: none;
+}
+
+.logout_button {
+    color: white;
+    cursor: pointer;
 }

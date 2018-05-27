@@ -5,13 +5,14 @@ import '../css/navbar.css';
 import {UserContext} from "./util/UserProvider";
 
 function UsernamePanel(props) {
+
     return(
         <div className="dropdown show mr-5">
             <a className="dropdown-toggle" href="#" role="button" id="user_actions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span className="mr-1 username">{props.username}</span>
             </a>
             <div className="dropdown-menu" aria-labelledby="user_actions">
-                <a className="dropdown-item" href="#"><span><i className="fa fa-sign-out"></i></span>Log out</a>
+                <div className="dropdown-item logout_button" onClick={props.logout}><span><i className="fa fa-sign-out"></i></span>Log out</div>
             </div>
         </div>
     )
@@ -50,14 +51,13 @@ export class Navbar extends React.Component {
     }
 
     render() {
+
         return(
             <UserContext.Consumer>
                 {value => {
-                    const {username} = value;
-                    console.log(value);
-                    console.log(username);
+                    const {username, logout} = value;
 
-                    let userPanel = (username) ? <UsernamePanel username={username}/> : "";
+                    let userPanel = (username) ? <UsernamePanel username={username} logout={logout}/> : "";
 
                     return(
                     <div id="navbar_bg">

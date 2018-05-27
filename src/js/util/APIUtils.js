@@ -13,6 +13,7 @@ const request = (options) => {
 
     const defaults = {headers: headers};
     options = Object.assign({}, defaults, options);
+
     return fetch(options.url, options)
         .then(response =>
             response.json().then(json => {
@@ -26,6 +27,7 @@ const request = (options) => {
 
 
 export function login(loginRequest) {
+
     return request({
         url: API_BASE_URL + "/auth/login",
         method: 'POST',
@@ -35,6 +37,7 @@ export function login(loginRequest) {
 
 
 export function retrieveSwrStatus() {
+
     return request({
         url: API_BASE_URL + "/swrStatus",
         method: 'GET'
@@ -43,9 +46,6 @@ export function retrieveSwrStatus() {
 
 
 export function getCurrentUser() {
-    if(!localStorage.getItem(ACCESS_TOKEN)) {
-        return Promise.reject("No access token set.");
-    }
 
     return request({
         url: API_BASE_URL + "/user/currentUser",
@@ -55,6 +55,7 @@ export function getCurrentUser() {
 
 export function sendEmailInvite(inviteData) {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
+
         return Promise.reject("No access token set.");
     }
 
