@@ -24,10 +24,8 @@ export class Provider extends React.Component {
     loadUser() {
 
         if (localStorage.getItem(ACCESS_TOKEN)) {
-            console.log("retriving user info...");
             getCurrentUser()
                 .then(response => {
-                    console.log(response);
                     this.setState({
                         user: response,
                     });

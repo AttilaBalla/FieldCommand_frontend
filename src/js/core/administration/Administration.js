@@ -2,6 +2,8 @@ import React from "react";
 import {AdminSidebar} from "./AdminSidebar";
 import {sidebarTypes} from "./SidebarItem";
 import {UserAdmin} from "./useradmin/UserAdmin";
+import {Redirect} from "react-router-dom";
+import {UserContext} from "../../util/UserProvider";
 
 export class Administration extends React.Component {
 
@@ -14,7 +16,6 @@ export class Administration extends React.Component {
     }
 
     handleChange(requestedPage) {
-        console.log("changing to: " + requestedPage);
         this.setState({requestedComponent: requestedPage});
     }
 
@@ -31,15 +32,33 @@ export class Administration extends React.Component {
         }
 
         return(
-            <div className="row">
-                <nav className="col-md-2 d-md-block sidebar">
-                    <AdminSidebar onChange={this.handleChange}/>
-                </nav>
-                <div className="col-md-10 admin_container">
-                    {adminComponent}
-                </div>
+            <UserContext.Consumer>
+                {value => {
 
-            </div>
+                    const {user} = value;
+
+                    if(user) {
+                        //TODO access control stuffz (user.simpleAuthorities)
+                        return(
+                        <div className="row">
+                            <nav className="col-md-2 d-md-block sidebar">
+                                <AdminSidebar onChange={this.handleChange}/>
+                            </nav>
+                            <div className="col-md-10 admin_container">
+                                {adminComponent}
+                            </div>
+
+                        </div>
+                        )
+                    }
+                    else {
+                        return(
+                            <Redirect to="/"/>
+                        )
+                    }
+                }}
+
+            </UserContext.Consumer>
         )
     }
 }

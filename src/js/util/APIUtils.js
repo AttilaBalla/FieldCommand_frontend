@@ -65,3 +65,15 @@ export function sendEmailInvite(inviteData) {
         body: JSON.stringify(inviteData)
     });
 }
+
+export function getAllUsers(inviteData) {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+
+        return Promise.reject("No access token set.");
+    }
+
+    return request({
+        url: API_BASE_URL + "/admin/users",
+        method: 'GET',
+    });
+}
