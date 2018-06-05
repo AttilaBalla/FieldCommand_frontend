@@ -37,8 +37,8 @@ export class Administration extends React.Component {
 
                     const {user} = value;
 
-                    if(user) {
-                        //TODO access control stuffz (user.simpleAuthorities)
+                    if(user) { //TODO access control stuffz (user.simpleAuthorities)
+
                         return(
                         <div className="row">
                             <nav className="col-md-2 d-md-block sidebar">

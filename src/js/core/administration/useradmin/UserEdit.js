@@ -26,7 +26,14 @@ export class UserEdit extends React.Component {
                 <div id="accordion" className="user_cards">
                     {this.state.users.map((user, key) => {
                         return (
-                            <UserCard key={key} id={user.id} name={user.username} email={user.email} role={user.role}/>
+                            <UserCard
+                                key={key}
+                                index={key}
+                                id={user.id}
+                                name={user.username}
+                                email={user.email}
+                                role={user.role}
+                            />
                         )
                     })}
                 </div>

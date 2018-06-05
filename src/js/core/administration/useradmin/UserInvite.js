@@ -78,7 +78,11 @@ export class UserInvite extends React.Component {
                         <input type="text" name="email" className="form-control" onChange={this.handleChange} placeholder="E-mail address"
                                required="true"/>
                     </div>
-                    <button className="btn btn-primary invite_send_button" type="submit">Send invitation</button>
+                    <button
+                        className="btn btn-primary invite_send_button"
+                        disabled={("pending" === this.state.status) ? "disabled" : ""}
+                        type="submit">Send invitation
+                    </button>
                 </form>
             </section>
         )

@@ -148,3 +148,13 @@ footer p {
     margin: 10px auto 0 auto;
     color: lightgray;
 }
+
+.alert {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.alert.show {
+    opacity: 1;
+    visibility: visible;
+}

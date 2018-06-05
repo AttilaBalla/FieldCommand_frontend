@@ -13,27 +13,58 @@ export const alertTypes = {
     }
 };
 
-export function Alert(props) {
+export class Alert extends React.Component {
 
-    let classElement = "";
+    constructor(props) {
+        super(props);
 
-    switch(props.alertType) {
-        case alertTypes.NEUTRAL:
-            classElement = alertTypes.NEUTRAL.classElement;
-            break;
-        case alertTypes.SUCCESS:
-            classElement = alertTypes.SUCCESS.classElement;
-            break;
-        case alertTypes.ERROR:
-            classElement = alertTypes.ERROR.classElement;
-            break;
-        default:
-            break;
+        this.state = {
+            active: true
+        };
+
+        this.disappear()
+
     }
 
-    return(
-        <div className={classElement} role="alert">
-            {props.text}
-        </div>
-    )
+    disappear() {
+        setTimeout(() => {
+            this.setState({
+                active: false
+            })
+        }, 5000);
+    }
+
+    setAlertType() {
+        let classElement = "";
+
+        switch(this.props.alertType) {
+            case alertTypes.NEUTRAL:
+                classElement = alertTypes.NEUTRAL.classElement;
+                break;
+            case alertTypes.SUCCESS:
+                classElement = alertTypes.SUCCESS.classElement;
+                break;
+            case alertTypes.ERROR:
+                classElement = alertTypes.ERROR.classElement;
+                break;
+            default:
+                break;
+        }
+
+        return classElement;
+    }
+
+    render() {
+        if(this.state.active) {
+
+            return (
+                <div className={this.setAlertType()} role="alert">
+                    {this.props.text}
+                </div>
+            )
+        } else {
+
+            return ""
+        }
+}
 }
