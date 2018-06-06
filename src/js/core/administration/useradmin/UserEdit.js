@@ -12,7 +12,20 @@ export class UserEdit extends React.Component {
         }
     }
 
-    componentWillMount() {
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.update) {
+            console.log("updating userlist");
+            this.getUserData();
+        } else {
+            console.log("no userlist update.")
+        }
+    }
+
+    componentDidMount() {
+        this.getUserData();
+    }
+
+    getUserData() {
         getAllUsers()
             .then(response => {
                 this.setState({users: response})

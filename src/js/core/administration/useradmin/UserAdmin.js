@@ -9,16 +9,24 @@ export class UserAdmin extends React.Component {
         super(props);
 
         this.state = {
+            listNeedsUpdate: false,
             alertType: null
         };
 
         this.setAlert = this.setAlert.bind(this);
+        this.setUpdate = this.setUpdate.bind(this);
     }
 
     setAlert(alert) {
         this.setState({
             alertType: alert.alertType,
             message: alert.message,
+        })
+    }
+
+    setUpdate(update) {
+        this.setState({
+            listNeedsUpdate: update
         })
     }
 
@@ -31,8 +39,8 @@ export class UserAdmin extends React.Component {
         return (
             <React.Fragment>
                 {alert}
-                <UserInvite sendAlert={this.setAlert}/>
-                <UserEdit sendAlert={this.setAlert}/>
+                <UserInvite sendUpdate={this.setUpdate} sendAlert={this.setAlert}/>
+                <UserEdit update={this.state.listNeedsUpdate} sendAlert={this.setAlert}/>
             </React.Fragment>
         )
     }
