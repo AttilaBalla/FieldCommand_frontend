@@ -21,7 +21,12 @@ export function UserRoleElement(props) {
 
     return(
         <React.Fragment>
-            <input type="radio" name="role" value={props.role} defaultChecked={(props.checked) ? "checked" : ""}/>
+            <input
+                type="radio"
+                name="role"
+                value={props.role}
+                defaultChecked={(props.checked) ? "checked" : ""}
+                onChange={props.handleChange}/>
             <span className={props.badgeColor}>{props.displayName}</span>
         </React.Fragment>
         )

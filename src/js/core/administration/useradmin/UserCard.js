@@ -1,6 +1,5 @@
 import React from "react";
 import {UserRoleElement, userRoles} from "./UserRoleElement"
-import {sendEmailInvite} from "../../../util/APIUtils";
 
 export class UserCard extends React.Component {
 
@@ -10,10 +9,13 @@ export class UserCard extends React.Component {
         this.state = {
             index: props.index,
             id: props.id,
-            name: props.name,
+            username: props.name,
             email: props.email,
             role: props.role
-        }
+        };
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     setNameColor(role) {
@@ -56,27 +58,8 @@ export class UserCard extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        console.log(this.state);
 
-        this.setState({status: "pending"});
-
-        console.log(this.state.email + " " + this.state.username);
-        sendEmailInvite({"username":this.state.username, "email": this.state.email})
-            .then(response => {
-
-                this.setState({
-                    status: "done",
-                    success: response["success"],
-                    result: response["information"],
-                });
-
-            }).catch(error => {
-            if(error.status === 401) {
-                this.setState({status: "unauthorized"});
-
-            } else {
-                this.setState({status: "serverError"})
-            }
-        })
     }
 
     render() {
@@ -89,6 +72,7 @@ export class UserCard extends React.Component {
                     checked = {(this.state.role === role.roleName)}
                     badgeColor = {role.badgeColor}
                     displayName = {role.displayName}
+                    handleChange = {this.handleChange}
                 />
             )
         });
@@ -96,16 +80,24 @@ export class UserCard extends React.Component {
         return (
             <div className="card">
                 <div className="card-header collapsed" data-toggle="collapse" data-target={"#collapse" + this.state.index}>
-                    <h6 className={"mb-0 " + this.setNameColor(this.state.role)} >{this.state.name}</h6>
+                    <h6 className={"mb-0 " + this.setNameColor(this.state.role)} >{this.state.username}</h6>
                 </div>
                 <div className="collapse" id={"collapse" + this.state.index} data-parent="#accordion">
                     <div className="card-body">
                         <form className="user_edit" onSubmit={this.handleSubmit}>
                             <div className="float-left user_details">
                                 <label htmlFor="username">Username</label>
-                                <input type="text" name="username" className="form-control user_username" defaultValue={this.state.name}/>
+                                <input type="text"
+                                       name="username"
+                                       className="form-control user_username"
+                                       onChange={this.handleChange}
+                                       defaultValue={this.state.username}/>
                                 <label htmlFor="email" className="mt-3">E-mail address</label>
-                                <input type="text" name="email" className="form-control user_email" defaultValue={this.state.email}/>
+                                <input type="text"
+                                       name="email"
+                                       className="form-control user_email"
+                                       onChange={this.handleChange}
+                                       defaultValue={this.state.email}/>
                             </div>
                             <div className="float-right mt-2 user_roles">
                                 <h6>Roles</h6>
