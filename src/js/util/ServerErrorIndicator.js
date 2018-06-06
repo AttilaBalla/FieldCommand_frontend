@@ -13,7 +13,7 @@ export function ServerErrorIndicator(props) {
             errorMessage = "Internal error occurred. If this alert persists, contact the site owner.";
             break;
         case "swrNetError":
-            errorMessage = "Unable to retrieve status. This might be due to FieldCommand's backend or SWR.net backend.";
+            errorMessage = "Unable to retrieve status. This might be due to Fieldcommand's backend or SWR.net's backend.";
             break;
         default:
             errorMessage = "";
