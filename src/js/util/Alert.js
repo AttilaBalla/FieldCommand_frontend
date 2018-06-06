@@ -1,4 +1,3 @@
-//I put it here for now but most likely this will be common
 import React from "react";
 
 export const alertTypes = {
@@ -21,23 +20,21 @@ export class Alert extends React.Component {
         this.state = {
             active: true
         };
-
-        this.disappear()
-
     }
 
-    disappear() {
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            active: true
+        });
         setTimeout(() => {
-            this.setState({
-                active: false
-            })
-        }, 5000);
+            this.setState({ active: false })
+        }, 4000);
     }
 
     setAlertType() {
         let classElement = "";
 
-        switch(this.props.alertType) {
+        switch (this.props.alertType) {
             case alertTypes.NEUTRAL:
                 classElement = alertTypes.NEUTRAL.classElement;
                 break;
@@ -55,16 +52,16 @@ export class Alert extends React.Component {
     }
 
     render() {
-        if(this.state.active) {
+        let classElement = this.setAlertType();
 
-            return (
-                <div className={this.setAlertType()} role="alert">
-                    {this.props.text}
-                </div>
-            )
-        } else {
-
-            return ""
+        if (this.state.active) {
+            classElement += " show";
         }
-}
+
+        return (
+            <div className={classElement} role="alert">
+                {this.props.message}
+            </div>
+        )
+    }
 }

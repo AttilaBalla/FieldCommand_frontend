@@ -150,8 +150,18 @@ footer p {
 }
 
 .alert {
+    position: fixed;
+    width: 30%;
+    right: 40px;
+    float: right;
+    z-index: 5;
+    box-shadow: 5px 5px 10px darkgrey;
     opacity: 0;
     visibility: hidden;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
 }
 
 .alert.show {
