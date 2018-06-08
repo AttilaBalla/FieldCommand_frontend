@@ -14,10 +14,7 @@ export class UserEdit extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.update) {
-            console.log("updating userlist");
             this.getUserData();
-        } else {
-            console.log("no userlist update.")
         }
     }
 
@@ -46,6 +43,7 @@ export class UserEdit extends React.Component {
                                 name={user.username}
                                 email={user.email}
                                 role={user.role}
+                                sendAlert={this.props.sendAlert}
                             />
                         )
                     })}

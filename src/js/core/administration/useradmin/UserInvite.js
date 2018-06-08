@@ -30,7 +30,6 @@ export class UserInvite extends React.Component {
             message: "Sending, please wait..."
         });
 
-        console.log(this.state.email + " " + this.state.username);
         sendEmailInvite({"username":this.state.username, "email": this.state.email})
             .then(response => {
 

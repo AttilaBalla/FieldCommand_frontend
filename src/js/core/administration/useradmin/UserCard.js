@@ -1,5 +1,7 @@
 import React from "react";
 import {UserRoleElement, userRoles} from "./UserRoleElement"
+import {updateUser} from "../../../util/APIUtils";
+import {alertTypes} from "../../../util/Alert";
 
 export class UserCard extends React.Component {
 
@@ -18,7 +20,7 @@ export class UserCard extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    setNameColor(role) {
+    setNameColor(role) { // cant be static, lol!
 
         let nameColor = "text-dark";
 
@@ -58,7 +60,29 @@ export class UserCard extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state);
+
+        updateUser(this.state)
+            .then(() => {
+                this.props.sendAlert({
+                    alertType: alertTypes.SUCCESS,
+                    message: "Your changes have been saved successfully!"
+                });
+
+            }).catch(error => {
+            if (error.status === 401) {
+
+                this.props.sendAlert({
+                    alertType: alertTypes.ERROR,
+                    message: "You do not have permission to modify that user!"
+                });
+            } else {
+
+                this.props.sendAlert({
+                    alertType: alertTypes.ERROR,
+                    message: error.information
+                });
+            }
+        })
 
     }
 
