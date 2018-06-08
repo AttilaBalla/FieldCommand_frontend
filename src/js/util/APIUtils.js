@@ -66,7 +66,7 @@ export function sendEmailInvite(inviteData) {
     });
 }
 
-export function getAllUsers(inviteData) {
+export function getAllUsers() {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
 
         return Promise.reject("No access token set.");
@@ -75,5 +75,23 @@ export function getAllUsers(inviteData) {
     return request({
         url: API_BASE_URL + "/admin/users",
         method: 'GET',
+    });
+}
+
+export function updateUser(updateData) {
+
+    return request({
+        url: API_BASE_URL + "/admin/updateUser",
+        method: 'POST',
+        body: JSON.stringify(updateData)
+    });
+}
+
+export function activateUser(activateData) {
+
+    return request({
+        url: API_BASE_URL + "/activate",
+        method: 'POST',
+        body: JSON.stringify(activateData)
     });
 }
