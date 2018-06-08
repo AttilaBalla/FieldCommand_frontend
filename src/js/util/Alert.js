@@ -12,7 +12,10 @@ export const alertTypes = {
     }
 };
 
+const alertTimeout = 4000;
+
 export class Alert extends React.Component {
+
 
     constructor(props) {
         super(props);
@@ -22,13 +25,20 @@ export class Alert extends React.Component {
         };
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({ active: false })
+        }, alertTimeout);
+    }
+
+    componentWillReceiveProps() {
+
         this.setState({
             active: true
         });
         setTimeout(() => {
             this.setState({ active: false })
-        }, 4000);
+        }, alertTimeout);
     }
 
     setAlertType() {
