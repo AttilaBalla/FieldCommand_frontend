@@ -1,5 +1,4 @@
-import {ACCESS_TOKEN} from "./Constants";
-import {API_BASE_URL} from "./Constants";
+import {ACCESS_TOKEN, FETCH_TIMEOUT, API_BASE_URL} from "./Constants";
 
 
 const request = (options) => {
@@ -14,7 +13,9 @@ const request = (options) => {
     const defaults = {headers: headers};
     options = Object.assign({}, defaults, options);
 
-    return fetch(options.url, options)
+    return Promise.race([
+
+        fetch(options.url, options) // element1
         .then(response =>
             response.json().then(json => {
                 if(!response.ok) {
@@ -22,7 +23,11 @@ const request = (options) => {
                 }
                 return json;
             })
-        );
+        ),
+
+        new Promise((_, reject) => // element2
+            setTimeout(() => reject(new Error("Timeout")), FETCH_TIMEOUT))
+        ]);
 };
 
 
@@ -90,7 +95,7 @@ export function updateUser(updateData) {
 export function activateUser(activateData) {
 
     return request({
-        url: API_BASE_URL + "/activate",
+        url: API_BASE_URL + "/auth/activate",
         method: 'POST',
         body: JSON.stringify(activateData)
     });
