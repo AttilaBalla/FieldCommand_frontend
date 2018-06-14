@@ -53,7 +53,6 @@ export class Provider extends React.Component {
     }
 
     render() {
-
         return(
             <UserContext.Provider value={
                 {

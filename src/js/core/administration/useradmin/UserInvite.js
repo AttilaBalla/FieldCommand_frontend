@@ -83,7 +83,7 @@ export class UserInvite extends React.Component {
                     </div>
                     <button
                         className="btn btn-primary invite_send_button"
-                        disabled={(this.state.status === "pending") ? "disabled" : ""}
+                        disabled={(this.state.pending) ? "disabled" : ""}
                         type="submit">Send invitation
                     </button>
                 </form>

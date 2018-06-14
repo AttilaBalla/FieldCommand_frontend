@@ -28,6 +28,7 @@ export class Login extends React.Component {
             username: "",
             password: "",
             loginStatus: false,
+            pending: false,
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,6 +37,7 @@ export class Login extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        this.setState({pending: true});
 
         login({"username": this.state.username, "password": this.state.password})
             .then(response => {
@@ -44,17 +46,22 @@ export class Login extends React.Component {
                 window.location.replace(window.location["origin"]);
 
             }).catch(error => {
+                console.log(error);
                 if (error.status === 401) {
-                this.setState({loginStatus: "unauthorized"});
+                    this.setState({
+                        loginStatus: "unauthorized",
+                        pending: false
+                    });
 
                 setTimeout(() => {
-                    this.setState({
-                        loginStatus: ""
-                    })
+                    this.setState({loginStatus: ""})
                 }, 2000);
 
                 } else {
-                this.setState({loginStatus: "serverError"})
+                    this.setState({
+                        loginStatus: "serverError",
+                        pending: false
+                    })
                 }
             })
 
@@ -73,7 +80,10 @@ export class Login extends React.Component {
                     <img src="/img/fc.png" width="200" height="200" alt=""/>
                     <h5>
                         FIELDCOMMAND LOGIN
-                        <ServerErrorIndicator error={this.state.loginStatus}/>
+                        {(this.state.loginStatus === "serverError")
+                            ? <ServerErrorIndicator error={(this.state.loginStatus)}/>
+                            : null
+                        }
                     </h5>
                     <LoginInput error={this.state.loginStatus}>
                         <label>
@@ -87,7 +97,10 @@ export class Login extends React.Component {
                             <input className="login_field" type="password" name="password" onChange={this.handleChange} placeholder="Password" required="true" />
                         </label>
                     </LoginInput>
-                    <button className="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+                    <button className="btn btn-lg btn-primary btn-block"
+                            type="submit"
+                            disabled={(this.state.pending) ? "disabled" : ""}>
+                        {(this.state.pending) ? "Please wait..." : "Login"}</button>
                 </form>
             </div>
         )

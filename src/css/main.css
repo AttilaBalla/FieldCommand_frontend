@@ -152,6 +152,7 @@ footer p {
 .alert {
     position: fixed;
     max-width: 35%;
+    min-width: 15%;
     right: 40px;
     float: right;
     z-index: 5;

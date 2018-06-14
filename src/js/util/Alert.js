@@ -1,4 +1,5 @@
 import React from "react";
+import {ALERT_TIMEOUT} from "./Constants";
 
 export const alertTypes = {
     NEUTRAL: {
@@ -11,8 +12,6 @@ export const alertTypes = {
         classElement: "alert alert-danger",
     }
 };
-
-const alertTimeout = 4000;
 
 export class Alert extends React.Component {
 
@@ -28,7 +27,7 @@ export class Alert extends React.Component {
     componentDidMount() {
         setTimeout(() => {
             this.setState({ active: false })
-        }, alertTimeout);
+        }, ALERT_TIMEOUT);
     }
 
     componentWillReceiveProps() {
@@ -38,7 +37,7 @@ export class Alert extends React.Component {
         });
         setTimeout(() => {
             this.setState({ active: false })
-        }, alertTimeout);
+        }, ALERT_TIMEOUT);
     }
 
     setAlertType() {
