@@ -38,7 +38,7 @@
 
 .badge_version {
     color: #fff;
-    background-color: #6e00b8;
+    background-color: #7a005b;
 }
 
 .user_details {
@@ -47,4 +47,8 @@
 
 .user_roles, .user_versions {
     width: 55%;
+}
+
+.text-owner {
+    color: #6E00B8;
 }
