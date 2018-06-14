@@ -15,12 +15,15 @@ export function ServerErrorIndicator(props) {
         case "swrNetError":
             errorMessage = "Unable to retrieve status. This might be due to Fieldcommand's backend or SWR.net's backend.";
             break;
+        case "activationError":
+            errorMessage = "Unable to activate the account. The key provided is invalid!";
+            break;
         default:
-            errorMessage = "";
+            errorMessage = props.error; // if no templates match, use the text provided
             break;
     }
 
-    if (errorMessage !== "") {
+    if (errorMessage) {
         return (
             <React.Fragment>
                 <i data-tip="React-tooltip" className="fa fa-exclamation-triangle text-danger m-2" aria-hidden="true"></i>

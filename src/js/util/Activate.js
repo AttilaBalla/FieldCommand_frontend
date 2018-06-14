@@ -29,6 +29,8 @@ export class Activate extends React.Component {
             difference: true,
             password: "",
             passwordAgain: "",
+            errorMessage: "",
+            pending: false,
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,19 +38,31 @@ export class Activate extends React.Component {
     }
 
     componentDidMount() {
-        const { match: { params } } = this.props; // pull params out of the URL via match obj
+        const {match: {params}} = this.props; // pull params out of the URL via match obj
         this.setState({key: params.id})
     }
 
     handleSubmit(event) {
         event.preventDefault();
+        this.setState({pending: true});
 
         activateUser({"key": this.state.key, "password": this.state.password})
-            .then(response => {
+            .then(() => {
                 window.location.replace(window.location["origin"]);
-
             }).catch(error => {
-                // TODO ERROR HANDLING
+                console.log(error.status);
+                if(error.status === 400) {
+
+                    this.setState({
+                        errorMessage: "activationError",
+                        pending: false
+                    })
+                } else {
+                    this.setState({
+                        errorMessage: "serverError",
+                        pending: false
+                    })
+                }
         })
 
     }
@@ -65,7 +79,7 @@ export class Activate extends React.Component {
             different = true;
         }
 
-        if(this.state.password.length <= PW_LENGTH) {
+        if(this.state.password.length < PW_LENGTH) {
             short = true;
         }
 
@@ -75,7 +89,7 @@ export class Activate extends React.Component {
                     <img src="/img/fc.png" width="200" height="200" alt=""/>
                     <h5>
                         SET YOUR PASSWORD
-                        <ServerErrorIndicator error={this.state.loginStatus}/>
+                        <ServerErrorIndicator error={this.state.errorMessage}/>
                     </h5>
                     <LoginInput error={different}>
                         <label>
@@ -92,8 +106,13 @@ export class Activate extends React.Component {
                     <button
                         className="btn btn-lg btn-primary btn-block"
                         type="submit"
-                        disabled={(different) ? "disabled" : "" || (short) ? "disabled" : ""}>
-                        {(different) ? "doesn't match!" : "" || (short) ? "too short... < " + PW_LENGTH : "Continue"}
+                        disabled={
+                            (different) ? "disabled" : "" ||
+                            (short) ? "disabled" : "" ||
+                            (this.state.pending) ? "disabled" : ""
+                        }>
+                        {(different) ? "doesn't match!" : "" ||
+                        (short) ? "too short... < " + PW_LENGTH : "Continue"}
                     </button>
                 </form>
             </div>
