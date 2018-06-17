@@ -15,6 +15,15 @@
     border-radius: 0;
 }
 
+.card-header {
+    cursor: pointer;
+}
+
+.card-header.disabled {
+    cursor: not-allowed;
+    background-color: #ebebeb;
+}
+
 .useradmin_invite {
     min-height: 180px;
 }
@@ -51,4 +60,14 @@
 
 .text-owner {
     color: #6E00B8;
+}
+
+.arrow_up {
+    transform: rotate(180deg);
+    transition: 0.25s;
+}
+
+.arrow_down {
+    transition: 0.25s;
+    transition-delay: 0.5s;
 }

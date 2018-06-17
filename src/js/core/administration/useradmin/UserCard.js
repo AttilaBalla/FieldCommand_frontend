@@ -4,6 +4,7 @@ import {updateUser} from "../../../util/APIUtils";
 import {alertTypes} from "../../../util/Alert";
 import {UserContext} from "../../../util/UserProvider";
 import {UserCardForm} from "./UserCardForm";
+import {UserCardHeader} from "./UserCardHeader";
 
 export class UserCard extends React.Component {
 
@@ -21,42 +22,6 @@ export class UserCard extends React.Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
-    }
-
-    setNameColor(role) { // cant be static, lol!
-
-        let nameColor = "text-dark";
-
-        switch(role) {
-
-            case "ROLE_OWNER":
-                nameColor = "text-owner";
-                break;
-
-            case "ROLE_ADMIN":
-                nameColor = "text-danger";
-                break;
-
-            case "ROLE_DEVELOPER":
-                nameColor = "text-warning";
-                break;
-
-            case "ROLE_USER":
-                nameColor = "text-primary";
-                break;
-
-            case "ROLE_NEW":
-                nameColor = "text-info";
-                break;
-
-            case "ROLE_DISABLED":
-                nameColor = "text-dark";
-                break;
-            default:
-                break;
-        }
-
-        return nameColor;
     }
 
     handleChange(event) {
@@ -109,17 +74,19 @@ export class UserCard extends React.Component {
                 {value => {
                     const {user} = value;
                     let editable = true;
-                    if(user.id !== parseInt(this.state.id, 10)) {
-                        if(user.rolePower <= this.state.rolePower) {
-                            editable = false;
-                        }
+
+                    if(user.id !== parseInt(this.state.id, 10) && user.rolePower <= this.state.rolePower) {
+                        editable = false;
                     }
 
                     return(
                         <div className="card">
-                            <div className="card-header collapsed" data-toggle="collapse" data-target={"#collapse" + this.state.index}>
-                                <h6 className={"mb-0 " + this.setNameColor(this.state.role)} >{this.state.username}</h6>
-                            </div>
+                            <UserCardHeader
+                                editable={editable}
+                                index={this.state.index}
+                                role={this.state.role}
+                                username={this.state.username}
+                            />
                             <div className="collapse" id={"collapse" + this.state.index} data-parent="#accordion">
                                 {(editable)
                                     ? <UserCardForm
@@ -128,7 +95,7 @@ export class UserCard extends React.Component {
                                         username={this.state.username}
                                         email={this.state.email}
                                         rolepanel={rolePanel}
-                                    />
+                                        />
                                     : null}
                             </div>
                         </div>
