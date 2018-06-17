@@ -1,6 +1,5 @@
 import React from "react";
 import {AdminSidebar} from "./AdminSidebar";
-import {sidebarTypes} from "./SidebarItem";
 import {UserAdmin} from "./useradmin/UserAdmin";
 import {Redirect} from "react-router-dom";
 import {UserContext} from "../../util/UserProvider";
@@ -24,7 +23,7 @@ export class Administration extends React.Component {
         let adminComponent = "";
 
         switch(this.state.requestedComponent) {
-            case sidebarTypes.USERS.text:
+            case "Users":
                 adminComponent = <UserAdmin/>;
                 break;
             default:
