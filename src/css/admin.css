@@ -71,3 +71,14 @@
     transition: 0.25s;
     transition-delay: 0.5s;
 }
+
+/* Newsfeed */
+
+.ql-toolbar {
+    background-color: whitesmoke;
+}
+
+.ql-editor {
+    background-color: white;
+    min-height: 200px;
+}
