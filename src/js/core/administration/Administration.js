@@ -3,6 +3,8 @@ import {AdminSidebar} from "./AdminSidebar";
 import {UserAdmin} from "./useradmin/UserAdmin";
 import {Redirect} from "react-router-dom";
 import {UserContext} from "../../util/UserProvider";
+import {NewsFeed} from "./newsfeed/NewsFeed";
+
 
 export class Administration extends React.Component {
 
@@ -25,6 +27,9 @@ export class Administration extends React.Component {
         switch(this.state.requestedComponent) {
             case "Users":
                 adminComponent = <UserAdmin/>;
+                break;
+            case "Newsfeed":
+                adminComponent = <NewsFeed/>;
                 break;
             default:
                 break;
