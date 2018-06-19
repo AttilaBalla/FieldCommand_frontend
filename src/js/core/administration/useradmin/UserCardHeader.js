@@ -5,7 +5,7 @@ export class UserCardHeader extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {arrow: "arrow_down"};
+        this.state = {arrowDown: true};
 
         this.rotateArrow = this.rotateArrow.bind(this);
     }
@@ -48,24 +48,13 @@ export class UserCardHeader extends React.Component {
 
     rotateArrow() {
 
-        let newDirection;
-
-        switch(this.state.arrow) {
-            case "arrow_down":
-                newDirection = "arrow_up";
-                break;
-            case "arrow_up":
-                newDirection = "arrow_down";
-
-                break;
-            default:
-                break;
-        }
-
-        this.setState({arrow: newDirection})
+        this.setState({arrowDown: (!this.state.arrowDown)})
     }
 
     render() {
+
+        let arrowClass = (this.state.arrowDown) ? "arrow_down" : "arrow_up";
+
         return (
             <div className={(this.props.editable) ? "card-header collapsed" : "card-header disabled"}
                  data-toggle={(this.props.editable) ? "collapse" : ""}
@@ -74,7 +63,7 @@ export class UserCardHeader extends React.Component {
                 <span className={"mb-0 " + this.setNameColor(this.props.role)}>{this.props.username}</span>
                 <span className="float-right">
                     {(this.props.editable) ?
-                        <i className={"fa fa-chevron-down " + this.setNameColor(this.props.role) + " " + this.state.arrow}
+                        <i className={"fa fa-chevron-down " + this.setNameColor(this.props.role) + " " + arrowClass}
                            aria-hidden="true"/>
                         : null}
                 </span>
