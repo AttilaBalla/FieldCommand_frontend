@@ -10,7 +10,16 @@ export class NewsFeed extends React.Component {
 
         this.state = {
             alertType: ""
-        }
+        };
+
+        this.setAlert = this.setAlert.bind(this);
+    }
+
+    setAlert(alert) {
+        this.setState({
+            alertType: alert.alertType,
+            message: alert.message,
+        })
     }
 
     render() {
@@ -22,7 +31,7 @@ export class NewsFeed extends React.Component {
         return(
             <React.Fragment>
                 {alert}
-                <NewsEditor/>
+                <NewsEditor sendAlert={this.setAlert}/>
             </React.Fragment>
         )
     }

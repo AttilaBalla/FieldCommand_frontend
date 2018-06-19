@@ -1,6 +1,8 @@
 import React from "react";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import {alertTypes} from "../../../util/Alert";
+import {sendNewsPost} from "../../../util/APIUtils";
 
 
 export class NewsEditor extends React.Component {
@@ -8,10 +10,12 @@ export class NewsEditor extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: '',
+            title: "",
+            content: "",
             visible: false
         };
         this.handleChange = this.handleChange.bind(this);
+        this.handleQuillChange = this.handleQuillChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.switchVisibility = this.switchVisibility.bind(this);
     }
@@ -29,27 +33,52 @@ export class NewsEditor extends React.Component {
         ],
     };
 
-    handleChange(value) {
-        this.setState({ text: value })
+    handleQuillChange(value) {
+        this.setState({ content: value })
+    }
+
+    handleChange(event) {
+        this.setState({[event.target.name]: event.target.value})
     }
 
     switchVisibility() {
         this.setState({visible: (!this.state.visible)})
     }
 
-    handleSubmit() {
-        //TODO submit stuff to backend + error handling
+    handleSubmit(event) {
+        event.preventDefault();
+
+        sendNewsPost(this.state)
+            .then(() => {
+                this.props.sendAlert({
+                    alertType: alertTypes.SUCCESS,
+                    message: "Your changes have been saved successfully!"
+                });
+
+            }).catch(error => {
+            this.props.sendAlert({
+                alertType: alertTypes.ERROR,
+                message: error.information
+            });
+        })
     }
 
     render() {
         return (
             <React.Fragment>
-                <h5>Create a new entry</h5>
+                <h5 className="mb-4">Create a new entry</h5>
+                <input type="text"
+                       name="title"
+                       className="form-control mb-3"
+                       onChange={this.handleChange}
+                       placeholder="Post Title"
+                       />
                 <ReactQuill
                     theme="snow"
                     modules={this.modules}
-                    value={this.state.text}
-                    onChange={this.handleChange}
+                    value={this.state.content}
+                    onChange={this.handleQuillChange}
+                    placeholder="Enter some stuff here..."
                 />
                 <div className="mt-3">
                     <span>Visible on main page:</span>

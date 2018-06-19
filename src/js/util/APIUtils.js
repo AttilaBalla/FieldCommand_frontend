@@ -1,4 +1,4 @@
-import {ACCESS_TOKEN, FETCH_TIMEOUT, API_BASE_URL} from "./Constants";
+import {ACCESS_TOKEN, API_BASE_URL, FETCH_TIMEOUT} from "./Constants";
 
 
 const request = (options) => {
@@ -98,5 +98,14 @@ export function activateUser(activateData) {
         url: API_BASE_URL + "/auth/activate",
         method: 'POST',
         body: JSON.stringify(activateData)
+    });
+}
+
+export function sendNewsPost(newsPostData) {
+
+    return request({
+        url: API_BASE_URL + "/dev/addNewsPost",
+        method: 'POST',
+        body: JSON.stringify(newsPostData)
     });
 }
