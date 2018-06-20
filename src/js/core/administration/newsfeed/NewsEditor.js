@@ -66,7 +66,6 @@ export class NewsEditor extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <h5 className="mb-4">Create a new entry</h5>
                 <input type="text"
                        name="title"
                        className="form-control mb-3"

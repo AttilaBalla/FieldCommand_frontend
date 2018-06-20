@@ -1,6 +1,9 @@
 import React from "react";
 import {NewsEditor} from "./NewsEditor";
 import {Alert} from "../../../util/Alert";
+import {Tab, TabList, TabPanel, Tabs} from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+import {NewsLister} from "./NewsLister";
 
 
 export class NewsFeed extends React.Component {
@@ -31,9 +34,19 @@ export class NewsFeed extends React.Component {
         return(
             <React.Fragment>
                 {alert}
-                <NewsEditor sendAlert={this.setAlert}/>
+                <Tabs>
+                    <TabList>
+                        <Tab>Create a new entry</Tab>
+                        <Tab>List existing entries</Tab>
+                    </TabList>
+                    <TabPanel>
+                        <NewsEditor sendAlert={this.setAlert}/>
+                    </TabPanel>
+                    <TabPanel>
+                        <NewsLister/>
+                    </TabPanel>
+                </Tabs>
             </React.Fragment>
         )
     }
-
 }
