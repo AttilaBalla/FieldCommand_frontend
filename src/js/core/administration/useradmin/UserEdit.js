@@ -19,10 +19,6 @@ export class UserEdit extends React.Component {
     }
 
     componentDidMount() {
-        this.getUserData();
-    }
-
-    getUserData() {
         getAllUsers()
             .then(response => {
                 this.setState({users: response})
@@ -33,7 +29,7 @@ export class UserEdit extends React.Component {
 
         return(
             <section className="useradmin_userlist">
-                <div id="accordion" className="user_cards">
+                <div id="accordion" className="cards">
                     {this.state.users.map((user, key) => {
                         return (
                             <UserCard

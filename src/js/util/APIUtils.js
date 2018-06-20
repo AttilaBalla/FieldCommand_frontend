@@ -13,6 +13,8 @@ const request = (options) => {
     const defaults = {headers: headers};
     options = Object.assign({}, defaults, options);
 
+    // ------------------------------------------------
+
     return Promise.race([
 
         fetch(options.url, options) // element1
@@ -107,5 +109,13 @@ export function sendNewsPost(newsPostData) {
         url: API_BASE_URL + "/dev/addNewsPost",
         method: 'POST',
         body: JSON.stringify(newsPostData)
+    });
+}
+
+export function getNewsPosts() {
+
+    return request({
+        url: API_BASE_URL + "/dev/getNewsPosts",
+        method: 'GET',
     });
 }
