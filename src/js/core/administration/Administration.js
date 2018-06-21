@@ -45,7 +45,7 @@ export class Administration extends React.Component {
 
                         return(
                         <div className="row">
-                            <nav className="col-md-2 d-md-block sidebar">
+                            <nav className="col-md-2 d-md-block sidebar main_color_dark">
                                 <AdminSidebar onChange={this.handleChange}/>
                             </nav>
                             <div className="col-md-10 admin_container">

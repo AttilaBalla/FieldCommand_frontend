@@ -5,7 +5,6 @@ body {
 #banner_bg {
     height: 300px;
     margin-bottom: 20px;
-    background-color:#2b435e;
     box-shadow: 0 0 20px rgba(50, 50, 60, 1)
 }
 
@@ -15,6 +14,24 @@ body {
     height: 300px;
     max-width: 1600px;
     margin: auto;
+}
+
+.main_color_dark {
+    background-color: #2b435e;
+    color: white;
+}
+
+.w-10 {
+    width: 10% !important;
+}
+
+
+.w-40 {
+    width: 40% !important;
+}
+
+.btn {
+    cursor: pointer;
 }
 
 .banner_text p {
@@ -115,7 +132,6 @@ body {
 }
 
 .sidebar {
-    background-color: #2b435e;
     padding: 0;
     min-height: 550px;
 }
