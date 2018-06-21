@@ -7,19 +7,6 @@ import {sendNewsPost} from "./APIUtils";
 
 export class QuillEditor extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            title: "",
-            content: "",
-            visible: false
-        };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleQuillChange = this.handleQuillChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.switchVisibility = this.switchVisibility.bind(this);
-    }
-
     modules = {
         toolbar: [
             [{ 'header': [1, 2, false] }],
@@ -32,6 +19,21 @@ export class QuillEditor extends React.Component {
             ['clean'],
         ],
     };
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            title: (props.editMode) ? props.title : "",
+            content: (props.editMode) ? props.content : "",
+            visible: (props.editMode) ? props.visible : false,
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleQuillChange = this.handleQuillChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.switchVisibility = this.switchVisibility.bind(this);
+    }
 
     handleQuillChange(value) {
         this.setState({ content: value })
@@ -48,22 +50,33 @@ export class QuillEditor extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        sendNewsPost(this.state)
-            .then(() => {
-                this.props.sendAlert({
-                    alertType: alertTypes.SUCCESS,
-                    message: "Your changes have been saved successfully!"
-                });
-
-            }).catch(error => {
+        if(this.state.title.length < 6 || this.state.content.length < 20) {
             this.props.sendAlert({
-                alertType: alertTypes.ERROR,
-                message: error.information
+                alertType: alertTypes.NEUTRAL,
+                message: "This post appears to be too short."
             });
-        })
+
+        } else {
+
+            sendNewsPost(this.state)
+                .then(() => {
+                    this.props.sendAlert({
+                        alertType: alertTypes.SUCCESS,
+                        message: "Your post has been saved successfully!"
+                    });
+                    this.setState({title: "", content: ""})
+
+                }).catch(error => {
+                this.props.sendAlert({
+                    alertType: alertTypes.ERROR,
+                    message: error.information
+                });
+            })
+        }
     }
 
     render() {
+
         return (
             <React.Fragment>
                 {(this.props.editMode) ? <h5> Post title </h5> : null}
@@ -71,7 +84,7 @@ export class QuillEditor extends React.Component {
                        name="title"
                        className="form-control mb-3"
                        onChange={this.handleChange}
-                       value={this.props.title}
+                       value={this.state.title}
                        placeholder="Post Title"
                        />
                 <ReactQuill
@@ -82,7 +95,7 @@ export class QuillEditor extends React.Component {
                     placeholder="Enter some stuff here..."
                 />
                 <div className="mt-3">
-                    <span>Visible on main page:</span>
+                    <span>visibility on main page:</span>
                     <VisibilityButton visible={this.state.visible} handleClick={this.switchVisibility}/>
                     <button className="btn btn-success float-right" onClick={this.handleSubmit}>
                         Submit
