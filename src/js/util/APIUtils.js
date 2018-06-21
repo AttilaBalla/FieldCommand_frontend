@@ -115,7 +115,7 @@ export function sendNewsPost(newsPostData) {
 export function getAllNewsPosts() {
 
     return request({
-        url: API_BASE_URL + "/dev/getNewsPosts",
+        url: API_BASE_URL + "/getNewsPosts",
         method: 'GET',
     });
 }
