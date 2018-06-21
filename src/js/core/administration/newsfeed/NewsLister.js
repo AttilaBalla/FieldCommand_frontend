@@ -1,6 +1,7 @@
 import React from "react";
 import {getNewsPosts} from "../../../util/APIUtils";
-import {NewsCard} from "./NewsCard";
+import {NewsItem} from "./NewsItem";
+import {alertTypes} from "../../../util/Alert";
 
 export class NewsLister extends React.Component {
     constructor(props) {
@@ -15,26 +16,41 @@ export class NewsLister extends React.Component {
             .then(response => {
                 this.setState({newsPosts: response})
             })
+            .catch(error => {
+            this.props.sendAlert({
+                alertType: alertTypes.ERROR,
+                message: error.information
+            });
+        })
     }
 
     render() {
         return (
-            <section className="useradmin_userlist">
-                <div className="cards">
+            <section>
+                <ul className="list-group list-group-flush">
+                    <li className="list-group-item main_color_dark">
+                        <div className="d-flex justify-content-between">
+                            <span className="w-40">Title</span>
+                            <span className="w-25">Date and time</span>
+                            <span className="w-10">Owner</span>
+                            <span className="w-10">Visibility</span>
+                            <span className="ml-auto mr-3">Actions</span>
+                        </div>
+                    </li>
                     {this.state.newsPosts.map((newsPost, key) => {
-                        console.log(newsPost);
                         return (
-                            <NewsCard
+                            <NewsItem
                                 key={key}
                                 id={newsPost.id}
                                 title={newsPost.title}
-                                content={newsPost.content}
+                                owner={newsPost.owner}
+                                date={newsPost.date}
                                 visible={(newsPost.visible === "True")}
                             />
 
                         )
                     })}
-                </div>
+                </ul>
             </section>
         )
 
