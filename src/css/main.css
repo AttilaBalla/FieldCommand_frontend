@@ -112,7 +112,7 @@ body {
 .text_box {
     display: block;
     background: rgba(240, 240, 240, 0.9);
-    padding: 5%;
+    padding: 70px;
 }
 
 .centered {
@@ -120,7 +120,7 @@ body {
 }
 
 .newsfeed_post {
-    padding-top: 40px;
+    margin-bottom: 40px;
     padding-bottom: 40px;
     border-bottom: thin solid lightgray;
 }
