@@ -34,16 +34,16 @@ export class NewsFeed extends React.Component {
         return(
             <React.Fragment>
                 {alert}
-                <Tabs>
+                <Tabs defaultIndex={0}>
                     <TabList>
+                        <Tab>Existing entries</Tab>
                         <Tab>Create a new entry</Tab>
-                        <Tab>List existing entries</Tab>
                     </TabList>
                     <TabPanel>
-                        <QuillEditor sendAlert={this.setAlert}/>
+                        <NewsLister/>
                     </TabPanel>
                     <TabPanel>
-                        <NewsLister/>
+                        <QuillEditor sendAlert={this.setAlert}/>
                     </TabPanel>
                 </Tabs>
             </React.Fragment>

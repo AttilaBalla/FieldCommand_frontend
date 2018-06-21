@@ -10,8 +10,14 @@ export class NewsEditor extends React.Component {
         super(props);
 
         this.state = {
-            newsPost: {}
-        }
+            hasNewsPost: false,
+            id: "", // newspost data
+            title: "",
+            date: "",
+            content: "",
+            owner: "",
+            visible: false,
+        };
     }
 
     componentDidMount() {
@@ -19,7 +25,14 @@ export class NewsEditor extends React.Component {
 
         getSingleNewsPost(params.id)
             .then(response => {
-                this.setState({newsPost: response})
+                this.setState({
+                    id: response.id,
+                    title: response.title,
+                    date: response.date,
+                    content: response.content,
+                    owner: response.owner,
+                    visible: response.visible,
+                    hasNewsPost: true})
             })
             .catch(error => {
                 this.props.sendAlert({ // this will fail atm, no alert prop is given
@@ -30,23 +43,33 @@ export class NewsEditor extends React.Component {
     }
 
     render() {
+
+        let editor;
+
+        if(this.state.hasNewsPost) {
+            editor = <QuillEditor
+                editMode={true}
+                title={this.state.title}
+                content={this.state.content}
+                visible={(this.state.visible === "True")}
+
+            />
+        } else {
+            editor = <p>loading editor...</p>
+        }
+
         return(
+
             <div className="container-fluid">
                 <div className="row core_container text_box">
                     <div className="col-9 text_box">
-                        <NewsFeedPost title={this.state.newsPost.title}
-                                      owner={this.state.newsPost.owner}
-                                      date={this.state.newsPost.date}
-                                      content={this.state.newsPost.content}
+                        <NewsFeedPost title={this.state.title}
+                                      owner={this.state.owner}
+                                      date={this.state.date}
+                                      content={this.state.content}
                         />
                     </div>
-                    <QuillEditor
-                        editMode={true}
-                        title={this.state.newsPost.title}
-                        content={this.state.newsPost.content}
-                        visiblity={this.state.newsPost.visible}
-
-                    /> {/* needs Alert prop!*/}
+                    {editor}
                 </div>
             </div>
         )
