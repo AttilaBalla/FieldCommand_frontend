@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 export class NewsItem extends React.Component {
 
@@ -22,9 +23,11 @@ export class NewsItem extends React.Component {
                     }
                     </span>
                     <span className="ml-auto">
-                        <button className="btn btn-warning mr-1" /*onClick={}*/>
-                            <i className="fa fa-pencil" aria-hidden="true"></i>
-                        </button>
+                        <Link to={"newseditor/" + this.props.id}>
+                            <button className="btn btn-warning mr-1">
+                                <i className="fa fa-pencil" aria-hidden="true"></i>
+                            </button>
+                        </Link>
                         <button className="btn btn-danger" /*onClick={}*/>
                             <i className="fa fa-trash" aria-hidden="true"></i>
                         </button>

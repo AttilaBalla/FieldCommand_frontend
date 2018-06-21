@@ -1,8 +1,8 @@
 import React from "react";
-import {NewsEditor} from "./NewsEditor";
-import {Alert} from "../../../util/Alert";
 import {Tab, TabList, TabPanel, Tabs} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import {QuillEditor} from "../../../util/QuillEditor";
+import {Alert} from "../../../util/Alert";
 import {NewsLister} from "./NewsLister";
 
 
@@ -40,7 +40,7 @@ export class NewsFeed extends React.Component {
                         <Tab>List existing entries</Tab>
                     </TabList>
                     <TabPanel>
-                        <NewsEditor sendAlert={this.setAlert}/>
+                        <QuillEditor sendAlert={this.setAlert}/>
                     </TabPanel>
                     <TabPanel>
                         <NewsLister/>

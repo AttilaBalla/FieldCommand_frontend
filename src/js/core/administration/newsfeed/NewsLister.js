@@ -1,5 +1,5 @@
 import React from "react";
-import {getNewsPosts} from "../../../util/APIUtils";
+import {getAllNewsPosts} from "../../../util/APIUtils";
 import {NewsItem} from "./NewsItem";
 import {alertTypes} from "../../../util/Alert";
 
@@ -12,7 +12,7 @@ export class NewsLister extends React.Component {
     }
 
     componentDidMount() {
-        getNewsPosts()
+        getAllNewsPosts()
             .then(response => {
                 this.setState({newsPosts: response})
             })

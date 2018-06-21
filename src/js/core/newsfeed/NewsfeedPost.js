@@ -5,9 +5,7 @@ export function NewsFeedPost(props) {
         <div className="newsfeed_post">
             <h2 className="post_title">{props.title}</h2>
             <p className="post_date">posted by {props.owner} on {props.date}</p>
-            <div className="post_content">
-                <p>{props.content}</p>
-            </div>
+            <div className="post_content" dangerouslySetInnerHTML={{__html: props.content}}/>
         </div>
     )
 }

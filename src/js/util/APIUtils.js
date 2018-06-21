@@ -112,10 +112,18 @@ export function sendNewsPost(newsPostData) {
     });
 }
 
-export function getNewsPosts() {
+export function getAllNewsPosts() {
 
     return request({
         url: API_BASE_URL + "/dev/getNewsPosts",
+        method: 'GET',
+    });
+}
+
+export function getSingleNewsPost(id) {
+
+    return request({
+        url: API_BASE_URL + "/dev/getNewsPosts/" + id,
         method: 'GET',
     });
 }

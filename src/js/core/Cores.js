@@ -9,6 +9,7 @@ import {Footer} from "../main/Footer";
 import {Administration} from "./administration/Administration";
 import '../../css/sidebar.css';
 import '../../css/admin.css';
+import {NewsEditor} from "./administration/newsfeed/NewsEditor";
 
 
 
@@ -18,9 +19,10 @@ export class Main extends Component {
         return (
             <div>
                 <Navbar/>
-                <Route exact path='/' component={HomeContainer}/>
-                <Route exact path='/about' component={AboutContainer}/>
-                <Route exact path='/administration' component={AdminContainer}/>
+                <Route exact path="/" component={HomeContainer}/>
+                <Route exact path="/about" component={AboutContainer}/>
+                <Route exact path="/administration" component={AdminContainer}/>
+                <Route exact path="/newseditor/:id" component={NewsEditor}/>
                 <Footer/>
             </div>
         )

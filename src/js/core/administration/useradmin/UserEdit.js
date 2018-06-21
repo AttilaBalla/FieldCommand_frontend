@@ -18,11 +18,15 @@ export class UserEdit extends React.Component {
         }
     }
 
-    componentDidMount() {
+    getUserData() {
         getAllUsers()
             .then(response => {
                 this.setState({users: response})
             })
+    }
+
+    componentDidMount() {
+        this.getUserData();
     }
 
     render() {
