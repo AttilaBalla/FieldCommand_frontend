@@ -22,7 +22,7 @@ function NavbarLinks(props) {
 
     const adminLink = (props.username ) ?
     <li className="nav-item">
-        <Link className="nav-link" to="/administration"> <i className="fa fa-cog"></i>Adminsitration</Link>
+        <Link className="nav-link" to="/administration"> <i className="fa fa-cog"></i>Administration</Link>
     </li> : "";
 
     return (
