@@ -123,7 +123,16 @@ export function getAllNewsPosts() {
 export function getSingleNewsPost(id) {
 
     return request({
-        url: API_BASE_URL + "/dev/getNewsPosts/" + id,
+        url: API_BASE_URL + "/getNewsPosts/" + id,
         method: 'GET',
+    });
+}
+
+export function updateNewsPost(newsPostData) {
+
+    return request({
+        url: API_BASE_URL + "/dev/updateNewsPost",
+        method: 'POST',
+        body: JSON.stringify(newsPostData)
     });
 }
