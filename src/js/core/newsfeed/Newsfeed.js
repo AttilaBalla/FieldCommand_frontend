@@ -37,6 +37,8 @@ export class Newsfeed extends React.Component {
                     /> : null
                 )
             })}
+            <NewsFeedPost/>
+            <NewsFeedPost/>
             </div>
         )
     }
