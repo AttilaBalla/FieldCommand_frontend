@@ -4,7 +4,7 @@ import ReactTooltip from 'react-tooltip'
 /**
  * @return {null}
  */
-export function ServerErrorIndicator(props) {
+export function ErrorIndicator(props) {
 
     let errorMessage = "";
 

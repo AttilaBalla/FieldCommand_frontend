@@ -1,6 +1,6 @@
 import React from "react";
-import { retrieveSwrStatus } from "./APIUtils.js";
-import {ServerErrorIndicator} from "./ServerErrorIndicator";
+import {retrieveSwrStatus} from "./APIUtils.js";
+import {ErrorIndicator} from "./ErrorIndicator";
 
 export class Swrnet extends React.Component {
 	content;
@@ -46,7 +46,7 @@ export class Swrnet extends React.Component {
             this.content =
 			<div>
 				<img className="mr-2" src="/img/swrnetlogo_off.png" width="80" height="20" alt=""/>
-                <ServerErrorIndicator error="swrNetError"/>
+                <ErrorIndicator error="swrNetError"/>
 			</div>;
 		}
 

@@ -1,7 +1,7 @@
 import React from "react";
 import '../../css/login.css';
-import { login } from './APIUtils';
-import {ServerErrorIndicator} from "./ServerErrorIndicator";
+import {login} from './APIUtils';
+import {ErrorIndicator} from "./ErrorIndicator";
 import {ACCESS_TOKEN} from "./Constants";
 
 function LoginInput(props) {
@@ -81,7 +81,7 @@ export class Login extends React.Component {
                     <h5>
                         FIELDCOMMAND LOGIN
                         {(this.state.loginStatus === "serverError")
-                            ? <ServerErrorIndicator error={(this.state.loginStatus)}/>
+                            ? <ErrorIndicator error={(this.state.loginStatus)}/>
                             : null
                         }
                     </h5>
