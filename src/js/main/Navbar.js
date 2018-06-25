@@ -63,7 +63,7 @@ export class Navbar extends React.Component {
 
                     if(error === null) {
 
-                        let userName = (user) ? user.username : "";
+                        userName = (user) ? user.username : "";
                         userPanel = (userName) ? <UsernamePanel username={userName} logout={logout}/> : "";
 
                     } else {
