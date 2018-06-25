@@ -9,7 +9,7 @@ export const sidebarTypes = [
     },
     {
         classElement: "nav-item sidebar_button",
-        icon: "fa fa-file-text-o",
+        icon: "fa fa-file",
         text: "Newsfeed"
     },
     {
@@ -26,6 +26,11 @@ export const sidebarTypes = [
         classElement: "nav-item sidebar_button",
         icon: "fa fa-user",
         text: "Users"
+    },
+    {
+        classElement: "nav-item sidebar_button",
+        icon: "fa fa-comment",
+        text: "Internal Request"
     }
 ];
 

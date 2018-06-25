@@ -4,6 +4,7 @@ import {UserAdmin} from "./useradmin/UserAdmin";
 import {Redirect} from "react-router-dom";
 import {UserContext} from "../../util/UserProvider";
 import {NewsFeed} from "./newsfeed/NewsFeed";
+import {InternalRequest} from "./internalrequest/InternalRequest";
 
 
 export class Administration extends React.Component {
@@ -30,6 +31,9 @@ export class Administration extends React.Component {
                 break;
             case "Newsfeed":
                 adminComponent = <NewsFeed/>;
+                break;
+            case "Internal Request":
+                adminComponent = <InternalRequest/>;
                 break;
             default:
                 break;
