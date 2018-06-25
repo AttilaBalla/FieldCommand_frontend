@@ -1,9 +1,9 @@
 import React from "react";
 import {Tab, TabList, TabPanel, Tabs} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import {QuillEditor} from "../../../util/QuillEditor";
 import {Alert} from "../../../util/Alert";
 import {NewsLister} from "./NewsLister";
+import {NewsCreator} from "./NewsCreator";
 
 
 export class NewsFeed extends React.Component {
@@ -43,7 +43,7 @@ export class NewsFeed extends React.Component {
                         <NewsLister/>
                     </TabPanel>
                     <TabPanel>
-                        <QuillEditor sendAlert={this.setAlert}/>
+                        <NewsCreator sendAlert={this.setAlert}/>
                     </TabPanel>
                 </Tabs>
             </React.Fragment>

@@ -1,9 +1,6 @@
 import React from "react";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import {alertTypes} from "./Alert";
-import {sendNewsPost, updateNewsPost} from "./APIUtils";
-
 
 export class QuillEditor extends React.Component {
 
@@ -24,7 +21,6 @@ export class QuillEditor extends React.Component {
         super(props);
 
         this.state = {
-            id: (props.editMode) ? props.newsPostId : "",
             title: (props.editMode) ? props.title : "",
             content: (props.editMode) ? props.content : "",
             visible: (props.editMode) ? props.visible : false,
@@ -50,52 +46,7 @@ export class QuillEditor extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-
-        if(this.state.title.length < 6 || this.state.content.length < 20) {
-            this.props.sendAlert({
-                alertType: alertTypes.NEUTRAL,
-                message: "This post appears to be too short."
-            });
-
-        } else {
-
-            if (this.props.editMode) {
-
-                let newsPostData = this.state;
-
-                updateNewsPost(newsPostData)
-                    .then(() => {
-                        this.props.sendAlert({
-                            alertType: alertTypes.SUCCESS,
-                            message: "Your post has been updated successfully!"
-                        });
-                        this.setState({title: "", content: ""})
-
-                    }).catch(error => {
-                    this.props.sendAlert({
-                        alertType: alertTypes.ERROR,
-                        message: error.information
-                    });
-                })
-
-            } else {
-
-                sendNewsPost(this.state)
-                    .then(() => {
-                        this.props.sendAlert({
-                            alertType: alertTypes.SUCCESS,
-                            message: "Your post has been saved successfully!"
-                        });
-                        this.setState({title: "", content: ""})
-
-                    }).catch(error => {
-                    this.props.sendAlert({
-                        alertType: alertTypes.ERROR,
-                        message: error.information
-                    });
-                })
-            }
-        }
+        this.props.sendNewsPost(this.state);
     }
 
     render() {

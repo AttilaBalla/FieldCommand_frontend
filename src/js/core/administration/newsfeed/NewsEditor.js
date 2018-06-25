@@ -1,6 +1,6 @@
 import React from "react";
 import {NewsFeedPost} from "../../newsfeed/NewsfeedPost";
-import {getSingleNewsPost} from "../../../util/APIUtils";
+import {getSingleNewsPost, updateNewsPost} from "../../../util/APIUtils";
 import {Alert, alertTypes} from "../../../util/Alert";
 import {QuillEditor} from "../../../util/QuillEditor";
 
@@ -20,6 +20,7 @@ export class NewsEditor extends React.Component {
         };
 
         this.setAlert = this.setAlert.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -51,6 +52,36 @@ export class NewsEditor extends React.Component {
         })
     }
 
+    handleSubmit(newsPost) {
+
+        let newsPostData = newsPost;
+
+        if(newsPostData.title.length < 6 || newsPostData.content.length < 20) {
+            this.props.sendAlert({
+                alertType: alertTypes.NEUTRAL,
+                message: "This post appears to be too short."
+            });
+
+        } else {
+
+            newsPostData["id"] = parseInt(this.state.id, 10);
+
+            updateNewsPost(newsPostData)
+                .then(() => {
+                    this.setState({
+                        alertType: alertTypes.SUCCESS,
+                        message: "Your post has been updated successfully!"
+                    });
+
+                }).catch(error => {
+                this.setState({
+                    alertType: alertTypes.ERROR,
+                    message: error.information
+                });
+            })
+        }
+    }
+
     render() {
 
         let editor;
@@ -58,11 +89,11 @@ export class NewsEditor extends React.Component {
         if(this.state.hasNewsPost) {
             editor = <QuillEditor
                 editMode={true}
-                newsPostId={this.state.id}
                 title={this.state.title}
                 content={this.state.content}
                 visible={(this.state.visible === "True")}
                 sendAlert={this.setAlert}
+                sendNewsPost={this.handleSubmit}
 
             />
         } else {
