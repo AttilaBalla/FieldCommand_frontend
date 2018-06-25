@@ -1,8 +1,10 @@
-import { Swrnet } from '../util/Swrnet.js';
+import {Swrnet} from '../util/Swrnet.js';
 import React from "react";
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import '../../css/navbar.css';
 import {UserContext} from "../util/UserProvider";
+import {InfoIndicator} from "../util/InfoIndicator";
+import {ErrorIndicator} from "../util/ErrorIndicator";
 
 function UsernamePanel(props) {
 
@@ -55,11 +57,28 @@ export class Navbar extends React.Component {
         return(
             <UserContext.Consumer>
                 {value => {
-                    //console.log(value.user);
-                    const {user, logout} = value;
+                    const {user, logout, error} = value;
 
-                    let userName = (user) ? user.username : "";
-                    let userPanel = (userName) ? <UsernamePanel username={userName} logout={logout}/> : "";
+                    let userPanel, userName = null;
+
+                    if(error === null) {
+
+                        let userName = (user) ? user.username : "";
+                        userPanel = (userName) ? <UsernamePanel username={userName} logout={logout}/> : "";
+
+                    } else {
+                        console.log(error);
+                        switch(error) {
+                            case "expiredToken":
+                                userPanel = <InfoIndicator info={error}/>;
+                                break;
+                            case "serverError":
+                                userPanel = <ErrorIndicator error={error}/>;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
 
                     return(
                     <div id="navbar_bg">
