@@ -41,6 +41,9 @@ function NavbarLinks(props) {
         <li className="nav-item">
             <Link className="nav-link" to="/"><i className="fa fa-clipboard"></i>Game Reports</Link>
         </li>
+        <li className="nav-item">
+            <Link className="nav-link" to="/internal-request"><i className="fa fa-comment"></i>Internal Request</Link>
+        </li>
         {adminLink}
     </ul>)
 }
