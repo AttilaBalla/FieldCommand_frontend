@@ -136,3 +136,11 @@ export function updateNewsPost(newsPostData) {
         body: JSON.stringify(newsPostData)
     });
 }
+
+export function deleteNewsPost(id) {
+
+    return request({
+        url: API_BASE_URL + "/dev/deleteNewsPost/" + id,
+        method: 'DELETE'
+    });
+}

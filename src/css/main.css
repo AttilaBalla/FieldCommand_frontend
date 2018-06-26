@@ -25,6 +25,10 @@ body {
     width: 10% !important;
 }
 
+.w-20 {
+    width: 20% !important;
+}
+
 
 .w-40 {
     width: 40% !important;
@@ -40,6 +44,12 @@ body {
 
 .row {
     margin: auto;
+}
+
+.no-overflow {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .core_container {

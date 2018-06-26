@@ -23,7 +23,7 @@ export class QuillEditor extends React.Component {
         this.state = {
             title: (props.editMode) ? props.title : "",
             content: (props.editMode) ? props.content : "",
-            visible: (props.editMode) ? props.visible : false,
+            visible: (props.editMode) ? props.visible : null,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -69,8 +69,9 @@ export class QuillEditor extends React.Component {
                     placeholder="Enter some stuff here..."
                 />
                 <div className="mt-3">
-                    <span>visibility on main page:</span>
-                    <VisibilityButton visible={this.state.visible} handleClick={this.switchVisibility}/>
+                    {(this.props.toggleVisibility)
+                        ? <VisibilityButton visible={this.state.visible} handleClick={this.switchVisibility}/>
+                        : null}
                     <button className="btn btn-success float-right" onClick={this.handleSubmit}>
                         Submit
                     </button>
@@ -82,20 +83,30 @@ export class QuillEditor extends React.Component {
 
 function VisibilityButton(props) {
 
+    let button;
+
     if(props.visible) {
 
-        return (
+        button =
             <button className="btn btn-success ml-2" onClick={props.handleClick}>
                 <i className="fa fa-eye mr-1" aria-hidden="true"></i>
                 Visible
-            </button>
-        )
+            </button>;
+
     } else {
-        return(
+
+        button =
             <button className="btn btn-secondary ml-2" onClick={props.handleClick}>
                 <i className="fa fa-eye-slash mr-1" aria-hidden="true"></i>
                 Not visible
-            </button>
-        )
+            </button>;
     }
+
+    return(
+        <React.Fragment>
+            <span>visibility on main page:</span>
+            {button}
+        </React.Fragment>
+    )
+
 }
