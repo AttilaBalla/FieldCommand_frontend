@@ -153,3 +153,36 @@ export function sendInternalRequest(internalRequest) {
         body: JSON.stringify(internalRequest)
     });
 }
+
+export function getInternalRequests() {
+
+    return request({
+        url: API_BASE_URL + "/user/ir/get",
+        method: "GET",
+    });
+}
+
+export function deleteInternalRequest(id) {
+
+    return request({
+        url: API_BASE_URL + "/user/ir/delete/" + id,
+        method: 'DELETE'
+    });
+}
+
+export function getSingleInternalRequest(id) {
+
+    return request({
+        url: API_BASE_URL + "/user/ir/get/" + id,
+        method: 'GET',
+    });
+}
+
+export function updateInternalRequest(internalRequest) {
+
+    return request({
+        url: API_BASE_URL + "/user/ir/update",
+        method: 'POST',
+        body: JSON.stringify(internalRequest)
+    });
+}
