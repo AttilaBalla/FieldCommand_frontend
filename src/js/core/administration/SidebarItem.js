@@ -26,11 +26,6 @@ export const sidebarTypes = [
         classElement: "nav-item sidebar_button",
         icon: "fa fa-user",
         text: "Users"
-    },
-    {
-        classElement: "nav-item sidebar_button",
-        icon: "fa fa-comment",
-        text: "Internal Request"
     }
 ];
 
