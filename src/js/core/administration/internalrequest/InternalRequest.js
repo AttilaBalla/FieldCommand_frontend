@@ -4,6 +4,7 @@ import {Alert} from "../../../util/Alert";
 import {Tab, TabList, TabPanel, Tabs} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import {InternalRequestCreator} from "./InternalRequestCreator";
+import {InternalRequestLister} from "./InternalRequestLister";
 
 
 export class InternalRequest extends React.Component {
@@ -12,7 +13,7 @@ export class InternalRequest extends React.Component {
         super(props);
         this.state = {
             alertType: ""
-        },
+        };
 
         this.setAlert = this.setAlert.bind(this);
     }
@@ -40,7 +41,7 @@ export class InternalRequest extends React.Component {
                         <Tab>Create a new entry</Tab>
                     </TabList>
                     <TabPanel>
-
+                        <InternalRequestLister sendAlert={this.setAlert}/>
                     </TabPanel>
                     <TabPanel>
                         <InternalRequestCreator sendAlert={this.setAlert}/>
