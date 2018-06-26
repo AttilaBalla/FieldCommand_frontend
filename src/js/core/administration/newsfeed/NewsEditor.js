@@ -1,8 +1,9 @@
 import React from "react";
-import {NewsFeedPost} from "../../newsfeed/NewsfeedPost";
+import {Redirect} from "react-router-dom";
 import {getSingleNewsPost, updateNewsPost} from "../../../util/APIUtils";
 import {Alert, alertTypes} from "../../../util/Alert";
 import {QuillEditor} from "../../../util/QuillEditor";
+import {NewsFeedPost} from "../../newsfeed/NewsfeedPost";
 
 export class NewsEditor extends React.Component {
 
@@ -28,6 +29,7 @@ export class NewsEditor extends React.Component {
 
         getSingleNewsPost(params.id)
             .then(response => {
+
                 this.setState({
                     id: response.id,
                     title: response.title,
@@ -38,7 +40,8 @@ export class NewsEditor extends React.Component {
                     hasNewsPost: true})
             })
             .catch(error => {
-                this.props.sendAlert({ // this will fail atm, no alert prop is given
+                this.setState({
+                    redirect: true,
                     alertType: alertTypes.ERROR,
                     message: error.information
                 });
@@ -84,6 +87,12 @@ export class NewsEditor extends React.Component {
 
     render() {
 
+        if(this.state.redirect) {
+            return(
+                <Redirect to="/"/>
+            )
+        }
+
         let editor;
 
         if(this.state.hasNewsPost) {
@@ -106,7 +115,6 @@ export class NewsEditor extends React.Component {
             : null;
 
         return(
-
             <div className="container-fluid">
                 <div className="row core_container text_box">
                     {alert}
