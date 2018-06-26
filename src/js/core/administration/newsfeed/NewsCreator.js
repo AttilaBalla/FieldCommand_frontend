@@ -8,12 +8,6 @@ export class NewsCreator extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            title: "",
-            content: "",
-            visible: false,
-        };
-
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -49,7 +43,7 @@ export class NewsCreator extends React.Component {
 
     render() {
         return(
-            <QuillEditor sendNewsPost={this.handleSubmit}/>
+            <QuillEditor sendNewsPost={this.handleSubmit} toggleVisibility={true}/>
         )
     }
 }
