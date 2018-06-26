@@ -40,7 +40,7 @@ export class NewsFeed extends React.Component {
                         <Tab>Create a new entry</Tab>
                     </TabList>
                     <TabPanel>
-                        <NewsLister/>
+                        <NewsLister sendAlert={this.setAlert}/>
                     </TabPanel>
                     <TabPanel>
                         <NewsCreator sendAlert={this.setAlert}/>
