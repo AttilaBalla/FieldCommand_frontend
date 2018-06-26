@@ -144,3 +144,12 @@ export function deleteNewsPost(id) {
         method: 'DELETE'
     });
 }
+
+export function sendInternalRequest(internalRequest) {
+
+    return request({
+        url: API_BASE_URL + "/user/ir/create",
+        method: "POST",
+        body: JSON.stringify(internalRequest)
+    });
+}

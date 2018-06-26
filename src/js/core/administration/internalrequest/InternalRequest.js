@@ -3,7 +3,7 @@ import 'react-tabs/style/react-tabs.css';
 import {Alert} from "../../../util/Alert";
 import {Tab, TabList, TabPanel, Tabs} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import {NewsEditor} from "../newsfeed/NewsEditor";
+import {InternalRequestCreator} from "./InternalRequestCreator";
 
 
 export class InternalRequest extends React.Component {
@@ -12,8 +12,17 @@ export class InternalRequest extends React.Component {
         super(props);
         this.state = {
             alertType: ""
-        }
+        },
 
+        this.setAlert = this.setAlert.bind(this);
+    }
+
+
+    setAlert(alert) {
+        this.setState({
+            alertType: alert.alertType,
+            message: alert.message,
+        })
     }
 
     render() {
@@ -25,19 +34,19 @@ export class InternalRequest extends React.Component {
         return(
             <React.Fragment>
                 {alert}
-                <Tabs>
+                <Tabs defaultIndex={0}>
                     <TabList>
-                        <Tab>Create a new request</Tab>
-                        <Tab>List existing requests</Tab>
+                        <Tab>Existing entries</Tab>
+                        <Tab>Create a new entry</Tab>
                     </TabList>
                     <TabPanel>
-                        <NewsEditor sendAlert={this.setAlert}/>
+
                     </TabPanel>
                     <TabPanel>
+                        <InternalRequestCreator sendAlert={this.setAlert}/>
                     </TabPanel>
                 </Tabs>
             </React.Fragment>
         )
     }
-
 }
