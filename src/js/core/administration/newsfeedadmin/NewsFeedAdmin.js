@@ -6,7 +6,7 @@ import {NewsLister} from "./NewsLister";
 import {NewsCreator} from "./NewsCreator";
 
 
-export class NewsFeed extends React.Component {
+export class NewsFeedAdmin extends React.Component {
 
     constructor(props) {
         super(props);
