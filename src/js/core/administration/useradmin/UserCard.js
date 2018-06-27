@@ -31,19 +31,27 @@ export class UserCard extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        updateUser(this.state)
-            .then(() => {
-                this.props.sendAlert({
-                    alertType: alertTypes.SUCCESS,
-                    message: "Your changes have been saved successfully!"
-                });
+        if(this.state.username === "" || this.state.email === "") {
+            this.props.sendAlert({
+                alertType: alertTypes.ERROR,
+                message: "The input fields cannot be empty!"
+            });
+        } else {
 
-            }).catch(error => {
+            updateUser(this.state)
+                .then(() => {
+                    this.props.sendAlert({
+                        alertType: alertTypes.SUCCESS,
+                        message: "Your changes have been saved successfully!"
+                    });
+
+                }).catch(error => {
                 this.props.sendAlert({
                     alertType: alertTypes.ERROR,
                     message: error.information
                 });
             })
+        }
     }
 
     render() {

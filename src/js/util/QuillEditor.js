@@ -47,6 +47,7 @@ export class QuillEditor extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         this.props.sendNewsPost(this.state);
+        this.setState({title: "", content: "", visible: false})
     }
 
     render() {
