@@ -3,8 +3,7 @@ import React from "react";
 import {Link} from 'react-router-dom';
 import '../../css/navbar.css';
 import {UserContext} from "../util/UserProvider";
-import {InfoIndicator} from "../util/InfoIndicator";
-import {ErrorIndicator} from "../util/ErrorIndicator";
+import {StatusMessage} from "../util/StatusMessage";
 
 function UsernamePanel(props) {
 
@@ -71,10 +70,10 @@ export class Navbar extends React.Component {
                         console.log(error);
                         switch(error) {
                             case "expiredToken":
-                                userPanel = <InfoIndicator info={error}/>;
+                                userPanel = <StatusMessage type="info" message={error}/>;
                                 break;
                             case "serverError":
-                                userPanel = <ErrorIndicator error={error}/>;
+                                userPanel = <StatusMessage type="error" message={error}/>;
                                 break;
                             default:
                                 break;
