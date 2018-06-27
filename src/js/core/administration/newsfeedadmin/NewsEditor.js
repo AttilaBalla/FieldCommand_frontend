@@ -116,7 +116,6 @@ export class NewsEditor extends React.Component {
 
         return(
             <div className="container-fluid">
-                <div className="row core_container text_box">
                     {alert}
                     <div className="col-9 text_box">
                         <NewsFeedPost title={this.state.title}
@@ -127,7 +126,6 @@ export class NewsEditor extends React.Component {
                     </div>
                     {editor}
                 </div>
-            </div>
         )
     }
 }

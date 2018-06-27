@@ -1,68 +1,41 @@
 import React from "react";
 import {AdminSidebar} from "./AdminSidebar";
 import {UserAdmin} from "./useradmin/UserAdmin";
-import {Redirect} from "react-router-dom";
+import {Redirect, Route} from "react-router-dom";
 import {UserContext} from "../../util/UserProvider";
-import {NewsFeed} from "./newsfeed/NewsFeed";
+import {NewsFeedAdmin} from "./newsfeedadmin/NewsFeedAdmin";
+import {NewsEditor} from "./newsfeedadmin/NewsEditor";
 
 
-export class Administration extends React.Component {
+export function Administration() {
 
-    constructor(props) {
-        super(props);
+    return(
+        <UserContext.Consumer>
+            {value => {
 
-        this.state = {requestedComponent: ""};
+                const {user} = value;
+                if(user) { //TODO access control stuffz (user.simpleAuthorities)
 
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange(requestedPage) {
-        this.setState({requestedComponent: requestedPage});
-    }
-
-    render() {
-
-        let adminComponent = "";
-
-        switch(this.state.requestedComponent) {
-            case "Users":
-                adminComponent = <UserAdmin/>;
-                break;
-            case "Newsfeed":
-                adminComponent = <NewsFeed/>;
-                break;
-            default:
-                break;
-        }
-
-        return(
-            <UserContext.Consumer>
-                {value => {
-
-                    const {user} = value;
-
-                    if(user) { //TODO access control stuffz (user.simpleAuthorities)
-
-                        return(
-                        <div className="row">
-                            <nav className="col-md-2 d-md-block sidebar main_color_dark">
-                                <AdminSidebar onChange={this.handleChange}/>
-                            </nav>
-                            <div className="col-md-10 admin_container">
-                                {adminComponent}
-                            </div>
-
+                    return(
+                    <div className="row">
+                        <nav className="col-md-2 d-md-block sidebar main_color_dark">
+                            <AdminSidebar user={user}/>
+                        </nav>
+                        <div className="col-md-10 admin_container">
+                            <Route path='/administration/users' component={UserAdmin}/>
+                            <Route path='/administration/newsfeed' component={NewsFeedAdmin}/>
+                            <Route exact path="/administration/newseditor/:id" component={NewsEditor}/>
                         </div>
-                        )
-                    }
-                    else {
-                        return(
-                            <Redirect to="/"/>
-                        )
-                    }
-                }}
 
-            </UserContext.Consumer>
-        )
-    }
+                    </div>
+                    )
+                }
+                else {
+                    return(
+                        <Redirect to="/"/>
+                    )
+                }
+            }}
+        </UserContext.Consumer>
+    )
 }

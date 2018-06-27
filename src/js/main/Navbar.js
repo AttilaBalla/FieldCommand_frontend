@@ -22,10 +22,12 @@ function UsernamePanel(props) {
 
 function NavbarLinks(props) {
 
-    const adminLink = (props.username ) ?
-    <li className="nav-item">
-        <Link className="nav-link" to="/administration"> <i className="fa fa-cog"></i>Administration</Link>
-    </li> : "";
+    const adminLink = (props.user !== null && props.user.rolePower >= 20)
+        ?
+            <li className="nav-item">
+                <Link className="nav-link" to="/administration/"> <i className="fa fa-cog"></i>Administration</Link>
+            </li>
+        : "";
 
     return (
     <ul className="navbar-nav main_navbar">
@@ -58,7 +60,7 @@ export class Navbar extends React.Component {
             <UserContext.Consumer>
                 {value => {
                     const {user, logout, error} = value;
-
+                    console.log(user);
                     let userPanel, userName = null;
 
                     if(error === null) {
@@ -84,7 +86,7 @@ export class Navbar extends React.Component {
                     <div id="navbar_bg">
                         <nav className="navbar navbar-expand-sm">
                             <Link className = "navbar-brand" to="/"><img src="/img/fc_icon.png" width="55" height="55" alt="logo"/></Link>
-                            <NavbarLinks username={userName}/>
+                            <NavbarLinks user={user}/>
                             <div className="navbar-nav ml-auto navbar_right">
                                 {userPanel}
                                 <Swrnet/>
