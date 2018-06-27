@@ -13,7 +13,7 @@ export const sidebarTypes = [
     {
         link: "/administration/newsfeed",
         classElement: "nav-item sidebar_button",
-        icon: "fa fa-file-text-o",
+        icon: "fa fa-file-text",
         text: "Newsfeed",
         rolePower: 20
     },
