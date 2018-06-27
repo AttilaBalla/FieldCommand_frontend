@@ -17,12 +17,10 @@ export class Main extends Component {
         return (
             <React.Fragment>
                 <Navbar/>
-                <switch>
                     <Route exact path="/" component={HomeContainer}/>
                     <Route exact path="/about" component={AboutContainer}/>
                     <Route exact path="/administration/*" component={AdminContainer}/>
                 <Footer/>
-                </switch>
             </React.Fragment>
         )
     }

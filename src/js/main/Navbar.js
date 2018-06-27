@@ -60,7 +60,6 @@ export class Navbar extends React.Component {
             <UserContext.Consumer>
                 {value => {
                     const {user, logout, error} = value;
-                    console.log(user);
                     let userPanel, userName = null;
 
                     if(error === null) {

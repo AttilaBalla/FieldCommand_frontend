@@ -60,7 +60,7 @@ export class NewsEditor extends React.Component {
         let newsPostData = newsPost;
 
         if(newsPostData.title.length < 6 || newsPostData.content.length < 20) {
-            this.props.sendAlert({
+            this.setState({
                 alertType: alertTypes.NEUTRAL,
                 message: "This post appears to be too short."
             });
