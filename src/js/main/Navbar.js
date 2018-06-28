@@ -3,8 +3,7 @@ import React from "react";
 import {Link} from 'react-router-dom';
 import '../../css/navbar.css';
 import {UserContext} from "../util/UserProvider";
-import {InfoIndicator} from "../util/InfoIndicator";
-import {ErrorIndicator} from "../util/ErrorIndicator";
+import {StatusMessage} from "../util/StatusMessage";
 
 function UsernamePanel(props) {
 
@@ -22,10 +21,12 @@ function UsernamePanel(props) {
 
 function NavbarLinks(props) {
 
-    const adminLink = (props.username ) ?
-    <li className="nav-item">
-        <Link className="nav-link" to="/administration"> <i className="fa fa-cog"></i>Administration</Link>
-    </li> : "";
+    const adminLink = (props.user !== null && props.user.rolePower >= 20)
+        ?
+            <li className="nav-item">
+                <Link className="nav-link" to="/administration/"> <i className="fa fa-cog"></i>Administration</Link>
+            </li>
+        : "";
 
     return (
     <ul className="navbar-nav main_navbar">
@@ -61,7 +62,6 @@ export class Navbar extends React.Component {
             <UserContext.Consumer>
                 {value => {
                     const {user, logout, error} = value;
-
                     let userPanel, userName = null;
 
                     if(error === null) {
@@ -73,10 +73,10 @@ export class Navbar extends React.Component {
                         console.log(error);
                         switch(error) {
                             case "expiredToken":
-                                userPanel = <InfoIndicator info={error}/>;
+                                userPanel = <StatusMessage type="info" message={error}/>;
                                 break;
                             case "serverError":
-                                userPanel = <ErrorIndicator error={error}/>;
+                                userPanel = <StatusMessage type="error" message={error}/>;
                                 break;
                             default:
                                 break;
@@ -87,7 +87,7 @@ export class Navbar extends React.Component {
                     <div id="navbar_bg">
                         <nav className="navbar navbar-expand-sm">
                             <Link className = "navbar-brand" to="/"><img src="/img/fc_icon.png" width="55" height="55" alt="logo"/></Link>
-                            <NavbarLinks username={userName}/>
+                            <NavbarLinks user={user}/>
                             <div className="navbar-nav ml-auto navbar_right">
                                 {userPanel}
                                 <Swrnet/>

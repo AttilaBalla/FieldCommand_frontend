@@ -1,7 +1,7 @@
 import React from "react";
 import '../../css/login.css';
 import {activateUser} from './APIUtils';
-import {ErrorIndicator} from "./ErrorIndicator";
+import {ErrorTooltip} from "./ErrorTooltip";
 import {PW_LENGTH} from "./Constants";
 
 function LoginInput(props) {
@@ -89,7 +89,7 @@ export class Activate extends React.Component {
                     <img src="/img/fc.png" width="200" height="200" alt=""/>
                     <h5>
                         SET YOUR PASSWORD
-                        <ErrorIndicator error={this.state.errorMessage}/>
+                        <ErrorTooltip error={this.state.errorMessage}/>
                     </h5>
                     <LoginInput error={different}>
                         <label>

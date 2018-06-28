@@ -1,55 +1,64 @@
 import React from "react";
 import {retrieveSwrStatus} from "./APIUtils.js";
-import {ErrorIndicator} from "./ErrorIndicator";
+import {ErrorTooltip} from "./ErrorTooltip";
 
 export class Swrnet extends React.Component {
 	content;
 	
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+		    status: "LOADING"
+        };
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 
         retrieveSwrStatus()
-      	.then(
-        (result) => {
-		  	this.setState(result);
-        },
-        (error) => {
-          	this.setState({
-            isLoaded: true,
-            error
-          	});
-            console.log(error);
-        });
+            .then((result) => {
+      	        this.setState({
+      	            result:result,
+                    status: ""
+      	        });
+            })
+            .catch(() => {
+                this.setState({
+                    status: "ERROR",
+                });
+            })
 	}
 
 	render() {
-		if(this.state["successful"]) {
 
-			const count = this.state["count"] > 0 ? (
-				<span className="text-success">{this.state["count"]}<i className="fa fa-user ml-1 mt-1" aria-hidden="true"></i></span>
-			) : (
-				<span>{this.state["count"]}<i className="fa fa-user ml-1 mt-1" aria-hidden="true"></i></span>
-			);
+		if(this.state.status === "LOADING") {
 
-			this.content =
-			<div>
-				<img className="mr-2" src="/img/swrnetlogo_on.png" width="80" height="20" alt=""/>
-				{count}
-			</div>;
+           return (
+                <React.Fragment>
+                    <span className="content-status-navbar">
+                        <i className="fa fa-spinner mr-2" aria-hidden="true"/>Loading...</span>
+                </React.Fragment>
+           )
+        }
 
-		} else {
-			// noinspection CheckTagEmptyBody
-            this.content =
-			<div>
-				<img className="mr-2" src="/img/swrnetlogo_off.png" width="80" height="20" alt=""/>
-                <ErrorIndicator error="swrNetError"/>
-			</div>;
-		}
+        if(this.state.status === "ERROR") {
 
-		return (this.content);
+            return (
+                <React.Fragment>
+                    <img className="mr-2" src="/img/swrnetlogo_off.png" width="80" height="20" alt=""/>
+                    <ErrorTooltip error="swrNetError"/>
+                </React.Fragment>
+            )
+        }
+
+        return(
+            <React.Fragment>
+                <img className="mr-2" src="/img/swrnetlogo_on.png" width="80" height="20" alt=""/>
+                {(this.state.result["count"] > 0)
+                    ? <span className="text-success">{this.state.result["count"]}<i className="fa fa-user ml-1 mt-1" aria-hidden="true"></i></span>
+                    : <span>{this.state.result["count"]}<i className="fa fa-user ml-1 mt-1" aria-hidden="true"></i></span>
+                }
+            </React.Fragment>
+        )
+
 	}
 }
