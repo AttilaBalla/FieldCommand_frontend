@@ -9,6 +9,8 @@ import {Footer} from "../main/Footer";
 import {Administration} from "./administration/Administration";
 import '../../css/sidebar.css';
 import '../../css/admin.css';
+import {InternalRequestEditor} from "./administration/internalrequest/InternalRequestEditor";
+import {InternalRequest} from "./administration/internalrequest/InternalRequest";
 
 
 export class Main extends Component {
@@ -20,6 +22,8 @@ export class Main extends Component {
                     <Route exact path="/" component={HomeContainer}/>
                     <Route exact path="/about" component={AboutContainer}/>
                     <Route exact path="/administration/*" component={AdminContainer}/>
+                    <Route exact path="/internal-request" component={InternalRequestContainer}/>
+                    <Route exact path="/ir-editor/:id" component={InternalRequestEditor} />
                 <Footer/>
             </React.Fragment>
         )
@@ -63,6 +67,20 @@ class AdminContainer extends React.Component {
         return (
             <div className="container-fluid core_container">
                 <Administration/>
+            </div>
+        )
+    }
+}
+
+
+class InternalRequestContainer extends React.Component {
+
+    render() {
+        return (
+            <div className="container-fluid">
+                <div className="core_container text_box">
+                    <InternalRequest/>
+                </div>
             </div>
         )
     }
