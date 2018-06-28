@@ -54,6 +54,7 @@ body {
 
 .core_container {
     max-width: 1600px;
+    min-height: 550px;
     margin: 0 auto 0 auto;
     padding: 0;
     box-shadow: 0 15px 30px rgba(50, 50, 60, 0.75)

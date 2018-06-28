@@ -24,11 +24,13 @@ export function UserCardForm(props) {
                     {props.rolepanel}
                 </div>
                 <div className="float-right mt-2 user_versions">
-                    <h6> Versions </h6>
-                    <input type="checkbox" name="versions" value="Official"/>
-                    <span className="badge badge_version ml-2">Official</span>
-                    <input type="checkbox" name="versions" value="BP 1.5"/>
-                    <span className="badge badge_version ml-2">BP 1.5</span>
+                    <h6> Projects </h6>
+                    <input type="checkbox" name="projects" value="ROTR"/>
+                    <span className="badge badge_project ml-2">Rise of the Reds</span>
+                    <input type="checkbox" name="projects" value="SWRNET"/>
+                    <span className="badge badge_project ml-2">SWR.net</span>
+                    <input type="checkbox" name="projects" value="FIELDCOMMAND"/>
+                    <span className="badge badge_project ml-2">FieldCommand</span>
                 </div>
                 <div className="float-right w-100">
                     <button className="btn btn-warning user_update_button float-right mb-3" type="submit">

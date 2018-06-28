@@ -34,6 +34,7 @@ export class InternalRequest extends React.Component {
         return(
             <React.Fragment>
                 {alert}
+                <h2>Internal requests</h2>
                 <Tabs defaultIndex={0}>
                     <TabList>
                         <Tab>Existing entries</Tab>
