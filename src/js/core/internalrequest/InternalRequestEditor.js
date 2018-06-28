@@ -1,7 +1,7 @@
 import React from "react";
-import {getSingleInternalRequest, updateInternalRequest} from "../../../util/APIUtils";
-import {Alert, alertTypes} from "../../../util/Alert";
-import {QuillEditor} from "../../../util/QuillEditor";
+import {getSingleInternalRequest, updateInternalRequest} from "../../util/APIUtils";
+import {Alert, alertTypes} from "../../util/Alert";
+import {QuillEditor} from "../../util/QuillEditor";
 
 export class InternalRequestEditor extends React.Component {
 

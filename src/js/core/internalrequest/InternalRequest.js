@@ -1,8 +1,7 @@
 import React from "react";
 import 'react-tabs/style/react-tabs.css';
-import {Alert} from "../../../util/Alert";
+import {Alert} from "../../util/Alert";
 import {Tab, TabList, TabPanel, Tabs} from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
 import {InternalRequestCreator} from "./InternalRequestCreator";
 import {InternalRequestLister} from "./InternalRequestLister";
 

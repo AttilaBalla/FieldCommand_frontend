@@ -9,8 +9,8 @@ import {Footer} from "../main/Footer";
 import {Administration} from "./administration/Administration";
 import '../../css/sidebar.css';
 import '../../css/admin.css';
-import {InternalRequestEditor} from "./administration/internalrequest/InternalRequestEditor";
-import {InternalRequest} from "./administration/internalrequest/InternalRequest";
+import {InternalRequestEditor} from "./internalrequest/InternalRequestEditor";
+import {InternalRequest} from "./internalrequest/InternalRequest";
 
 
 export class Main extends Component {

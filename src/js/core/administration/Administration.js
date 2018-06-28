@@ -26,7 +26,6 @@ export function Administration() {
                             <Route path='/administration/newsfeed' component={NewsFeedAdmin}/>
                             <Route exact path="/administration/newseditor/:id" component={NewsEditor}/>
                         </div>
-
                     </div>
                     )
                 }

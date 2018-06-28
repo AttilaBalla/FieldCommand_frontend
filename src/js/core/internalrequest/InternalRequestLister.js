@@ -1,6 +1,6 @@
 import React from "react";
-import {getInternalRequests, deleteInternalRequest} from "../../../util/APIUtils";
-import {alertTypes} from "../../../util/Alert";
+import {deleteInternalRequest, getInternalRequests} from "../../util/APIUtils";
+import {alertTypes} from "../../util/Alert";
 import {InternalRequestItem} from "./InternalRequestItem";
 
 export class InternalRequestLister extends React.Component {
