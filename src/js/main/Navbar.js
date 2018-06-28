@@ -28,6 +28,13 @@ function NavbarLinks(props) {
             </li>
         : "";
 
+    const intRequestLink = (props.user)
+        ?
+        <li className="nav-item">
+            <Link className="nav-link" to="/internal-request"><i className="fa fa-comment"></i>Internal Requests</Link>
+        </li>
+        : "";
+
     return (
     <ul className="navbar-nav main_navbar">
         <li className="nav-item">
@@ -42,9 +49,7 @@ function NavbarLinks(props) {
         <li className="nav-item">
             <Link className="nav-link" to="/"><i className="fa fa-clipboard"></i>Game Reports</Link>
         </li>
-        <li className="nav-item">
-            <Link className="nav-link" to="/internal-request"><i className="fa fa-comment"></i>Internal Request</Link>
-        </li>
+        {intRequestLink}
         {adminLink}
     </ul>)
 }
@@ -70,15 +75,12 @@ export class Navbar extends React.Component {
                         userPanel = (userName) ? <UsernamePanel username={userName} logout={logout}/> : "";
 
                     } else {
-                        console.log(error);
                         switch(error) {
                             case "expiredToken":
                                 userPanel = <StatusMessage type="info" message={error}/>;
                                 break;
-                            case "serverError":
-                                userPanel = <StatusMessage type="error" message={error}/>;
-                                break;
                             default:
+                                userPanel = <StatusMessage type="error" message={error}/>;
                                 break;
                         }
                     }
