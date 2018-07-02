@@ -18,14 +18,28 @@ export class UserCard extends React.Component {
             email: props.email,
             role: props.role,
             rolePower: props.rolePower,
+            projects: []
         };
+
+        this.selectedProjects = new Set();
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
     }
 
     handleChange(event) {
         this.setState({[event.target.name]: event.target.value})
+    }
+
+    handleCheckboxChange(event) {
+        if (this.selectedProjects.has(event.target.value)) {
+            this.selectedProjects.delete(event.target.value);
+        } else {
+            this.selectedProjects.add(event.target.value);
+        }
+
+        console.log(this.selectedProjects);
     }
 
     handleSubmit(event) {
@@ -55,7 +69,6 @@ export class UserCard extends React.Component {
     }
 
     render() {
-
         let rolePanel = null;
         if (this.props.role === "ROLE_OWNER") {
             rolePanel = <p className="text-secondary">
@@ -100,6 +113,7 @@ export class UserCard extends React.Component {
                                     ? <UserCardForm
                                         submit={this.handleSubmit}
                                         change={this.handleChange}
+                                        toggleCheckbox={this.handleCheckboxChange}
                                         username={this.state.username}
                                         email={this.state.email}
                                         rolepanel={rolePanel}
