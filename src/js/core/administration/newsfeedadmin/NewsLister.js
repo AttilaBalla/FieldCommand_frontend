@@ -52,7 +52,7 @@ export class NewsLister extends React.Component {
             <section>
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item main_color_dark">
-                        <div className="d-flex justify-content-between">
+                        <div className="d-flex">
                             <span className="w-40">Title</span>
                             <span className="w-20">Date and time</span>
                             <span className="w-10">Owner</span>

@@ -31,7 +31,7 @@ function NavbarLinks(props) {
     const intRequestLink = (props.user)
         ?
         <li className="nav-item">
-            <Link className="nav-link" to="/internal-request"><i className="fa fa-comment"></i>Internal Requests</Link>
+            <Link className="nav-link" to="/requests"><i className="fa fa-comment"></i>Internal Requests</Link>
         </li>
         : "";
 

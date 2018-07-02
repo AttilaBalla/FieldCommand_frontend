@@ -22,8 +22,8 @@ export class Main extends Component {
                     <Route exact path="/" component={HomeContainer}/>
                     <Route exact path="/about" component={AboutContainer}/>
                     <Route exact path="/administration/*" component={AdminContainer}/>
-                    <Route exact path="/internal-request" component={InternalRequestContainer}/>
-                    <Route exact path="/ir-editor/:id" component={InternalRequestEditor} />
+                    <Route exact path="/requests" component={InternalRequestContainer}/>
+                    <Route exact path="/requests/:id" component={InternalRequestEditor} />
                 <Footer/>
             </React.Fragment>
         )

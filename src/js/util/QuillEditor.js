@@ -47,17 +47,15 @@ export class QuillEditor extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         this.props.sendNewsPost(this.state);
-        this.setState({title: "", content: "", visible: false})
     }
 
     render() {
 
         return (
             <React.Fragment>
-                {(this.props.editMode) ? <h5> Post title </h5> : null}
                 <input type="text"
                        name="title"
-                       className="form-control mb-3"
+                       className="form-control mb-3 mt-3"
                        onChange={this.handleChange}
                        value={this.state.title}
                        placeholder="Post Title"
