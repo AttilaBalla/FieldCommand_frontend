@@ -45,17 +45,12 @@
     cursor: pointer;
 }
 
-.badge_project {
-    color: #fff;
-    background-color: #7a005b;
-}
-
 .user_details {
     width: 35%;
 }
 
 .user_roles, .user_versions {
-    width: 55%;
+    width: 60%;
 }
 
 .text-owner {
