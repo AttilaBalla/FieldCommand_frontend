@@ -20,7 +20,6 @@ export class InternalRequestLister extends React.Component {
     getPosts() {
         getInternalRequests()
             .then(response => {
-                console.log(response);
                 this.setState({internalRequests: response})
             })
             .catch(error => {
@@ -54,11 +53,11 @@ export class InternalRequestLister extends React.Component {
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item main_color_dark">
                         <div className="d-flex justify-content-between">
+                            <span className="w-10">Status</span>
                             <span className="w-40">Title</span>
                             <span className="w-20">Date and time</span>
                             <span className="w-10">Owner</span>
-                            <span className="w-10">Status</span>
-                            <span className="ml-auto mr-3">Actions</span>
+                            <span className="ml-auto mr-3">Project</span>
                         </div>
                     </li>
                     {this.state.internalRequests.map((internalRequest, key) => {
