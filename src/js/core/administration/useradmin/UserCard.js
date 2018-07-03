@@ -5,6 +5,8 @@ import {alertTypes} from "../../../util/Alert";
 import {UserContext} from "../../../util/UserProvider";
 import {UserCardForm} from "./UserCardForm";
 import {UserCardHeader} from "./UserCardHeader";
+import {projectBadges} from "../../../util/ProjectBadge";
+import {UserProjectsElement} from "./UserProjectsElement";
 
 export class UserCard extends React.Component {
 
@@ -17,15 +19,26 @@ export class UserCard extends React.Component {
             username: props.name,
             email: props.email,
             role: props.role,
+            projects: props.projects,
             rolePower: props.rolePower,
-            projects: []
         };
 
         this.selectedProjects = new Set();
 
+        if(props.projects.length > 0) {
+            props.projects.forEach(element => {
+                this.selectedProjects.add(element);
+            })
+        }
+
+        this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+    }
+
+    componentWillMount() {
+        this.rolesPanel = this.makeRolesPanel();
+        this.projectsPanel = this.makeProjectsPanel();
     }
 
     handleChange(event) {
@@ -38,8 +51,6 @@ export class UserCard extends React.Component {
         } else {
             this.selectedProjects.add(event.target.value);
         }
-
-        console.log(this.selectedProjects);
     }
 
     handleSubmit(event) {
@@ -52,7 +63,13 @@ export class UserCard extends React.Component {
             });
         } else {
 
-            updateUser(this.state)
+            let formData = this.state;
+
+            formData["projects"] = Array.from(this.selectedProjects);
+
+            console.log(formData);
+
+            updateUser(formData)
                 .then(() => {
                     this.props.sendAlert({
                         alertType: alertTypes.SUCCESS,
@@ -68,13 +85,28 @@ export class UserCard extends React.Component {
         }
     }
 
-    render() {
+    makeProjectsPanel() {
+        let projectList = Object.keys(projectBadges).map(i => projectBadges[i]);
+
+        return projectList.map((project, key) => {
+            return (
+                <UserProjectsElement
+                    key={key}
+                    shortname={project.projectShortName}
+                    toggleCheckbox={this.handleCheckboxChange}
+                    checked={this.selectedProjects.has(project.projectShortName)}
+                />
+            )
+        });
+    }
+
+    makeRolesPanel() {
         let rolePanel = null;
         if (this.props.role === "ROLE_OWNER") {
             rolePanel = <p className="text-secondary">
-                            <i className="fa fa-ban mr-2" aria-hidden="true"></i>
-                            cannot be changed for this user!
-                        </p>
+                <i className="fa fa-ban mr-2" aria-hidden="true"></i>
+                cannot be changed for this user!
+            </p>
         } else {
             rolePanel = userRoles.map((role, key) => {
                 return (
@@ -89,6 +121,11 @@ export class UserCard extends React.Component {
                 )
             });
         }
+
+        return rolePanel;
+    }
+
+    render() {
 
         return (
             <UserContext.Consumer>
@@ -116,7 +153,8 @@ export class UserCard extends React.Component {
                                         toggleCheckbox={this.handleCheckboxChange}
                                         username={this.state.username}
                                         email={this.state.email}
-                                        rolepanel={rolePanel}
+                                        rolepanel={this.rolesPanel}
+                                        projectpanel={this.projectsPanel}
                                         />
                                     : null}
                             </div>
