@@ -1,6 +1,7 @@
 import React from "react";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import {ProjectBadge} from "./ProjectBadge";
 
 export class QuillEditor extends React.Component {
 
@@ -71,6 +72,9 @@ export class QuillEditor extends React.Component {
                     {(this.props.toggleVisibility)
                         ? <VisibilityButton visible={this.state.visible} handleClick={this.switchVisibility}/>
                         : null}
+                    {(this.props.toggleProjectSelect)
+                        ? <ProjectDropDown/>
+                        : null}
                     <button className="btn btn-success float-right" onClick={this.handleSubmit}>
                         Submit
                     </button>
@@ -107,5 +111,23 @@ function VisibilityButton(props) {
             {button}
         </React.Fragment>
     )
+}
 
+function ProjectDropDown(props) {
+    return(
+
+
+        <div className="btn-group btn-group-toggle" data-toggle="buttons">
+            <label className="btn btn btn-outline-secondary active">
+                <input type="radio" name="options" value="ROTR" autoComplete="off" checked/><ProjectBadge project="ROTR" displayName={true}/>
+            </label>
+            <label className="btn btn-outline-secondary">
+                <input type="radio" name="options" value="SWRNET" autoComplete="off"/><ProjectBadge project="SWRNET" displayName={true}/>
+            </label>
+            <label className="btn btn-outline-secondary">
+                <input type="radio" name="options" value="FC" autoComplete="off"/><ProjectBadge project="FC" displayName={true}/>
+            </label>
+        </div>
+
+    )
 }

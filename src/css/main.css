@@ -37,13 +37,21 @@ p {
     width: 20% !important;
 }
 
-
 .w-40 {
     width: 40% !important;
 }
 
 .btn {
     cursor: pointer;
+}
+
+.btn-outline-secondary {
+    color: black;
+    background-color: whitesmoke;
+}
+
+.btn-outline-secondary.active {
+    background-color: red;
 }
 
 .banner_text p {
