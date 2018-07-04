@@ -67,8 +67,6 @@ export class UserCard extends React.Component {
 
             formData["projects"] = Array.from(this.selectedProjects);
 
-            console.log(formData);
-
             updateUser(formData)
                 .then(() => {
                     this.props.sendAlert({

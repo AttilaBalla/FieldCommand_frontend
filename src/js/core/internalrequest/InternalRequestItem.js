@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "react-router-dom/es/Link";
+import {ProjectBadge} from "../../util/ProjectBadge";
 
 export class InternalRequestItem extends React.Component {
 
@@ -49,6 +50,7 @@ export class InternalRequestItem extends React.Component {
                     </span>
                     <span className="w-20">{this.props.date}</span>
                     <span className="w-10">{this.props.owner}</span>
+                    <span className="w-10"><ProjectBadge project={this.props.project}/></span>
                     <span className="ml-auto">
                         {(this.state.confirmedDelete)
                             ? cancelDeleteButton

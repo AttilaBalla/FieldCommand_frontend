@@ -2,6 +2,7 @@ import React from "react";
 import {getSingleInternalRequest, updateInternalRequest} from "../../util/APIUtils";
 import {Alert, alertTypes} from "../../util/Alert";
 import {QuillEditor} from "../../util/QuillEditor";
+import {ProjectBadge} from "../../util/ProjectBadge";
 
 export class InternalRequestEditor extends React.Component {
 
@@ -15,7 +16,8 @@ export class InternalRequestEditor extends React.Component {
             date: "",
             content: "",
             owner: "",
-            visible: false,
+            status: "",
+            project: "",
         };
 
         this.setAlert = this.setAlert.bind(this);
@@ -34,6 +36,7 @@ export class InternalRequestEditor extends React.Component {
                     content: response.content,
                     owner: response.owner,
                     status: response.status,
+                    project: response.project,
                     hasInternalRequest: true})
             })
             .catch(error => {
@@ -109,6 +112,7 @@ export class InternalRequestEditor extends React.Component {
                 <div className="row core_container text_box">
                     {alert}
                     <span>Submitted by: {this.state.owner}</span>
+                    <span className="float-right">Project: <ProjectBadge project={this.state.project} /></span>
                     <div className="intrequest_panel">
                         <h4>{this.state.title}</h4>
                         <div className="post_content" dangerouslySetInnerHTML={{__html: this.state.content}}/>

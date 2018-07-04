@@ -1,7 +1,7 @@
 import React from "react";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import {ProjectBadge} from "./ProjectBadge";
+import {ProjectBadge, projectBadges} from "./ProjectBadge";
 
 export class QuillEditor extends React.Component {
 
@@ -25,12 +25,14 @@ export class QuillEditor extends React.Component {
             title: (props.editMode) ? props.title : "",
             content: (props.editMode) ? props.content : "",
             visible: (props.editMode) ? props.visible : null,
+            project: (props.editMode) ? props.project : "ROTR"
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleQuillChange = this.handleQuillChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.switchVisibility = this.switchVisibility.bind(this);
+        this.setProject = this.setProject.bind(this);
     }
 
     handleQuillChange(value) {
@@ -43,6 +45,10 @@ export class QuillEditor extends React.Component {
 
     switchVisibility() {
         this.setState({visible: (!this.state.visible)})
+    }
+
+    setProject(project) {
+        this.setState({project: project});
     }
 
     handleSubmit(event) {
@@ -73,7 +79,7 @@ export class QuillEditor extends React.Component {
                         ? <VisibilityButton visible={this.state.visible} handleClick={this.switchVisibility}/>
                         : null}
                     {(this.props.toggleProjectSelect)
-                        ? <ProjectDropDown/>
+                        ? <ProjectsButtonGroup setProject={this.setProject} activeProject={this.state.project}/>
                         : null}
                     <button className="btn btn-success float-right" onClick={this.handleSubmit}>
                         Submit
@@ -113,24 +119,65 @@ function VisibilityButton(props) {
     )
 }
 
-function ProjectDropDown(props) {
-    return(
+class ProjectsButtonGroup extends React.Component {
 
+    constructor(props) {
+        super(props);
 
-        <div className="btn-group btn-group-toggle btn-group-blue" data-toggle="buttons">
-            <label className="btn btn-blue active">
-                <input type="radio" name="options" value="ROTR" defaultChecked/>
-                <ProjectBadge project="ROTR" displayName={true}/>
-            </label>
-            <label className="btn btn-blue">
-                <input type="radio" name="options" value="SWRNET"/>
-                <ProjectBadge project="SWRNET" displayName={true}/>
-            </label>
-            <label className="btn btn-blue">
-                <input type="radio" name="options" value="FC"/>
-                <ProjectBadge project="FC" displayName={true}/>
-            </label>
-        </div>
+        this.activeProject = "ROTR";
+        this.projectList = Object.keys(projectBadges).map(i => projectBadges[i]);
+        this.setActiveProject = this.setActiveProject.bind(this);
+    }
 
-    )
+    componentWillReceiveProps(nextProps) { // I <3 this thing
+        this.activeProject = nextProps.activeProject;
+    }
+
+    setActiveProject(activeProject) {
+        this.props.setProject(activeProject);
+    }
+
+    render() {
+        let projectButtons = this.projectList.map((project, key) => {
+
+            return(
+                <ProjectButton
+                    active={(project.projectShortName === this.activeProject)}
+                    key={key}
+                    project={project.projectShortName}
+                    setProject={this.setActiveProject}
+                />
+            )
+        });
+
+        return (
+            <div className="btn-group btn-group-toggle btn-group-blue">
+                {projectButtons}
+            </div>
+        )
+    }
+}
+
+class ProjectButton extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+        this.props.setProject(this.props.project);
+    }
+
+    render() {
+
+        let buttonClass = (this.props.active) ? "btn btn-blue active" : "btn btn-blue";
+
+        return (
+            <button className={buttonClass} onClick={this.handleClick}>
+                <ProjectBadge project={this.props.project} displayName={true}/>
+            </button>
+        )
+    }
 }

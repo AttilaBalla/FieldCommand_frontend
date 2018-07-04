@@ -52,7 +52,7 @@ export function ProjectBadge(props) {
 
     return(
         <React.Fragment>
-            <span className="badge badge_project ml-2" data-tip={(props.displayName) ? null : "React-tooltip"}>
+            <span className="badge badge_project" data-tip={(props.displayName) ? null : "React-tooltip"}>
                 {projectIcon}{(props.displayName) ? projectName : null}
             </span>
             {toolTip}

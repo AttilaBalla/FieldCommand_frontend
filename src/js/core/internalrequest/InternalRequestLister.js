@@ -57,7 +57,8 @@ export class InternalRequestLister extends React.Component {
                             <span className="w-40">Title</span>
                             <span className="w-20">Date and time</span>
                             <span className="w-10">Owner</span>
-                            <span className="ml-auto mr-3">Project</span>
+                            <span className="w-10">Project</span>
+                            <span className="ml-auto"></span>
                         </div>
                     </li>
                     {this.state.internalRequests.map((internalRequest, key) => {
@@ -69,6 +70,7 @@ export class InternalRequestLister extends React.Component {
                                 owner={internalRequest.owner}
                                 date={internalRequest.date}
                                 status={internalRequest.status}
+                                project={internalRequest.project}
                                 deletePost={this.deletePost}
                             />
 
