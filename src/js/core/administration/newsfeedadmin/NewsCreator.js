@@ -43,7 +43,7 @@ export class NewsCreator extends React.Component {
 
     render() {
         return(
-            <QuillEditor sendNewsPost={this.handleSubmit} toggleVisibility={true}/>
+            <QuillEditor sendContent={this.handleSubmit} toggleVisibility={true}/>
         )
     }
 }

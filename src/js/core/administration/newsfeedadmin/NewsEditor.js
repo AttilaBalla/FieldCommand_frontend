@@ -102,7 +102,7 @@ export class NewsEditor extends React.Component {
                 content={this.state.content}
                 visible={(this.state.visible === "True")}
                 sendAlert={this.setAlert}
-                sendNewsPost={this.handleSubmit}
+                sendContent={this.handleSubmit}
                 toggleVisibility={true}
 
             />
