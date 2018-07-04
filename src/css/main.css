@@ -2,7 +2,7 @@ body {
     background-color: rgb(235, 235, 235);
 }
 
-p {
+p, label {
     margin: 0;
 }
 
@@ -50,8 +50,26 @@ p {
     background-color: whitesmoke;
 }
 
-.btn-outline-secondary.active {
-    background-color: red;
+.btn-group-blue {
+    border: thin solid rgb(14, 117, 177);
+    border-radius: 5px;
+}
+
+.btn-blue {
+    transition: background-color 0.5s;
+    transition-timing-function: ease;
+}
+
+.btn-blue.active {
+    color: white;
+    background-color: rgb(14, 117, 177) !important;
+    box-shadow: 0 0 7px rgb(14, 117, 177) !important;
+}
+
+.btn-blue.focus, .btn-blue:hover {
+    color: white;
+    background-color: rgb(17, 150, 228);
+    box-shadow: 0 0 7px rgb(25, 171, 255);
 }
 
 .banner_text p {

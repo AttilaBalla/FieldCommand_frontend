@@ -47,7 +47,7 @@ export class QuillEditor extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        this.props.sendNewsPost(this.state);
+        this.props.sendContent(this.state);
     }
 
     render() {
@@ -117,15 +117,18 @@ function ProjectDropDown(props) {
     return(
 
 
-        <div className="btn-group btn-group-toggle" data-toggle="buttons">
-            <label className="btn btn btn-outline-secondary active">
-                <input type="radio" name="options" value="ROTR" autoComplete="off" checked/><ProjectBadge project="ROTR" displayName={true}/>
+        <div className="btn-group btn-group-toggle btn-group-blue" data-toggle="buttons">
+            <label className="btn btn-blue active">
+                <input type="radio" name="options" value="ROTR" defaultChecked/>
+                <ProjectBadge project="ROTR" displayName={true}/>
             </label>
-            <label className="btn btn-outline-secondary">
-                <input type="radio" name="options" value="SWRNET" autoComplete="off"/><ProjectBadge project="SWRNET" displayName={true}/>
+            <label className="btn btn-blue">
+                <input type="radio" name="options" value="SWRNET"/>
+                <ProjectBadge project="SWRNET" displayName={true}/>
             </label>
-            <label className="btn btn-outline-secondary">
-                <input type="radio" name="options" value="FC" autoComplete="off"/><ProjectBadge project="FC" displayName={true}/>
+            <label className="btn btn-blue">
+                <input type="radio" name="options" value="FC"/>
+                <ProjectBadge project="FC" displayName={true}/>
             </label>
         </div>
 
