@@ -3,6 +3,7 @@ import {getSingleInternalRequest, updateInternalRequest} from "../../util/APIUti
 import {Alert, alertTypes} from "../../util/Alert";
 import {QuillEditor} from "../../util/QuillEditor";
 import {ProjectBadge} from "../../util/ProjectBadge";
+import {IRSupportModule} from "./modules/IRSupportModule";
 
 export class InternalRequestEditor extends React.Component {
 
@@ -37,6 +38,8 @@ export class InternalRequestEditor extends React.Component {
                     owner: response.owner,
                     status: response.status,
                     project: response.project,
+                    supporters: response.supporters,
+                    supportPercent: response.supportPercent,
                     hasInternalRequest: true})
             })
             .catch(error => {
@@ -44,7 +47,7 @@ export class InternalRequestEditor extends React.Component {
                     alertType: alertTypes.ERROR,
                     message: error.information
                 });
-            })
+            });
     }
 
     setAlert(alert) {
@@ -118,15 +121,7 @@ export class InternalRequestEditor extends React.Component {
                         <div className="post_content" dangerouslySetInnerHTML={{__html: this.state.content}}/>
                     </div>
                     <div className="intrequest_panel">
-                        <h4>Support</h4>
-                        <span>You can support this request if you think it's worth fulfilling.</span>
-                        <div className="progress">
-                            <div className="progress-bar progress-bar-striped bg-success" role="progressbar" style={{width: "70%"}}
-                                 aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">70%</div>
-                        </div>
-                        <button type="button" className="btn btn-success">
-                            <i className="fa fa-thumbs-up" aria-hidden="true"></i>Support
-                        </button>
+                       <IRSupportModule percent={this.state.supportPercent}/>
                     </div>
                     <div className="intrequest_panel">
                         <h4>Status</h4>
