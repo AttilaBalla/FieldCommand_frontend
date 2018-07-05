@@ -37,6 +37,10 @@ p, label {
     width: 20% !important;
 }
 
+.w-35 {
+    width: 35% !important;
+}
+
 .w-40 {
     width: 40% !important;
 }

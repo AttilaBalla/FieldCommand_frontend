@@ -54,11 +54,11 @@ export class InternalRequestLister extends React.Component {
                     <li className="list-group-item main_color_dark">
                         <div className="d-flex justify-content-between">
                             <span className="w-10">Status</span>
-                            <span className="w-40">Title</span>
+                            <span className="w-35">Title</span>
                             <span className="w-20">Date and time</span>
                             <span className="w-10">Owner</span>
                             <span className="w-10">Project</span>
-                            <span className="ml-auto"></span>
+                            <span className="ml-auto">Actions</span>
                         </div>
                     </li>
                     {this.state.internalRequests.map((internalRequest, key) => {

@@ -35,7 +35,7 @@ export class InternalRequestItem extends React.Component {
         let cancelDeleteButton =
         <React.Fragment>
             <span className="small mr-1">Are you sure?</span>
-            <button className="btn btn-secondary mr-1" onClick={this.cancelDelete}>
+            <button className="btn btn-secondary btn-sm mr-1" onClick={this.cancelDelete}>
                 <i className="fa fa-ban" aria-hidden="true"></i>
             </button>
         </React.Fragment>;
@@ -45,18 +45,18 @@ export class InternalRequestItem extends React.Component {
             <li className="list-group-item">
                 <div className="d-flex">
                     <span className="w-10">{this.props.status}</span>
-                    <span className="w-40 no-overflow">
+                    <span className="w-35 no-overflow">
                         <Link to={"requests/" + this.props.id}>{this.props.title}</Link>
                     </span>
                     <span className="w-20">{this.props.date}</span>
                     <span className="w-10">{this.props.owner}</span>
-                    <span className="w-10"><ProjectBadge project={this.props.project}/></span>
+                    <span className="w-10"><ProjectBadge project={this.props.project} id={this.props.id}/></span>
                     <span className="ml-auto">
                         {(this.state.confirmedDelete)
                             ? cancelDeleteButton
                             : null
                         }
-                        <button className="btn btn-danger"  onClick={this.sendDelete}>
+                        <button className="btn btn-danger btn-sm"  onClick={this.sendDelete}>
                             {(this.state.confirmedDelete)
                                 ? <i className="fa fa-check" aria-hidden="true"></i>
                                 : <i className="fa fa-trash" aria-hidden="true"></i>
