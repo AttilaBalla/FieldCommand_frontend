@@ -1,9 +1,11 @@
 import React from "react";
-import {getSingleInternalRequest, updateInternalRequest} from "../../util/APIUtils";
+import {alterIntRequestSupport, getSingleInternalRequest, updateInternalRequest} from "../../util/APIUtils";
 import {Alert, alertTypes} from "../../util/Alert";
+import {UserContext} from "../../util/UserProvider";
 import {QuillEditor} from "../../util/QuillEditor";
 import {ProjectBadge} from "../../util/ProjectBadge";
 import {IRSupportModule} from "./modules/IRSupportModule";
+import {IRStatusModule} from "./modules/IRStatusModule";
 
 export class InternalRequestEditor extends React.Component {
 
@@ -87,7 +89,25 @@ export class InternalRequestEditor extends React.Component {
         }
     }
 
+    handleSupportChange(username) {
+        alterIntRequestSupport({requestId: this.state.requestId, username: username})
+            .then(() => {
+                this.setState({
+                    alertType: alertTypes.SUCCESS,
+                    message: "You are not supporting this request!"
+                });
+
+            }).catch(error => {
+            this.setState({
+                alertType: alertTypes.ERROR,
+                message: error.information
+            });
+        });
+    }
+
     render() {
+
+        console.log(this.state);
 
         let editor;
 
@@ -110,53 +130,41 @@ export class InternalRequestEditor extends React.Component {
             : null;
 
         return(
+            <UserContext.Consumer>
+                {value => {
+                    const {user} = value;
 
-            <div className="container-fluid">
-                <div className="row core_container text_box">
-                    {alert}
-                    <span>Submitted by: {this.state.owner}</span>
-                    <span className="float-right">Project: <ProjectBadge project={this.state.project} /></span>
-                    <div className="intrequest_panel">
-                        <h4>{this.state.title}</h4>
-                        <div className="post_content" dangerouslySetInnerHTML={{__html: this.state.content}}/>
-                    </div>
-                    <div className="intrequest_panel">
-                       <IRSupportModule percent={this.state.supportPercent}/>
-                    </div>
-                    <div className="intrequest_panel">
-                        <h4>Status</h4>
-                        <span>You are an assigned admin for this project, you can handle this request by changing it's status.</span>
-                        <div className="btn-group btn-group-toggle mt-2 w-100" data-toggle="buttons">
-                            <label className="btn btn-secondary">
-                                <input type="radio" name="status" value="archived" autoComplete="off"/>
-                                <i className="fa fa-archive" aria-hidden="true"></i> Archived
-                            </label>
-                            <label className="btn btn-danger">
-                                <input type="radio" name="status" value="denied" autoComplete="off"/>
-                                <i className="fa fa-ban" aria-hidden="true"></i> Denied
-                            </label>
-                            <label className="btn btn-info active">
-                                <input type="radio" name="status" value="waiting" autoComplete="off"/>
-                                <i className="fa fa-clock-o" aria-hidden="true"></i> Waiting
-                            </label>
-                            <label className="btn btn-warning">
-                                <input type="radio" name="status" value="in_progress" autoComplete="off"/>
-                                <i className="fa fa-hourglass-half" aria-hidden="true"></i> In progress
-                            </label>
-                            <label className="btn btn-success">
-                                <input type="radio" name="status" value="approved" autoComplete="off"/>
-                                <i className="fa fa-thumbs-up" aria-hidden="true"></i> Approved
-                            </label>
-                            <label className="btn btn-success">
-                                <input type="radio" name="status" value="done" autoComplete="off"/>
-                                <i className="fa fa-check" aria-hidden="true"></i> Done
-                            </label>
+                    return(
+                        <div className="container-fluid">
+                            <div className="row core_container text_box">
+                                {alert}
+                                <span>Submitted by: {this.state.owner}</span>
+                                <span className="float-right">Project: <ProjectBadge project={this.state.project} /></span>
+                                <div className="intrequest_panel">
+                                    <h4>{this.state.title}</h4>
+                                    <div className="post_content" dangerouslySetInnerHTML={{__html: this.state.content}}/>
+                                </div>
+                                <div className="intrequest_panel">
+                                    {(this.state.hasInternalRequest)
+                                        ?<IRSupportModule
+                                            percent={this.state.supportPercent}
+                                            currentUser={user.username}
+                                            supporters={this.state.supporters}
+                                            alterRequest={this.handleSupportChange}
+                                        />
+                                        : null
+                                    }
+                                </div>
+                                <div className="intrequest_panel">
+                                    <IRStatusModule/>
+                                </div>
+                                <span>You are the owner of this request. You can edit it below.</span>
+                                {editor}
+                            </div>
                         </div>
-                    </div>
-                    <span>You are the owner of this request. You can edit it below.</span>
-                    {editor}
-                </div>
-            </div>
+                    )
+                }}
+            </UserContext.Consumer>
         )
     }
 }

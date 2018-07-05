@@ -186,3 +186,12 @@ export function updateInternalRequest(internalRequest) {
         body: JSON.stringify(internalRequest)
     });
 }
+
+export function alterIntRequestSupport(supportData) {
+
+    return request({
+        url: API_BASE_URL + "/user/ir/support",
+        method: 'POST',
+        body: JSON.stringify(supportData)
+    });
+}
