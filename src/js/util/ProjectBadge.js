@@ -46,13 +46,13 @@ export function ProjectBadge(props) {
     let toolTip = (props.displayName)
         ? null
         :
-        <ReactTooltip place="top" type="dark" effect="solid">
+        <ReactTooltip id={props.id} place="top" type="dark" effect="solid">
             {projectName}
         </ReactTooltip>;
 
     return(
         <React.Fragment>
-            <span className="badge badge_project" data-tip={(props.displayName) ? null : "React-tooltip"}>
+            <span className="badge badge_project" data-tip data-for={props.id}>
                 {projectIcon}{(props.displayName) ? projectName : null}
             </span>
             {toolTip}
