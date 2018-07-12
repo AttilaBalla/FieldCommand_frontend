@@ -1,11 +1,12 @@
 import React from "react";
-import {alterIntRequestSupport, getSingleInternalRequest, updateInternalRequest} from "../../util/APIUtils";
+import {getSingleInternalRequest, updateInternalRequest} from "../../util/APIUtils";
 import {Alert, alertTypes} from "../../util/Alert";
 import {UserContext} from "../../util/UserProvider";
 import {QuillEditor} from "../../util/QuillEditor";
 import {ProjectBadge} from "../../util/ProjectBadge";
 import {IRSupportModule} from "./modules/IRSupportModule";
 import {IRStatusModule} from "./modules/IRStatusModule";
+import {Redirect} from "react-router-dom";
 
 export class InternalRequestEditor extends React.Component {
 
@@ -107,8 +108,6 @@ export class InternalRequestEditor extends React.Component {
 
     render() {
 
-        console.log(this.state);
-
         let editor;
 
         if(this.state.hasInternalRequest) {
@@ -118,7 +117,7 @@ export class InternalRequestEditor extends React.Component {
                 content={this.state.content}
                 status={this.state.status}
                 sendAlert={this.setAlert}
-                sendNewsPost={this.handleSubmit}
+                sendContent={this.handleSubmit}
 
             />
         } else {
@@ -156,7 +155,16 @@ export class InternalRequestEditor extends React.Component {
                                     }
                                 </div>
                                 <div className="intrequest_panel">
-                                    <IRStatusModule/>
+
+                                    {(this.state.hasInternalRequest)
+                                        ? <IRStatusModule
+                                            requestId={this.state.id}
+                                            canHandleRequest={(user.projects.includes(this.state.project))}
+                                            status={this.state.status}
+                                            sendAlert={this.setAlert}
+                                        />
+                                        : null
+                                    }
                                 </div>
                                 <span>You are the owner of this request. You can edit it below.</span>
                                 {editor}

@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "react-router-dom/es/Link";
 import {ProjectBadge} from "../../util/ProjectBadge";
+import {statusButtons} from "./modules/IRStatusModule";
 
 export class InternalRequestItem extends React.Component {
 
@@ -40,17 +41,19 @@ export class InternalRequestItem extends React.Component {
             </button>
         </React.Fragment>;
 
+         let statusData = statusButtons[this.props.status];
+
         return(
 
             <li className="list-group-item">
                 <div className="d-flex">
-                    <span className="w-10">{this.props.status}</span>
+                    <span className={statusData.textColor + " w-10 small"}><i className={statusData.icon + " mr-2"}></i>{statusData.displayName}</span>
                     <span className="w-35 no-overflow">
                         <Link to={"requests/" + this.props.id}>{this.props.title}</Link>
                     </span>
                     <span className="w-20">{this.props.date}</span>
                     <span className="w-10">{this.props.owner}</span>
-                    <span className="w-10"><ProjectBadge project={this.props.project} id={this.props.id}/></span>
+                    <span><ProjectBadge project={this.props.project} id={this.props.id}/></span>
                     <span className="ml-auto">
                         {(this.state.confirmedDelete)
                             ? cancelDeleteButton

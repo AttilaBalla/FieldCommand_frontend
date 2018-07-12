@@ -89,7 +89,7 @@ export function updateUser(updateData) {
 
     return request({
         url: API_BASE_URL + "/admin/updateUser",
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify(updateData)
     });
 }
@@ -132,7 +132,7 @@ export function updateNewsPost(newsPostData) {
 
     return request({
         url: API_BASE_URL + "/dev/updateNewsPost",
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify(newsPostData)
     });
 }
@@ -182,7 +182,7 @@ export function updateInternalRequest(internalRequest) {
 
     return request({
         url: API_BASE_URL + "/user/ir/update",
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify(internalRequest)
     });
 }
@@ -193,5 +193,14 @@ export function alterIntRequestSupport(supportData) {
         url: API_BASE_URL + "/user/ir/support",
         method: 'POST',
         body: JSON.stringify(supportData)
+    });
+}
+
+export function alterIntRequestStatus(StatusData) {
+
+    return request({
+        url: API_BASE_URL + "/dev/ir/updateStatus",
+        method: 'PUT',
+        body: JSON.stringify(StatusData)
     });
 }
