@@ -14,7 +14,7 @@ export function Administration() {
             {value => {
 
                 const {user} = value;
-                if(user) { //TODO access control stuffz (user.simpleAuthorities)
+                if(user) {
 
                     return(
                     <div className="row">
@@ -28,10 +28,10 @@ export function Administration() {
                         </div>
                     </div>
                     )
-                }
-                else {
+                } else {
+
                     return(
-                        <Redirect to="/"/>
+                        <Redirect to="/"/> // TODO 403
                     )
                 }
             }}

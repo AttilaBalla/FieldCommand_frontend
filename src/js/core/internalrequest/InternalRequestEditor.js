@@ -33,6 +33,7 @@ export class InternalRequestEditor extends React.Component {
 
         getSingleInternalRequest(params.id)
             .then(response => {
+
                 this.setState({
                     id: response.id,
                     title: response.title,
@@ -90,22 +91,6 @@ export class InternalRequestEditor extends React.Component {
         }
     }
 
-    handleSupportChange(username) {
-        alterIntRequestSupport({requestId: this.state.requestId, username: username})
-            .then(() => {
-                this.setState({
-                    alertType: alertTypes.SUCCESS,
-                    message: "You are not supporting this request!"
-                });
-
-            }).catch(error => {
-            this.setState({
-                alertType: alertTypes.ERROR,
-                message: error.information
-            });
-        });
-    }
-
     render() {
 
         let editor;
@@ -133,6 +118,10 @@ export class InternalRequestEditor extends React.Component {
                 {value => {
                     const {user} = value;
 
+                    if(user == null) {
+                        return <Redirect to={"/"}/> // TODO 403
+                    }
+
                     return(
                         <div className="container-fluid">
                             <div className="row core_container text_box">
@@ -149,7 +138,9 @@ export class InternalRequestEditor extends React.Component {
                                             percent={this.state.supportPercent}
                                             currentUser={user.username}
                                             supporters={this.state.supporters}
-                                            alterRequest={this.handleSupportChange}
+                                            requestId={this.state.id}
+                                            isRequestOwner={(this.state.owner === user.username)}
+                                            sendAlert={this.setAlert}
                                         />
                                         : null
                                     }
@@ -166,8 +157,13 @@ export class InternalRequestEditor extends React.Component {
                                         : null
                                     }
                                 </div>
-                                <span>You are the owner of this request. You can edit it below.</span>
-                                {editor}
+                                {(this.state.owner === user.username)
+                                    ? <React.Fragment>
+                                            <span>You are the owner of this request. You can edit it below.</span>
+                                            {editor}
+                                    </React.Fragment>
+                                    : null}
+
                             </div>
                         </div>
                     )

@@ -25,7 +25,7 @@ export class QuillEditor extends React.Component {
             title: (props.editMode) ? props.title : "",
             content: (props.editMode) ? props.content : "",
             visible: (props.editMode) ? props.visible : null,
-            project: (props.editMode) ? props.project : "ROTR"
+            projectName: (props.editMode) ? props.project : "ROTR"
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -48,7 +48,7 @@ export class QuillEditor extends React.Component {
     }
 
     setProject(project) {
-        this.setState({project: project});
+        this.setState({projectName: project});
     }
 
     handleSubmit(event) {
@@ -79,7 +79,7 @@ export class QuillEditor extends React.Component {
                         ? <VisibilityButton visible={this.state.visible} handleClick={this.switchVisibility}/>
                         : null}
                     {(this.props.toggleProjectSelect)
-                        ? <ProjectsButtonGroup setProject={this.setProject} activeProject={this.state.project}/>
+                        ? <ProjectsButtonGroup setProject={this.setProject} activeProject={this.state.projectName}/>
                         : null}
                     <button className="btn btn-success float-right" onClick={this.handleSubmit}>
                         Submit
@@ -125,7 +125,7 @@ class ProjectsButtonGroup extends React.Component {
         super(props);
 
         this.activeProject = "ROTR";
-        this.projectList = Object.keys(projectBadges).map(i => projectBadges[i]);
+        this.projectList = Object.keys(projectBadges).map(i => projectBadges[i]); // k so dis thing makes map() usable on nested objects
         this.setActiveProject = this.setActiveProject.bind(this);
     }
 

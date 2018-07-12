@@ -35,7 +35,9 @@ export class InternalRequestCreator extends React.Component {
                 }).catch(error => {
                 this.props.sendAlert({
                     alertType: alertTypes.ERROR,
-                    message: error.information
+                    message: (error.information === undefined)
+                        ? "A server error occured, please notify the owner!"
+                        : error.information
                 });
             })
         }

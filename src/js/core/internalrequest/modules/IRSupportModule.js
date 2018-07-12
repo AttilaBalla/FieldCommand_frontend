@@ -1,39 +1,71 @@
 import React from "react";
+import {alertTypes} from "../../../util/Alert";
+import {alterIntRequestSupport} from "../../../util/APIUtils";
 
 export class IRSupportModule extends React.Component {
 
     constructor(props) {
         super(props);
 
-        this.state = {}
+        this.state = {
+          percent: props.percent,
+            isSupportingRequest: (this.props.supporters.includes(this.props.currentUser))
+        };
+
+        this.handleSupportChange = this.handleSupportChange.bind(this);
     }
 
-    componentDidMount() {
+    handleSupportChange() {
+        alterIntRequestSupport({requestId: this.props.requestId, username: this.props.currentUser})
+            .then((response) => {
 
+                this.setState({
+                    percent: parseInt(response.information, 10),
+                    isSupportingRequest: !this.state.isSupportingRequest
+                });
+
+                this.props.sendAlert({
+                    alertType: alertTypes.SUCCESS,
+                    message: (this.state.isSupportingRequest)
+                        ? "You are supporting this request!"
+                        : "You are no longer supporting this request."
+                });
+
+            }).catch(error => {
+            this.props.sendAlert({
+                alertType: alertTypes.ERROR,
+                message: error.information
+            });
+        });
     }
 
     render() {
 
-        this.requestOwner = (this.props.supporters.includes(this.props.currentUser));
-
         return(
             <React.Fragment>
                 <h4>Support</h4>
-                {(this.requestOwner)
+                {(this.props.isRequestOwner)
                 ?<span>You are the owner of this request, therefore you are supporting it.</span>
-                :<span>You can support this request if you think it's worth fulfilling.</span>
+                : (this.state.isSupportingRequest)
+                        ?<span>You are supporting this request.</span>
+                        :<span>You can support this request if you think it's worth fulfilling.</span>
                 }
                 <div className="progress">
                     <div className="progress-bar progress-bar-striped bg-success"
-                         role="progressbar" style={{width: this.props.percent + "%"}}
-                         aria-valuenow={this.props.percent}
+                         role="progressbar" style={{width: this.state.percent + "%"}}
+                         aria-valuenow={this.state.percent}
                          aria-valuemin="0"
-                         aria-valuemax="100">{this.props.percent}%</div>
+                         aria-valuemax="100">{this.state.percent}%</div>
                 </div>
-                {(this.requestOwner)? null
-                    :<button type="button" className="btn btn-success">
-                        <i className="fa fa-thumbs-up" aria-hidden="true"></i>Support
-                    </button>}
+                {(this.props.isRequestOwner)
+                    ? null
+                    : (this.state.isSupportingRequest)
+                        ?<button type="button" className="btn btn-secondary" onClick={this.handleSupportChange}>
+                            <i className="fa fa-ban mr-2" aria-hidden="true"></i>Revoke support
+                        </button>
+                        :<button type="button" className="btn btn-success" onClick={this.handleSupportChange}>
+                            <i className="fa fa-thumbs-up mr-2" aria-hidden="true"></i>Support
+                        </button>}
 
             </React.Fragment>
         )

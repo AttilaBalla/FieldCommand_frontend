@@ -8,7 +8,7 @@ export const sidebarTypes = [
         classElement: "nav-item sidebar_button",
         icon: "fa fa-cogs",
         text: "General",
-        rolePower: 1 // To be implemented
+        rolePower: 1 //TODO To be implemented
     },
     {
         link: "/administration/newsfeed",
@@ -22,14 +22,14 @@ export const sidebarTypes = [
         classElement: "nav-item sidebar_button",
         icon: "fa fa-fire-extinguisher",
         text: "Game Reports",
-        rolePower: 1 // To be implemented
+        rolePower: 1 //TODO To be implemented
     },
     {
         link: "/administration/releases",
         classElement: "nav-item sidebar_button",
         icon: "fa fa-upload",
         text: "Releases",
-        rolePower: 1 // To be implemented
+        rolePower: 1 //TODO To be implemented
     },
     {
         link: "/administration/users",
