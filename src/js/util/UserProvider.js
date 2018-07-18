@@ -3,14 +3,13 @@ import {getCurrentUser} from "./APIUtils";
 import {ACCESS_TOKEN} from "./Constants";
 
 export const UserContext = React.createContext();
-export class Provider extends React.Component {
+export class UserProvider extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             user: null,
-            notFound: false,
-            serverError: false
+            error: null,
         };
 
         this.logout = this.logout.bind(this);
@@ -30,18 +29,14 @@ export class Provider extends React.Component {
                         user: response,
                     });
                 }).catch(error => {
-                if (error.status === 404) {
-                    this.setState({
-                        notFound: true,
-                    });
+                if (error.status === 401) {
+                    localStorage.removeItem(ACCESS_TOKEN);
+                    this.setState({error: "expiredToken"});
                 } else {
-                    this.setState({
-                        serverError: true,
-                    });
+                    this.setState({error: "serverError"});
                 }
             });
         } else {
-            //TODO error handling
             console.log("no access token set!");
         }
 
@@ -56,8 +51,9 @@ export class Provider extends React.Component {
         return(
             <UserContext.Provider value={
                 {
-                    user:this.state.user, // expose data to other components
+                    user: this.state.user, // expose data to other components
                     logout: this.logout,
+                    error: this.state.error
                 }
             }>
                 {this.props.children}

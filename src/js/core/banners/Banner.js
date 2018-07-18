@@ -2,7 +2,7 @@ import React from 'react';
 
 export function Banner() {
     return(
-        <div id="banner_bg">
+        <div id="banner_bg" className="main_color_dark">
             <div className="container-fluid">
                 <div className="row banner_container">
                     <div className="col-3">

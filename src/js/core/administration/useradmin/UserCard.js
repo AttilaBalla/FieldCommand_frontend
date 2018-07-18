@@ -4,6 +4,9 @@ import {updateUser} from "../../../util/APIUtils";
 import {alertTypes} from "../../../util/Alert";
 import {UserContext} from "../../../util/UserProvider";
 import {UserCardForm} from "./UserCardForm";
+import {UserCardHeader} from "./UserCardHeader";
+import {projectBadges} from "../../../util/ProjectBadge";
+import {UserProjectsElement} from "./UserProjectsElement";
 
 export class UserCard extends React.Component {
 
@@ -16,79 +19,92 @@ export class UserCard extends React.Component {
             username: props.name,
             email: props.email,
             role: props.role,
+            projects: props.projects,
             rolePower: props.rolePower,
         };
 
+        this.selectedProjects = new Set();
+
+        if(props.projects.length > 0) {
+            props.projects.forEach(element => {
+                this.selectedProjects.add(element);
+            })
+        }
+
+        this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
-    setNameColor(role) { // cant be static, lol!
-
-        let nameColor = "text-dark";
-
-        switch(role) {
-
-            case "ROLE_OWNER":
-                nameColor = "text-owner";
-                break;
-
-            case "ROLE_ADMIN":
-                nameColor = "text-danger";
-                break;
-
-            case "ROLE_DEVELOPER":
-                nameColor = "text-warning";
-                break;
-
-            case "ROLE_USER":
-                nameColor = "text-primary";
-                break;
-
-            case "ROLE_NEW":
-                nameColor = "text-info";
-                break;
-
-            case "ROLE_DISABLED":
-                nameColor = "text-dark";
-                break;
-            default:
-                break;
-        }
-
-        return nameColor;
+    componentWillMount() {
+        this.rolesPanel = this.makeRolesPanel();
+        this.projectsPanel = this.makeProjectsPanel();
     }
 
     handleChange(event) {
         this.setState({[event.target.name]: event.target.value})
     }
 
+    handleCheckboxChange(event) {
+        if (this.selectedProjects.has(event.target.value)) {
+            this.selectedProjects.delete(event.target.value);
+        } else {
+            this.selectedProjects.add(event.target.value);
+        }
+    }
+
     handleSubmit(event) {
         event.preventDefault();
 
-        updateUser(this.state)
-            .then(() => {
-                this.props.sendAlert({
-                    alertType: alertTypes.SUCCESS,
-                    message: "Your changes have been saved successfully!"
-                });
+        if(this.state.username === "" || this.state.email === "") {
+            this.props.sendAlert({
+                alertType: alertTypes.ERROR,
+                message: "The input fields cannot be empty!"
+            });
+        } else {
 
-            }).catch(error => {
+            let formData = this.state;
+
+            formData["projects"] = Array.from(this.selectedProjects);
+
+            updateUser(formData)
+                .then(() => {
+                    this.props.sendAlert({
+                        alertType: alertTypes.SUCCESS,
+                        message: "Your changes have been saved successfully!"
+                    });
+
+                }).catch(error => {
                 this.props.sendAlert({
                     alertType: alertTypes.ERROR,
                     message: error.information
                 });
             })
+        }
     }
 
-    render() {
+    makeProjectsPanel() {
+        let projectList = Object.keys(projectBadges).map(i => projectBadges[i]);
 
+        return projectList.map((project, key) => {
+            return (
+                <UserProjectsElement
+                    key={key}
+                    shortname={project.projectShortName}
+                    toggleCheckbox={this.handleCheckboxChange}
+                    checked={this.selectedProjects.has(project.projectShortName)}
+                />
+            )
+        });
+    }
+
+    makeRolesPanel() {
         let rolePanel = null;
         if (this.props.role === "ROLE_OWNER") {
             rolePanel = <p className="text-secondary">
-                            <i className="fa fa-ban mr-2" aria-hidden="true"></i>
-                            cannot be changed for this user!
-                        </p>
+                <i className="fa fa-ban mr-2" aria-hidden="true"></i>
+                cannot be changed for this user!
+            </p>
         } else {
             rolePanel = userRoles.map((role, key) => {
                 return (
@@ -104,31 +120,40 @@ export class UserCard extends React.Component {
             });
         }
 
+        return rolePanel;
+    }
+
+    render() {
+
         return (
             <UserContext.Consumer>
                 {value => {
                     const {user} = value;
                     let editable = true;
-                    if(user.id !== parseInt(this.state.id, 10)) {
-                        if(user.rolePower <= this.state.rolePower) {
-                            editable = false;
-                        }
+
+                    if(user.id !== parseInt(this.state.id, 10) && user.rolePower <= this.state.rolePower) {
+                        editable = false;
                     }
 
                     return(
                         <div className="card">
-                            <div className="card-header collapsed" data-toggle="collapse" data-target={"#collapse" + this.state.index}>
-                                <h6 className={"mb-0 " + this.setNameColor(this.state.role)} >{this.state.username}</h6>
-                            </div>
+                            <UserCardHeader
+                                editable={editable}
+                                index={this.state.index}
+                                role={this.state.role}
+                                username={this.state.username}
+                            />
                             <div className="collapse" id={"collapse" + this.state.index} data-parent="#accordion">
                                 {(editable)
                                     ? <UserCardForm
                                         submit={this.handleSubmit}
                                         change={this.handleChange}
+                                        toggleCheckbox={this.handleCheckboxChange}
                                         username={this.state.username}
                                         email={this.state.email}
-                                        rolepanel={rolePanel}
-                                    />
+                                        rolepanel={this.rolesPanel}
+                                        projectpanel={this.projectsPanel}
+                                        />
                                     : null}
                             </div>
                         </div>

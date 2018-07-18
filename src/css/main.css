@@ -2,10 +2,13 @@ body {
     background-color: rgb(235, 235, 235);
 }
 
+p, label {
+    margin: 0;
+}
+
 #banner_bg {
     height: 300px;
     margin-bottom: 20px;
-    background-color:#2b435e;
     box-shadow: 0 0 20px rgba(50, 50, 60, 1)
 }
 
@@ -17,6 +20,70 @@ body {
     margin: auto;
 }
 
+.main_color_dark {
+    background-color: #2b435e;
+    color: white;
+}
+
+.d-flex {
+    align-items: center;
+}
+
+.w-10 {
+    width: 10% !important;
+}
+
+.w-15 {
+    width: 15% !important;
+}
+
+.w-20 {
+    width: 20% !important;
+}
+
+.w-35 {
+    width: 35% !important;
+}
+
+.w-40 {
+    width: 40% !important;
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.btn-outline-secondary {
+    color: black;
+    background-color: whitesmoke;
+}
+
+.btn-group-blue {
+    border: thin solid rgb(14, 117, 177);
+    border-radius: 5px;
+}
+
+.btn-blue {
+    transition: background-color 0.5s;
+    transition-timing-function: ease;
+}
+
+.btn-blue.active {
+    color: white;
+    background-color: rgb(14, 117, 177) !important;
+    box-shadow: 0 0 7px rgb(14, 117, 177) !important;
+}
+
+.btn-blue.focus, .btn-blue:hover {
+    color: white;
+    background-color: rgb(17, 150, 228);
+    box-shadow: 0 0 7px rgb(25, 171, 255);
+}
+
+.disabled {
+    cursor: not-allowed;
+}
+
 .banner_text p {
     font-size: 13px;
 }
@@ -25,8 +92,15 @@ body {
     margin: auto;
 }
 
+.no-overflow {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 .core_container {
     max-width: 1600px;
+    min-height: 550px;
     margin: 0 auto 0 auto;
     padding: 0;
     box-shadow: 0 15px 30px rgba(50, 50, 60, 0.75)
@@ -95,7 +169,7 @@ body {
 .text_box {
     display: block;
     background: rgba(240, 240, 240, 0.9);
-    padding: 5%;
+    padding: 70px;
 }
 
 .centered {
@@ -103,7 +177,7 @@ body {
 }
 
 .newsfeed_post {
-    padding-top: 40px;
+    margin-bottom: 40px;
     padding-bottom: 40px;
     border-bottom: thin solid lightgray;
 }
@@ -114,8 +188,27 @@ body {
     font-size: 13px;
 }
 
+.post_content {
+    word-break: break-all;
+}
+
+.intrequest_panel {
+    border: thin solid lightgrey;
+    padding: 2%;
+    margin: 10px 0 30px 0;
+}
+
+.progress {
+    margin: 25px 0 25px 0;
+    background-color: #cccccc;
+}
+
+.progress-bar {
+    transition: width 0.6s;
+    transition-timing-function: ease;
+}
+
 .sidebar {
-    background-color: #2b435e;
     padding: 0;
     min-height: 550px;
 }
@@ -168,4 +261,27 @@ footer p {
 .alert.show {
     opacity: 1;
     visibility: visible;
+}
+
+.content-status {
+    margin: auto;
+    text-align: center;
+    color: lightgrey;
+    text-shadow: 0 1px 1px darkgrey;
+}
+
+.content-status-navbar {
+    margin: auto;
+    text-align: center;
+    color: lightgrey;
+    text-shadow: 0 1px 1px darkgrey;
+}
+
+.fa-spinner {
+    animation: rotateSpinner infinite 1s linear;
+}
+
+@keyframes rotateSpinner {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }

@@ -1,20 +1,26 @@
 import React from "react";
 
 export const userRoles = [
-
-    {roleName: "ROLE_ADMIN",
+    {
+        roleName: "ROLE_ADMIN",
         badgeColor: "badge badge-danger ml-2",
-        displayName: "Admin"},
-    {roleName: "ROLE_DEVELOPER",
+        displayName: "Admin"
+    },
+    {
+        roleName: "ROLE_DEVELOPER",
         badgeColor: "badge badge-warning ml-2",
-        displayName: "Developer"},
-    {roleName: "ROLE_USER",
+        displayName: "Developer"
+    },
+    {
+        roleName: "ROLE_USER",
         badgeColor: "badge badge-primary ml-2",
-        displayName: "User"},
-    {roleName: "ROLE_DISABLED",
+        displayName: "User"
+    },
+    {
+        roleName: "ROLE_DISABLED",
         badgeColor: "badge badge-dark ml-2",
-        displayName: "Disabled"},
-
+        displayName: "Disabled"
+    },
     ];
 
 export function UserRoleElement(props) {

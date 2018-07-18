@@ -19,16 +19,13 @@ export function UserCardForm(props) {
                            onChange={props.change}
                            defaultValue={props.email}/>
                 </div>
-                <div className="float-right mt-2 user_roles">
+                <div className="float-right mt-2 user_permissionPanel">
                     <h6>Role</h6>
                     {props.rolepanel}
                 </div>
-                <div className="float-right mt-2 user_versions">
-                    <h6> Versions </h6>
-                    <input type="checkbox" name="versions" value="Official"/>
-                    <span className="badge badge_version ml-2">Official</span>
-                    <input type="checkbox" name="versions" value="BP 1.5"/>
-                    <span className="badge badge_version ml-2">BP 1.5</span>
+                <div className="float-right mt-2 user_permissionPanel">
+                    <h6> Projects </h6>
+                    {props.projectpanel}
                 </div>
                 <div className="float-right w-100">
                     <button className="btn btn-warning user_update_button float-right mb-3" type="submit">

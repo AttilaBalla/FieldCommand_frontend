@@ -13,35 +13,36 @@ export class AdminSidebar extends React.Component {
     }
 
     handleClick(activeItem) {
-        this.setState({highlightedItem: activeItem.text});
-        this.props.onChange(activeItem.text);
+        this.setState({highlightedItem: activeItem});
 
     }
 
     render() {
+
+        let rolePower = this.props.user.rolePower;
         return (
             <ul className="nav flex-column side_navbar">
-                <SidebarItem itemType={sidebarTypes.TITLE}/>
-                <SidebarItem
-                    itemType={sidebarTypes.GENERAL}
-                    onClick={this.handleClick}
-                    highlighted={
-                        this.state.highlightedItem === sidebarTypes.GENERAL.text ? "highlighted" : "" }/>
-                <SidebarItem
-                    itemType={sidebarTypes.GAMEREPORTS}
-                    onClick={this.handleClick}
-                    highlighted={
-                        this.state.highlightedItem === sidebarTypes.GAMEREPORTS.text ? "highlighted" : "" }/>
-                <SidebarItem
-                    itemType={sidebarTypes.RELEASES}
-                    onClick={this.handleClick}
-                    highlighted={
-                        this.state.highlightedItem === sidebarTypes.RELEASES.text ? "highlighted" : "" }/>
-                <SidebarItem
-                    itemType={sidebarTypes.USERS}
-                    onClick={this.handleClick}
-                    highlighted={
-                        sidebarTypes.USERS.text === this.state.highlightedItem ? "highlighted" : ""}></SidebarItem>
+                <SidebarItem classElement="centered font-weight-bold sidebar_title"
+                             text="Administration"
+                />
+                {sidebarTypes.map((menuItem, key) => {
+
+                    if(rolePower >= menuItem.rolePower) {
+
+                        return (
+                            <SidebarItem
+                                key={key}
+                                link={menuItem.link}
+                                classElement={menuItem.classElement}
+                                icon={menuItem.icon}
+                                text={menuItem.text} onClick={this.handleClick}
+                                highlighted={(this.state.highlightedItem === menuItem.text) ? "highlighted" : ""}
+                            />
+                        )
+                    } else {
+                        return null;
+                    }
+                })}
             </ul>
         )
     }

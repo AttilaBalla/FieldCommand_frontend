@@ -18,10 +18,6 @@ export class UserEdit extends React.Component {
         }
     }
 
-    componentDidMount() {
-        this.getUserData();
-    }
-
     getUserData() {
         getAllUsers()
             .then(response => {
@@ -29,11 +25,15 @@ export class UserEdit extends React.Component {
             })
     }
 
+    componentDidMount() {
+        this.getUserData();
+    }
+
     render() {
 
         return(
             <section className="useradmin_userlist">
-                <div id="accordion" className="user_cards">
+                <div id="accordion" className="cards">
                     {this.state.users.map((user, key) => {
                         return (
                             <UserCard
@@ -43,6 +43,7 @@ export class UserEdit extends React.Component {
                                 name={user.username}
                                 email={user.email}
                                 role={user.role}
+                                projects={user.projects}
                                 rolePower={user.rolePower}
                                 sendAlert={this.props.sendAlert}
                             />
