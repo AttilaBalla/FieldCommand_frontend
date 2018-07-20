@@ -37,8 +37,6 @@ export class Newsfeed extends React.Component {
                         <i className="fa fa-spinner mr-2" aria-hidden="true"></i>loading posts...
                     </h4>
                 </span>
-
-
             )
         }
 
@@ -48,6 +46,17 @@ export class Newsfeed extends React.Component {
                     <h4 className="content-status text-danger">
                         <i className="fa fa-exclamation-triangle mr-2" aria-hidden="true"></i>Could not load content. This might be a connection or server issue.
                     </h4>
+                </span>
+            )
+        }
+
+        if(this.state.newsPosts.length === 0) {
+            return(
+                <span>
+                    <h6 className="content-status">
+                        There are no posts to show :(<br/>
+                        Maybe next time there will be something here...
+                    </h6>
                 </span>
             )
         }
