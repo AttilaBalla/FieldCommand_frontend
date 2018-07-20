@@ -21,6 +21,7 @@ export class UserCard extends React.Component {
             role: props.role,
             projects: props.projects,
             rolePower: props.rolePower,
+            buttonsDisabled: false,
         };
 
         this.selectedProjects = new Set();
@@ -63,6 +64,8 @@ export class UserCard extends React.Component {
             });
         } else {
 
+            this.setState({buttonsDisabled: true});
+
             let formData = this.state;
 
             formData["projects"] = Array.from(this.selectedProjects);
@@ -73,13 +76,16 @@ export class UserCard extends React.Component {
                         alertType: alertTypes.SUCCESS,
                         message: "Your changes have been saved successfully!"
                     });
+                    this.setState({buttonsDisabled: false});
 
                 }).catch(error => {
-                this.props.sendAlert({
-                    alertType: alertTypes.ERROR,
-                    message: error.information
-                });
-            })
+                    this.props.sendAlert({
+                        alertType: alertTypes.ERROR,
+                        message: error.information
+                    });
+                    this.setState({buttonsDisabled: false});
+                }
+            )
         }
     }
 
@@ -153,6 +159,7 @@ export class UserCard extends React.Component {
                                         email={this.state.email}
                                         rolepanel={this.rolesPanel}
                                         projectpanel={this.projectsPanel}
+                                        buttonsDisabled={this.state.buttonsDisabled}
                                         />
                                     : null}
                             </div>
