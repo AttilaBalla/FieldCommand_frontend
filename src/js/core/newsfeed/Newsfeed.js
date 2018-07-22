@@ -50,7 +50,7 @@ export class Newsfeed extends React.Component {
             )
         }
 
-        if(this.state.newsPosts.length === 0) {
+        if(this.state.newsPosts.filter(newsPost => (newsPost.visible)).length < 1) {
             return(
                 <span>
                     <h6 className="content-status">
@@ -66,7 +66,7 @@ export class Newsfeed extends React.Component {
                 {this.state.newsPosts.map((newsPost, key) => {
 
                     return (
-                        (newsPost.visible === "True") ?
+                        (newsPost.visible) ?
                         <NewsFeedPost
                             key={key}
                             title={newsPost.title}
