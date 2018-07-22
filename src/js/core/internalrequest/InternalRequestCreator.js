@@ -30,7 +30,6 @@ export class InternalRequestCreator extends React.Component {
                         alertType: alertTypes.SUCCESS,
                         message: "Your post has been saved successfully!"
                     });
-                    this.setState({title: "", message: ""})
 
                 }).catch(error => {
                 this.props.sendAlert({
