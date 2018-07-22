@@ -7,7 +7,7 @@ export const statusButtons = {
         {
             name: "ARCHIVED",
             displayName: "Archived",
-            textColor: "text-secondary",
+            textColor: "secondary",
             icon: "fa fa-archive",
             buttonClass: "btn btn-outline-dark"
         },
@@ -15,7 +15,7 @@ export const statusButtons = {
         {
             name: "DENIED",
             displayName: "Denied",
-            textColor: "text-danger",
+            textColor: "danger",
             icon: "fa fa-ban",
             buttonClass: "btn btn-outline-danger"
         },
@@ -23,7 +23,7 @@ export const statusButtons = {
         {
             name: "WAITING",
             displayName: "Waiting",
-            textColor: "text-info",
+            textColor: "info",
             icon: "fa fa-clock-o",
             buttonClass: "btn btn-outline-info"
         },
@@ -31,7 +31,7 @@ export const statusButtons = {
         {
             name: "IN_PROGRESS",
             displayName: "In Progress",
-            textColor: "text-warning",
+            textColor: "warning",
             icon: "fa fa-hourglass-half",
             buttonClass: "btn btn-outline-warning"
         },
@@ -39,7 +39,7 @@ export const statusButtons = {
         {
             name: "APPROVED",
             displayName: "Approved",
-            textColor: "text-success",
+            textColor: "success",
             icon: "fa fa-thumbs-up",
             buttonClass: "btn btn-outline-success"
         },
@@ -47,7 +47,7 @@ export const statusButtons = {
         {
             name: "DONE",
             displayName: "Done",
-            textColor: "text-success",
+            textColor: "success",
             icon: "fa fa-check",
             buttonClass: "btn btn-outline-success"
         }
@@ -127,9 +127,15 @@ export class IRStatusModule extends React.Component {
             )
         });
 
+        let contentChanged = false;
+
+        if(this.state.response !== "" || this.state.oldStatus !== this.state.status) {
+            contentChanged = true;
+        }
+
         return(
 
-            <React.Fragment>
+            <div className={(contentChanged) ? "intrequest_panel outlined" : "intrequest_panel"}>
                 <h4>Status</h4>
                 {(this.props.canHandleRequest)
                     ? <span>You are an assigned admin for this project, you can handle this request by changing it's status.</span>
@@ -137,6 +143,15 @@ export class IRStatusModule extends React.Component {
                 <div className="btn-group btn-group-toggle mt-2 w-100" data-toggle="buttons" >
                     {buttonComponents}
                 </div>
+
+                {(this.props.handledBy) ? <small className=" mt-2 d-flex">Last handled by: {this.props.handledBy}</small> : null}
+
+                {(this.props.response)
+                    ?
+                    <div className={"mt-2 alert alert-" + statusButtons[this.props.status].textColor} role="alert">
+                        <i className=" mr-2 fa fa-commenting" aria-hidden="true"></i>{this.props.response}
+                    </div>
+                    : null}
 
                 {(this.props.canHandleRequest)
                     ?
@@ -150,12 +165,15 @@ export class IRStatusModule extends React.Component {
                                    placeholder="You can provide a short response to this request (optional)"
                                    onChange={this.handleChange}
                             />
-                            <button className="btn btn-warning ml-auto" onClick={this.handleSubmit}>Save Changes</button>
+                            <button className={(contentChanged) ? "btn btn-primary ml-auto" : "btn btn-secondary ml-auto disabled"}
+                                    onClick={this.handleSubmit}>
+                                <i className="fa fa-floppy-o mr-2" aria-hidden="true"></i>
+                                Save Changes
+                            </button>
                         </div>
                     </React.Fragment>
                     : null}
-
-            </React.Fragment>
+            </div>
         )
     }
 }

@@ -49,6 +49,10 @@ p, label {
     width: 40% !important;
 }
 
+.w-90 {
+    width: 90% !important;
+}
+
 .btn {
     cursor: pointer;
 }
@@ -188,12 +192,15 @@ p, label {
     font-size: 13px;
 }
 
-.post_content {
-    word-break: break-all;
-}
-
 .intrequest_panel {
     border: thin solid lightgrey;
+    padding: 2%;
+    margin: 10px 0 30px 0;
+}
+
+.intrequest_panel.outlined {
+    border: thin solid #0188fe;
+    box-shadow: 0 0 3px #0188fe;
     padding: 2%;
     margin: 10px 0 30px 0;
 }
@@ -242,7 +249,7 @@ footer p {
     color: lightgray;
 }
 
-.alert {
+.popup-alert {
     position: fixed;
     max-width: 35%;
     min-width: 15%;
@@ -258,7 +265,7 @@ footer p {
     transition: 0.5s;
 }
 
-.alert.show {
+.popup-alert.show {
     opacity: 1;
     visibility: visible;
 }
