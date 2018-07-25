@@ -61,6 +61,7 @@ export class IRStatusModule extends React.Component {
         this.state = {
             requestId: props.requestId,
             oldStatus: props.status,
+            oldResponse: props.response,
             status: props.status,
             response: ""
         };
@@ -80,33 +81,33 @@ export class IRStatusModule extends React.Component {
 
     handleSubmit() {
 
-        if(this.state.oldStatus === this.state.status && this.state.response === "") {
-            this.props.sendAlert({
-                alertType: alertTypes.NEUTRAL,
-                message: "Please change the status or provide a response."
-            });
-        } else {
+        alterIntRequestStatus(this.state)
+            .then(() => {
 
-            alterIntRequestStatus(this.state)
-                .then(() => {
+                this.props.sendAlert({
+                    alertType: alertTypes.SUCCESS,
+                    message: "The status of this request has been updated!"
+                });
 
-                    this.props.sendAlert({
-                        alertType: alertTypes.SUCCESS,
-                        message: "The status of this request has been updated!"
-                    });
+                //avoid overwriting the response with "" if it's not updated next time
+                if(this.state.response) {
+                    this.setState({
+                        oldResponse: this.state.response,
+                        oldStatus: this.state.status
+                    })
+                } else {
                     this.setState({
                         oldStatus: this.state.status,
                     })
-
-                })
-                .catch(error => {
-                    console.log(error.information);
-                    this.props.sendAlert({
-                        alertType: alertTypes.ERROR,
-                        message: error.information
-                    });
+                }
+            })
+            .catch(error => {
+                console.log(error.information);
+                this.props.sendAlert({
+                    alertType: alertTypes.ERROR,
+                    message: error.information
                 });
-        }
+            });
     }
 
     render() {
@@ -128,8 +129,9 @@ export class IRStatusModule extends React.Component {
         });
 
         let contentChanged = false;
-
-        if(this.state.response !== "" || this.state.oldStatus !== this.state.status) {
+        // HL module if response is not empty AND does not equal the old response OR status changed
+        if((this.state.response !== "" && this.state.response !== this.state.oldResponse)
+            || this.state.oldStatus !== this.state.status) {
             contentChanged = true;
         }
 
@@ -148,8 +150,8 @@ export class IRStatusModule extends React.Component {
 
                 {(this.props.response)
                     ?
-                    <div className={"mt-2 alert alert-" + statusButtons[this.props.status].textColor} role="alert">
-                        <i className=" mr-2 fa fa-commenting" aria-hidden="true"></i>{this.props.response}
+                    <div className={"mt-2 alert alert-" + statusButtons[this.state.oldStatus].textColor} role="alert">
+                        <i className=" mr-2 fa fa-commenting" aria-hidden="true"></i>{this.state.oldResponse}
                     </div>
                     : null}
 
@@ -166,7 +168,7 @@ export class IRStatusModule extends React.Component {
                                    onChange={this.handleChange}
                             />
                             <button className={(contentChanged) ? "btn btn-primary ml-auto" : "btn btn-secondary ml-auto disabled"}
-                                    onClick={this.handleSubmit}>
+                                    onClick={(contentChanged) ? this.handleSubmit : null}>
                                 <i className="fa fa-floppy-o mr-2" aria-hidden="true"></i>
                                 Save Changes
                             </button>
