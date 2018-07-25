@@ -68,7 +68,7 @@ export class NewsLister extends React.Component {
                                 title={newsPost.title}
                                 owner={newsPost.owner}
                                 date={newsPost.date}
-                                visible={(newsPost.visible === "True")}
+                                visible={(newsPost.visible)}
                                 deletePost={this.deletePost}
                             />
 

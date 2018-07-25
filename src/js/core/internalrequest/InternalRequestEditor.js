@@ -41,6 +41,8 @@ export class InternalRequestEditor extends React.Component {
                     content: response.content,
                     owner: response.owner,
                     status: response.status,
+                    answer: response.response,
+                    handledBy: response.handledBy,
                     project: response.project,
                     supporters: response.supporters,
                     supportPercent: response.supportPercent,
@@ -114,6 +116,7 @@ export class InternalRequestEditor extends React.Component {
             : null;
 
         return(
+
             <UserContext.Consumer>
                 {value => {
                     const {user} = value;
@@ -145,18 +148,19 @@ export class InternalRequestEditor extends React.Component {
                                         : null
                                     }
                                 </div>
-                                <div className="intrequest_panel">
 
-                                    {(this.state.hasInternalRequest)
-                                        ? <IRStatusModule
-                                            requestId={this.state.id}
-                                            canHandleRequest={(user.projects.includes(this.state.project))}
-                                            status={this.state.status}
-                                            sendAlert={this.setAlert}
-                                        />
-                                        : null
-                                    }
-                                </div>
+                                {(this.state.hasInternalRequest)
+                                    ? <IRStatusModule
+                                        requestId={this.state.id}
+                                        canHandleRequest={(user.projects.includes(this.state.project))}
+                                        status={this.state.status}
+                                        response={this.state.answer}
+                                        handledBy={this.state.handledBy}
+                                        sendAlert={this.setAlert}
+                                    />
+                                    : null
+                                }
+
                                 {(this.state.owner === user.username)
                                     ? <React.Fragment>
                                             <span>You are the owner of this request. You can edit it below.</span>

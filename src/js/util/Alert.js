@@ -3,13 +3,13 @@ import {ALERT_TIMEOUT} from "./Constants";
 
 export const alertTypes = {
     NEUTRAL: {
-        classElement: "alert alert-secondary",
+        classElement: "alert-secondary",
     },
     SUCCESS: {
-        classElement: "alert alert-success",
+        classElement: "alert-success",
     },
     ERROR: {
-        classElement: "alert alert-danger",
+        classElement: "alert-danger",
     }
 };
 
@@ -68,7 +68,7 @@ export class Alert extends React.Component {
         }
 
         return (
-            <div className={classElement} role="alert">
+            <div className={"alert popup-alert " + classElement} role="alert">
                 {this.props.message}
             </div>
         )

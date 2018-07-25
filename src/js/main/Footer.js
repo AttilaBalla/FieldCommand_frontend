@@ -18,7 +18,7 @@ export function Footer() {
                         <a href="http://forums.swr-productions.com/index.php?showforum=22"><img
                             src="/img/rotr_icon_forum.png" alt=""/></a>
                     </div>
-                    <p>2018 - Created by XAttus</p>
+                    <p> version 0.2 / 2018 - Created by XAttus</p>
                 </div>
             </div>
         </footer>

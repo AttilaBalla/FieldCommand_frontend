@@ -37,8 +37,6 @@ export class Newsfeed extends React.Component {
                         <i className="fa fa-spinner mr-2" aria-hidden="true"></i>loading posts...
                     </h4>
                 </span>
-
-
             )
         }
 
@@ -52,12 +50,23 @@ export class Newsfeed extends React.Component {
             )
         }
 
+        if(this.state.newsPosts.filter(newsPost => (newsPost.visible)).length < 1) {
+            return(
+                <span>
+                    <h6 className="content-status">
+                        There are no posts to show :(<br/>
+                        Maybe next time there will be something here...
+                    </h6>
+                </span>
+            )
+        }
+
         return (
             <React.Fragment>
                 {this.state.newsPosts.map((newsPost, key) => {
 
                     return (
-                        (newsPost.visible === "True") ?
+                        (newsPost.visible) ?
                         <NewsFeedPost
                             key={key}
                             title={newsPost.title}

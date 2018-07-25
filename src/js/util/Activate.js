@@ -1,8 +1,9 @@
 import React from "react";
 import '../../css/login.css';
-import {activateUser} from './APIUtils';
+import {activateUser, validateActivationKey} from './APIUtils';
 import {ErrorTooltip} from "./ErrorTooltip";
 import {PW_LENGTH} from "./Constants";
+import {StatusMessage} from "./StatusMessage";
 
 function LoginInput(props) {
 
@@ -25,6 +26,7 @@ export class Activate extends React.Component {
         super(props);
 
         this.state = {
+            username: "",
             key: null,
             difference: true,
             password: "",
@@ -39,32 +41,44 @@ export class Activate extends React.Component {
 
     componentDidMount() {
         const {match: {params}} = this.props; // pull params out of the URL via match obj
-        this.setState({key: params.id})
-    }
 
+        validateActivationKey(params.id)
+            .then(response => {
+
+                console.log(response);
+
+                this.setState({
+                    key: params.id,
+                    username: response.information,
+                });
+
+            }).catch(() => {
+                this.setState({
+                    errorMessage: "serverError",
+                })
+        })
+
+    }
     handleSubmit(event) {
         event.preventDefault();
         this.setState({pending: true});
 
-        activateUser({"key": this.state.key, "password": this.state.password})
+        activateUser({
+            "key": this.state.key,
+            "password": this.state.password,
+            "username": this.state.username
+            })
             .then(() => {
+
                 window.location.replace(window.location["origin"]);
+
             }).catch(error => {
-                console.log(error.status);
-                if(error.status === 400) {
 
-                    this.setState({
-                        errorMessage: "activationError",
-                        pending: false
-                    })
-                } else {
-                    this.setState({
-                        errorMessage: "serverError",
-                        pending: false
-                    })
-                }
-        })
-
+                this.setState({
+                    errorMessage: error.information,
+                    pending: false
+                })
+            })
     }
 
     handleChange(event) {
@@ -83,14 +97,33 @@ export class Activate extends React.Component {
             short = true;
         }
 
+        let usernameInfo = `Your username will be displayed to others and will be required when logging in.
+            You may modify it here if you wish. Afterwards it can only be modified by admins.`;
+
         return (
             <div className="login_container">
                 <form onSubmit={this.handleSubmit}>
                     <img src="/img/fc.png" width="200" height="200" alt=""/>
                     <h5>
-                        SET YOUR PASSWORD
+                        SET YOUR USERNAME & PASSWORD
                         <ErrorTooltip error={this.state.errorMessage}/>
                     </h5>
+                    <div className="w-90 m-auto">
+                        <StatusMessage type="info" message={usernameInfo}/>
+                    </div>
+                    <div className="input_field">
+                        <label>
+                            <span className="fa fa-user" aria-hidden="true"/>
+                            <input
+                                className="login_field"
+                                type="text"
+                                name="username"
+                                onChange={this.handleChange}
+                                placeholder="Username"
+                                value={this.state.username}
+                                required="true" />
+                        </label>
+                    </div>
                     <LoginInput error={different}>
                         <label>
                             <span className="fa fa-lock" aria-hidden="true"/>
@@ -109,7 +142,8 @@ export class Activate extends React.Component {
                         disabled={
                             (different) ? "disabled" : "" ||
                             (short) ? "disabled" : "" ||
-                            (this.state.pending) ? "disabled" : ""
+                            (this.state.pending) ? "disabled" : "" ||
+                            (this.state.username) ? "" : "disabled"
                         }>
                         {(different) ? "doesn't match!" : "" ||
                         (short) ? "too short... < " + PW_LENGTH : "Continue"}

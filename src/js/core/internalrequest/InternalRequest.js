@@ -13,10 +13,12 @@ export class InternalRequest extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            alertType: ""
+            alertType: "",
+            tabIndex: 0,
         };
 
         this.setAlert = this.setAlert.bind(this);
+        this.setTabIndex = this.setTabIndex.bind(this);
     }
 
 
@@ -24,6 +26,15 @@ export class InternalRequest extends React.Component {
         this.setState({
             alertType: alert.alertType,
             message: alert.message,
+            tabIndex: 0,
+        })
+    }
+
+    setTabIndex(tabIndex) {
+        this.setState({
+            tabIndex: tabIndex,
+            alertType: "",
+            message: ""
         })
     }
 
@@ -47,13 +58,13 @@ export class InternalRequest extends React.Component {
                     return (<React.Fragment>
                         {alert}
                         <h2>Internal requests</h2>
-                        <Tabs defaultIndex={0}>
+                        <Tabs selectedIndex={this.state.tabIndex} onSelect={this.setTabIndex}>
                             <TabList>
                                 <Tab>Existing entries</Tab>
                                 <Tab>Create a new entry</Tab>
                             </TabList>
                             <TabPanel>
-                                <InternalRequestLister sendAlert={this.setAlert}/>
+                                <InternalRequestLister currentUser={user} sendAlert={this.setAlert}/>
                             </TabPanel>
                             <TabPanel>
                                 <InternalRequestCreator sendAlert={this.setAlert}/>

@@ -58,6 +58,8 @@ export class QuillEditor extends React.Component {
 
     render() {
 
+        let disabled = (this.props.submitDisabled) ? "disabled" : null;
+
         return (
             <React.Fragment>
                 <input type="text"
@@ -81,7 +83,7 @@ export class QuillEditor extends React.Component {
                     {(this.props.toggleProjectSelect)
                         ? <ProjectsButtonGroup setProject={this.setProject} activeProject={this.state.projectName}/>
                         : null}
-                    <button className="btn btn-success float-right" onClick={this.handleSubmit}>
+                    <button className={"btn btn-success float-right " + disabled} onClick={(disabled) ? null : this.handleSubmit}>
                         Submit
                     </button>
                 </div>

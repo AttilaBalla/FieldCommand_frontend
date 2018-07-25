@@ -2,6 +2,8 @@ import React from "react";
 
 export function UserCardForm(props) {
 
+    let disabled = (props.buttonsDisabled) ? "disabled" : null;
+
     return(
         <div className="card-body">
             <form className="user_edit" onSubmit={props.submit}>
@@ -28,8 +30,8 @@ export function UserCardForm(props) {
                     {props.projectpanel}
                 </div>
                 <div className="float-right w-100">
-                    <button className="btn btn-warning user_update_button float-right mb-3" type="submit">
-                        Save changes
+                    <button className={"btn btn-primary user_update_button float-right mb-3 " + disabled} type="submit">
+                        <i className="fa fa-floppy-o mr-2" aria-hidden="true"></i>Save changes
                     </button>
                 </div>
             </form>

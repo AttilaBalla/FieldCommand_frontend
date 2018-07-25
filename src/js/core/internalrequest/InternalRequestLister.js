@@ -23,6 +23,14 @@ export class InternalRequestLister extends React.Component {
                 this.setState({internalRequests: response})
             })
             .catch(error => {
+
+                if(error.status === 401) {
+                    this.props.sendAlert({
+                        alertType: alertTypes.ERROR,
+                        message: "Seems like your session has expired. Please refresh the page!"
+                    })
+                }
+
                 this.props.sendAlert({
                     alertType: alertTypes.ERROR,
                     message: error.information
@@ -48,6 +56,7 @@ export class InternalRequestLister extends React.Component {
     }
 
     render() {
+
         return (
             <section>
                 <ul className="list-group list-group-flush">
@@ -71,7 +80,10 @@ export class InternalRequestLister extends React.Component {
                                 date={internalRequest.date}
                                 status={internalRequest.status}
                                 project={internalRequest.project}
-                                deletePost={this.deletePost}
+                                deletePost={
+                                    (this.props.currentUser.username === internalRequest.owner ||
+                                    this.props.currentUser.roleType === "ROLE_OWNER")
+                                    ? this.deletePost : null}
                             />
 
                         )

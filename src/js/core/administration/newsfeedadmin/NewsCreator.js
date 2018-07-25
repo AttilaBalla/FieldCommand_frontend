@@ -8,6 +8,8 @@ export class NewsCreator extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {pendingRequest: false};
+
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -24,26 +26,31 @@ export class NewsCreator extends React.Component {
 
         } else {
 
+            this.setState({pendingRequest: true});
+
             sendNewsPost(newsPostData)
                 .then(() => {
                     this.props.sendAlert({
                         alertType: alertTypes.SUCCESS,
                         message: "Your post has been saved successfully!"
                     });
-                    this.setState({title: "", content: ""})
+                    this.setState({pendingRequest: false})
 
                 }).catch(error => {
-                this.props.sendAlert({
-                    alertType: alertTypes.ERROR,
-                    message: error.information
-                });
-            })
+                    this.props.sendAlert({
+                        alertType: alertTypes.ERROR,
+                        message: error.information
+                    });
+                    this.setState({pendingRequest: false})
+                }
+            )
         }
     }
 
     render() {
+
         return(
-            <QuillEditor sendContent={this.handleSubmit} toggleVisibility={true}/>
+            <QuillEditor sendContent={this.handleSubmit} toggleVisibility={true} submitDisabled={(this.state.pendingRequest)}/>
         )
     }
 }

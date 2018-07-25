@@ -94,6 +94,15 @@ export function updateUser(updateData) {
     });
 }
 
+export function validateActivationKey(key) {
+
+    return request({
+        url: API_BASE_URL + "/auth/validateKey",
+        method: 'POST',
+        body: JSON.stringify(key)
+    });
+}
+
 export function activateUser(activateData) {
 
     return request({
