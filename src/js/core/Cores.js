@@ -38,7 +38,7 @@ class HomeContainer extends React.Component {
             <React.Fragment>
                 <Banner/>
                 <div className="row core_container">
-                    <div className="col-9 text_box">
+                    <div className="col-md-9 text_box">
                         <Newsfeed/>
                     </div>
                     <Timeline/>

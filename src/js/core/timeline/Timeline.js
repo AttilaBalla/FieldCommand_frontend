@@ -1,12 +1,12 @@
 import React from "react";
-import { entryTypes } from "./TimelineEntryTypes.js";
+import {entryTypes} from "./TimelineEntryTypes.js";
 import {TimelineEntry} from "./TimelineEntry";
 
 export class Timeline extends React.Component {
 
     render() {
         return (
-            <div id="sidebar" className="col-3">
+            <div id="sidebar" className="col-md-3">
                 <TimelineEntry entryType={entryTypes.REPORT}>
                     <p>Game report title</p>
                     <p>24-3-2018 21:01</p>

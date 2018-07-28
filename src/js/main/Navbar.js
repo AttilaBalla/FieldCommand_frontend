@@ -87,9 +87,16 @@ export class Navbar extends React.Component {
 
                     return(
                     <div id="navbar_bg">
-                        <nav className="navbar navbar-expand-sm">
+                        <nav className="navbar navbar-expand-md">
                             <Link className = "navbar-brand" to="/"><img src="/img/fc_icon.png" width="55" height="55" alt="logo"/></Link>
-                            <NavbarLinks user={user}/>
+                            <button className="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <i className="fa fa-chevron-down text-primary" aria-hidden="true"></i>
+                            </button>
+                            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                                <NavbarLinks user={user}/>
+                            </div>
                             <div className="navbar-nav ml-auto navbar_right">
                                 {userPanel}
                                 <Swrnet/>

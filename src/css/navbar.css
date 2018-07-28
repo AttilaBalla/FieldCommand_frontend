@@ -31,6 +31,11 @@
     margin: auto;
 }
 
+.navbar-collapse {
+    z-index: 2;
+    background-color: #243a51;
+}
+
 .navbar a {
     font-weight: bold;
 }

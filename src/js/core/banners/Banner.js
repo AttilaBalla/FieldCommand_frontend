@@ -2,10 +2,10 @@ import React from 'react';
 
 export function Banner() {
     return(
-        <div id="banner_bg" className="main_color_dark">
-            <div className="container-fluid">
+        <div className="container-fluid">
+            <div id="banner_bg" className="main_color_dark">
                 <div className="row banner_container">
-                    <div className="col-3">
+                    <div className="col-md-3">
                         <div className="banner_side client_bg">
                             <div className="banner_text">
                                 <h4>Download Client</h4>
@@ -13,7 +13,7 @@ export function Banner() {
                             </div>
                         </div>
                     </div>
-                    <div className="col-6">
+                    <div className="col-md-6">
                         <div id="banner_center">
                             <div className="banner_text">
                                 <h4>Fieldcommand</h4>
@@ -21,7 +21,7 @@ export function Banner() {
                             </div>
                         </div>
                     </div>
-                    <div className="col-3">
+                    <div className="col-md-3">
                         <div className="banner_side reports_bg">
                             <div className="banner_text">
                                 <h4>Share your games</h4>
