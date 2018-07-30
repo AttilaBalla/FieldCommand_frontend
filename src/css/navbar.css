@@ -66,6 +66,15 @@
     align-items: center;
 }
 
+@media (max-width: 768px) {
+
+    .navbar_right {
+        position: absolute;
+        left: 25%;
+    }
+}
+
+
 .dropdown a {
     color: lightgray;
     text-decoration: none;

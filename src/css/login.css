@@ -8,6 +8,12 @@
     box-shadow: 0 15px 30px rgba(50, 50, 60, 0.75)
 }
 
+@media (max-width: 768px) {
+    .login_container {
+        width: 100%;
+    }
+}
+
 .login_container img {
     display: block;
     margin: auto;

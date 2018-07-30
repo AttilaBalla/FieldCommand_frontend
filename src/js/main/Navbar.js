@@ -97,7 +97,7 @@ export class Navbar extends React.Component {
                             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                                 <NavbarLinks user={user}/>
                             </div>
-                            <div className="navbar-nav ml-auto navbar_right">
+                            <div className="navbar_right">
                                 {userPanel}
                                 <Swrnet/>
                             </div>
