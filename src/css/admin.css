@@ -28,6 +28,12 @@
     min-height: 180px;
 }
 
+.usercard_icons {
+    padding-bottom: 15px;
+    border-bottom: thin solid lightgrey;
+    margin-bottom: 15px;
+}
+
 .admin_actions {
     color: gray;
 }

@@ -18,6 +18,7 @@ export class UserCard extends React.Component {
             id: props.id,
             username: props.name,
             email: props.email,
+            activated: props.activated,
             role: props.role,
             projects: props.projects,
             rolePower: props.rolePower,
@@ -89,6 +90,10 @@ export class UserCard extends React.Component {
         }
     }
 
+    resetActivation() {
+
+    }
+
     makeProjectsPanel() {
         let projectList = Object.keys(projectBadges).map(i => projectBadges[i]);
 
@@ -148,6 +153,7 @@ export class UserCard extends React.Component {
                                 index={this.state.index}
                                 role={this.state.role}
                                 username={this.state.username}
+                                activated={this.state.activated}
                             />
                             <div className="collapse" id={"collapse" + this.state.index} data-parent="#accordion">
                                 {(editable)
@@ -155,8 +161,11 @@ export class UserCard extends React.Component {
                                         submit={this.handleSubmit}
                                         change={this.handleChange}
                                         toggleCheckbox={this.handleCheckboxChange}
+                                        resetActivation={this.resetActivation}
                                         username={this.state.username}
                                         email={this.state.email}
+                                        role={this.state.role}
+                                        activated={this.state.activated}
                                         rolepanel={this.rolesPanel}
                                         projectpanel={this.projectsPanel}
                                         buttonsDisabled={this.state.buttonsDisabled}

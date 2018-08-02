@@ -42,6 +42,7 @@ export class UserEdit extends React.Component {
                                 id={user.id}
                                 name={user.username}
                                 email={user.email}
+                                activated={user.activated}
                                 role={user.role}
                                 projects={user.projects}
                                 rolePower={user.rolePower}

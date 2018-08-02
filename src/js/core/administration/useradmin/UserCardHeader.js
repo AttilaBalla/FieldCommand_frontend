@@ -61,6 +61,8 @@ export class UserCardHeader extends React.Component {
                  data-target={(this.props.editable) ? "#collapse" + this.props.index : ""}
                  onClick={this.rotateArrow}>
                 <span className={"mb-0 " + this.setNameColor(this.props.role)}>{this.props.username}</span>
+                {(this.props.activated) ? null : <span className="text-secondary ml-2 small"><i className="fa fa-power-off" aria-hidden="true"></i></span> }
+                {(this.props.role === "ROLE_NEW") ? <span className="text-secondary ml-2 small"><i className="fa fa-plug" aria-hidden="true"></i></span> : null}
                 <span className="float-right">
                     {(this.props.editable) ?
                         <i className={"fa fa-chevron-down " + this.setNameColor(this.props.role) + " " + arrowClass}
