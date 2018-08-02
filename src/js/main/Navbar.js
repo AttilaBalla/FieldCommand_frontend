@@ -61,6 +61,10 @@ export class Navbar extends React.Component {
 		this.state = {};
     }
 
+    handleClick() {
+        //console.log("something here"); TODO mobile view menu closing upon tapping a link
+    }
+
     render() {
 
         return(
@@ -94,7 +98,7 @@ export class Navbar extends React.Component {
                                     aria-expanded="false" aria-label="Toggle navigation">
                                 <i className="fa fa-chevron-down text-primary" aria-hidden="true"></i>
                             </button>
-                            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                            <div className="collapse navbar-collapse" id="navbarSupportedContent" onClick={this.handleClick}>
                                 <NavbarLinks user={user}/>
                             </div>
                             <div className="navbar_right">
