@@ -59,36 +59,39 @@ export class InternalRequestLister extends React.Component {
 
         return (
             <section>
-                <ul className="list-group list-group-flush">
-                    <li className="list-group-item main_color_dark">
-                        <div className="d-flex justify-content-between">
-                            <span className="w-10">Status</span>
-                            <span className="w-35">Title</span>
-                            <span className="w-20">Date and time</span>
-                            <span className="w-10">Owner</span>
-                            <span className="w-10">Project</span>
-                            <span className="ml-auto">Actions</span>
-                        </div>
-                    </li>
-                    {this.state.internalRequests.map((internalRequest, key) => {
-                        return (
-                            <InternalRequestItem
-                                key={key}
-                                id={internalRequest.id}
-                                title={internalRequest.title}
-                                owner={internalRequest.owner}
-                                date={internalRequest.date}
-                                status={internalRequest.status}
-                                project={internalRequest.project}
-                                deletePost={
-                                    (this.props.currentUser.username === internalRequest.owner ||
-                                    this.props.currentUser.roleType === "ROLE_OWNER")
-                                    ? this.deletePost : null}
-                            />
-
-                        )
-                    })}
-                </ul>
+                <div className="table-responsive-md">
+                    <table className="table table-hover">
+                        <thead className="main_color_dark">
+                            <tr>
+                                <th className="w-10">Status</th>
+                                <th className="w-35">Title</th>
+                                <th className="w-20">Date and time</th>
+                                <th className="w-10">Owner</th>
+                                <th className="w-10">Project</th>
+                                <th className="text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {this.state.internalRequests.map((internalRequest, key) => {
+                            return (
+                                <InternalRequestItem
+                                    key={key}
+                                    id={internalRequest.id}
+                                    title={internalRequest.title}
+                                    owner={internalRequest.owner}
+                                    date={internalRequest.date}
+                                    status={internalRequest.status}
+                                    project={internalRequest.project}
+                                    deletePost={
+                                        (this.props.currentUser.username === internalRequest.owner ||
+                                        this.props.currentUser.roleType === "ROLE_OWNER")
+                                        ? this.deletePost : null}
+                                />
+                            )
+                        })}
+                        </tbody>
+                    </table>
+                </div>
             </section>
         )
 

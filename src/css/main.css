@@ -175,7 +175,7 @@ p, label {
 .text_box {
     display: block;
     background: rgba(240, 240, 240, 0.9);
-    padding: 70px;
+    padding: 3%;
 }
 
 .centered {

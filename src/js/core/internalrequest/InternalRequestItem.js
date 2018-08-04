@@ -42,7 +42,7 @@ export class InternalRequestItem extends React.Component {
         </React.Fragment>;
 
         let deleteButton = (this.props.deletePost) ?
-            <span className="ml-auto">
+            <td className="text-right">
                     {(this.state.confirmedDelete)
                         ? cancelDeleteButton
                         : null
@@ -53,25 +53,21 @@ export class InternalRequestItem extends React.Component {
                             : <i className="fa fa-trash" aria-hidden="true"></i>
                         }
                 </button>
-            </span> : null;
+            </td> : null;
 
          let statusData = statusButtons[this.props.status];
 
         return(
-
-            <li className="list-group-item">
-                <div className="d-flex">
-                    <span className={"text-" + statusData.textColor + " w-10 small"}><i className={statusData.icon + " mr-2"}></i>{statusData.displayName}</span>
-                    <span className="w-35 no-overflow">
+                <tr className="bg-white">
+                    <td className={"text-" + statusData.textColor + " w-10 small"}><i className={statusData.icon + " mr-2"}></i>{statusData.displayName}</td>
+                    <td className="w-35 no-overflow">
                         <Link to={"requests/" + this.props.id}>{this.props.title}</Link>
-                    </span>
-                    <span className="w-20">{this.props.date}</span>
-                    <span className="w-10">{this.props.owner}</span>
-                    <span><ProjectBadge project={this.props.project} id={this.props.id}/></span>
+                    </td>
+                    <td className="w-20">{this.props.date}</td>
+                    <td className="w-10">{this.props.owner}</td>
+                    <td><ProjectBadge project={this.props.project} id={this.props.id}/></td>
                     {deleteButton}
-                </div>
-            </li>
-
+                </tr>
         )
     }
 }
