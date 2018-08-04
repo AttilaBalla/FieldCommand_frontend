@@ -2,13 +2,9 @@ import React from "react";
 
 export class UserCardForm extends React.Component {
 
-    constructor(props) {
-        super(props);
+    checkForIconConditions() {
 
         this.icons = [];
-    }
-
-    componentWillMount() {
 
         if(!this.props.activated) {
             this.icons.push(
@@ -31,6 +27,9 @@ export class UserCardForm extends React.Component {
 
 
     render() {
+
+        this.checkForIconConditions();
+
         let disabled = (this.props.buttonsDisabled) ? "disabled" : null;
 
         return (
@@ -77,7 +76,7 @@ export class UserCardForm extends React.Component {
                     </form>
                 </div>
                 <div className = "card-footer text-muted" >
-                    <button className="btn btn-warning">
+                    <button className="btn btn-warning" onClick={this.props.resetActivation}>
                         Reset Activation
                     </button>
                 </div>
