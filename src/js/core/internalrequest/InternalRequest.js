@@ -1,6 +1,6 @@
 import React from "react";
 import 'react-tabs/style/react-tabs.css';
-import {Alert} from "../../util/Alert";
+import {Alert, alertTypes} from "../../util/Alert";
 import {Tab, TabList, TabPanel, Tabs} from 'react-tabs';
 import {UserContext} from "../../util/UserProvider";
 import {InternalRequestCreator} from "./InternalRequestCreator";
@@ -23,10 +23,17 @@ export class InternalRequest extends React.Component {
 
 
     setAlert(alert) {
+
+        let tabIndex = 0;
+
+        if(alert.alertType === alertTypes.NEUTRAL) {
+            tabIndex = 0
+        }
+
         this.setState({
             alertType: alert.alertType,
             message: alert.message,
-            tabIndex: 0,
+            tabIndex: tabIndex,
         })
     }
 

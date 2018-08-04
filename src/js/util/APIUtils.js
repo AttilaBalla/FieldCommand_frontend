@@ -112,6 +112,15 @@ export function activateUser(activateData) {
     });
 }
 
+export function resetActivationForUser(userId) {
+
+    return request({
+        url: API_BASE_URL + "/admin/resetUser",
+        method: 'POST',
+        body: JSON.stringify(userId)
+    });
+}
+
 export function sendNewsPost(newsPostData) {
 
     return request({

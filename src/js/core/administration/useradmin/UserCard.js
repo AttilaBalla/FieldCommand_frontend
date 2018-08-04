@@ -1,6 +1,6 @@
 import React from "react";
 import {UserRoleElement, userRoles} from "./UserRoleElement"
-import {updateUser} from "../../../util/APIUtils";
+import {resetActivationForUser, updateUser} from "../../../util/APIUtils";
 import {alertTypes} from "../../../util/Alert";
 import {UserContext} from "../../../util/UserProvider";
 import {UserCardForm} from "./UserCardForm";
@@ -36,6 +36,7 @@ export class UserCard extends React.Component {
         this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.resetActivation = this.resetActivation.bind(this);
     }
 
     componentWillMount() {
@@ -91,7 +92,19 @@ export class UserCard extends React.Component {
     }
 
     resetActivation() {
+        resetActivationForUser(this.state.id)
+            .then(() => {
+                this.props.sendAlert({
+                    alertType: alertTypes.SUCCESS,
+                    message: "Account reset successful!"
+                });
 
+            }).catch(error => {
+                this.props.sendAlert({
+                    alertType: alertTypes.ERROR,
+                    message: error.information
+                });
+        })
     }
 
     makeProjectsPanel() {
