@@ -22,6 +22,8 @@ export class UserProvider extends React.Component {
 
     loadUser() {
 
+        this.setState({user: "loading"});
+
         if (localStorage.getItem(ACCESS_TOKEN)) {
             getCurrentUser()
                 .then(response => {
@@ -37,6 +39,9 @@ export class UserProvider extends React.Component {
                 }
             });
         } else {
+
+            this.setState({user: null});
+
             console.log("no access token set!");
         }
 
