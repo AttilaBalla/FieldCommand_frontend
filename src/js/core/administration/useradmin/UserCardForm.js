@@ -1,4 +1,5 @@
 import React from "react";
+import {UserCardIcon} from "./UserCardIcon";
 
 export class UserCardForm extends React.Component {
 
@@ -8,23 +9,22 @@ export class UserCardForm extends React.Component {
 
         if(!this.props.activated) {
             this.icons.push(
-                <span className="text-secondary ml-2 small d-block">
-                    <i className="fa fa-power-off mr-2" aria-hidden="true"></i>
-                    This account has no password currently.
-                </span>)
+                {
+                    icon: "fa fa-power-off",
+                    description: "This account has no password currently."
+                }
+            )
         }
 
         if(this.props.role === "ROLE_NEW") {
             this.icons.push(
-                <span className="text-secondary ml-2 small d-block">
-                    <i className="fa fa-plug mr-2" aria-hidden="true"></i>
-                    This account does not have a role. You can set one now, or it will be automatically set to User upon activation.
-                </span>
+                {
+                    icon: "fa fa-plug",
+                    description: "This account does not have a role. You can set one now, or it will be automatically set to User upon activation."
+                }
             )
         }
     }
-
-
 
     render() {
 
@@ -38,9 +38,14 @@ export class UserCardForm extends React.Component {
                     {(this.icons.length > 0)
                         ?
                         <div className="usercard_icons">
-                            {this.icons.map((icon, key) => {
-                                return icon;
-                            })}
+                            {this.icons.map((item, key) => {
+                                return <UserCardIcon
+                                    key={key}
+                                    iconClass={item.icon}
+                                    description={item.description}
+                                />
+                            }
+                            )}
                         </div>
                         : null
                     }
