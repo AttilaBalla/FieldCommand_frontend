@@ -1,5 +1,6 @@
 import React from "react";
 import {alertTypes} from "../../../util/Alert";
+import ReactTooltip from 'react-tooltip'
 import {alterIntRequestSupport} from "../../../util/APIUtils";
 
 export class IRSupportModule extends React.Component {
@@ -8,7 +9,8 @@ export class IRSupportModule extends React.Component {
         super(props);
 
         this.state = {
-          percent: props.percent,
+            percent: props.percent,
+            supporters: props.supporters,
             isSupportingRequest: (this.props.supporters.includes(this.props.currentUser))
         };
 
@@ -20,8 +22,9 @@ export class IRSupportModule extends React.Component {
             .then((response) => {
 
                 this.setState({
-                    percent: parseInt(response.information, 10),
-                    isSupportingRequest: !this.state.isSupportingRequest
+                    percent: parseInt(response.percent, 10),
+                    isSupportingRequest: !this.state.isSupportingRequest,
+                    supporters: response.supporters
                 });
 
                 this.props.sendAlert({
@@ -51,12 +54,23 @@ export class IRSupportModule extends React.Component {
                         :<span>You can support this request if you think it's worth fulfilling.</span>
                 }
                 <div className="progress">
-                    <div className="progress-bar progress-bar-striped bg-success"
+                    <div data-tip data-for="progressBar-tooltip" className="progress-bar progress-bar-striped bg-success"
                          role="progressbar" style={{width: this.state.percent + "%"}}
                          aria-valuenow={this.state.percent}
                          aria-valuemin="0"
                          aria-valuemax="100">{this.state.percent}%</div>
                 </div>
+
+                <ReactTooltip id="progressBar-tooltip" type="dark" effect="solid">
+                    {this.state.supporters.map((supporter, key) => {
+                        return(
+                        <span key={key} className="mr-2">
+                            {supporter}
+                        </span>
+                        )
+                    })}
+                </ReactTooltip>
+
                 {(this.props.isRequestOwner)
                     ? null
                     : (this.state.isSupportingRequest)
