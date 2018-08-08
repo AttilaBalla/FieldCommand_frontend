@@ -23,6 +23,7 @@ export class QuillEditor extends React.Component {
 
         this.state = {
             title: (props.editMode) ? props.title : "",
+            summary: (props.editMode) ? props.summary : "",
             content: (props.editMode) ? props.content : "",
             visible: (props.editMode) ? props.visible : null,
             projectName: (props.editMode) ? props.project : "ROTR"
@@ -69,6 +70,19 @@ export class QuillEditor extends React.Component {
                        value={this.state.title}
                        placeholder="Post Title"
                        />
+
+                {(this.props.isNewspost)
+                    ?
+                    <input type="text"
+                           name="summary"
+                           className="form-control mb-3 mt-3"
+                           onChange={this.handleChange}
+                           value={this.state.summary}
+                           placeholder="Post Summary"
+                    />
+                    : null
+                }
+
                 <ReactQuill
                     theme="snow"
                     modules={this.modules}
@@ -77,10 +91,10 @@ export class QuillEditor extends React.Component {
                     placeholder="Enter some stuff here..."
                 />
                 <div className="mt-3">
-                    {(this.props.toggleVisibility)
+                    {(this.props.isNewspost)
                         ? <VisibilityButton visible={this.state.visible} handleClick={this.switchVisibility}/>
                         : null}
-                    {(this.props.toggleProjectSelect)
+                    {(this.props.isInternalRequest)
                         ? <ProjectsButtonGroup setProject={this.setProject} activeProject={this.state.projectName}/>
                         : null}
                     <button className={"btn btn-success float-right " + disabled} onClick={(disabled) ? null : this.handleSubmit}>

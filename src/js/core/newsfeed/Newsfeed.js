@@ -31,6 +31,7 @@ export class Newsfeed extends React.Component {
     render() {
 
         if(this.state.status === "LOADING") {
+
             return(
                 <span>
                     <h4 className="content-status">
@@ -41,6 +42,7 @@ export class Newsfeed extends React.Component {
         }
 
         if(this.state.status === "ERROR") {
+
             return(
                 <span>
                     <h4 className="content-status text-danger">
@@ -51,6 +53,7 @@ export class Newsfeed extends React.Component {
         }
 
         if(this.state.newsPosts.filter(newsPost => (newsPost.visible)).length < 1) {
+
             return(
                 <span>
                     <h6 className="content-status">
@@ -72,7 +75,7 @@ export class Newsfeed extends React.Component {
                             title={newsPost.title}
                             owner={newsPost.owner}
                             date={newsPost.date}
-                            content={newsPost.content}
+                            content={newsPost.summary}
                         /> : null
                     )
                 })}
