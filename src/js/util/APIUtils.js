@@ -217,7 +217,7 @@ export function alterIntRequestSupport(supportData) {
 export function alterIntRequestStatus(StatusData) {
 
     return request({
-        url: API_BASE_URL + "/dev/ir/updateStatus",
+        url: API_BASE_URL + "/user/ir/updateStatus",
         method: 'PUT',
         body: JSON.stringify(StatusData)
     });

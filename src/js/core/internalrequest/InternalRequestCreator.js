@@ -44,6 +44,6 @@ export class InternalRequestCreator extends React.Component {
     }
 
     render() {
-        return <QuillEditor sendContent={this.handleSubmit} toggleProjectSelect={true}/>;
+        return <QuillEditor sendContent={this.handleSubmit} isInternalRequest={true}/>;
     }
 }

@@ -50,7 +50,7 @@ export class NewsCreator extends React.Component {
     render() {
 
         return(
-            <QuillEditor sendContent={this.handleSubmit} toggleVisibility={true} submitDisabled={(this.state.pendingRequest)}/>
+            <QuillEditor sendContent={this.handleSubmit} isNewspost={true} submitDisabled={(this.state.pendingRequest)}/>
         )
     }
 }

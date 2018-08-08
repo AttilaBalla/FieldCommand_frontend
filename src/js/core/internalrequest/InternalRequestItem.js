@@ -59,12 +59,14 @@ export class InternalRequestItem extends React.Component {
 
         return(
                 <tr className="bg-white">
-                    <td className={"text-" + statusData.textColor + " w-10 small"}><i className={statusData.icon + " mr-2"}></i>{statusData.displayName}</td>
-                    <td className="w-35 no-overflow">
+                    <td className={"align-middle text-" + statusData.textColor + " w-10 small"}>
+                        <i className={statusData.icon + " mr-2"}></i>{statusData.displayName}
+                    </td>
+                    <td className="align-middle w-35 no-overflow">
                         <Link to={"requests/" + this.props.id}>{this.props.title}</Link>
                     </td>
-                    <td className="w-20">{this.props.date}</td>
-                    <td className="w-10">{this.props.owner}</td>
+                    <td className="align-middle w-20">{this.props.date}</td>
+                    <td className="align-middle w-10">{this.props.owner}</td>
                     <td><ProjectBadge project={this.props.project} id={this.props.id}/></td>
                     {deleteButton}
                 </tr>
