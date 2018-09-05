@@ -19,7 +19,7 @@ export class InternalRequestCreator extends React.Component {
         if(internalRequestData.title.length < 6 || internalRequestData.content.length < 20) {
             this.props.sendAlert({
                 alertType: alertTypes.NEUTRAL,
-                message: "This post appears to be too short."
+                messages: ["This post appears to be too short."]
             });
 
         } else {
@@ -28,15 +28,15 @@ export class InternalRequestCreator extends React.Component {
                 .then(() => {
                     this.props.sendAlert({
                         alertType: alertTypes.SUCCESS,
-                        message: "Your post has been saved successfully!"
+                        messages: ["Your post has been saved successfully!"]
                     });
 
                 }).catch(error => {
                 this.props.sendAlert({
                     alertType: alertTypes.ERROR,
-                    message: (error.information === undefined)
-                        ? "A server error occured, please notify the owner!"
-                        : error.information
+                    messages: (error.information === undefined)
+                        ? ["A server error occured, please notify the owner!"]
+                        : [error.information]
                 });
             })
         }

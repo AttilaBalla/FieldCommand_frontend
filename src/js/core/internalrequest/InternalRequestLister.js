@@ -27,13 +27,13 @@ export class InternalRequestLister extends React.Component {
                 if(error.status === 401) {
                     this.props.sendAlert({
                         alertType: alertTypes.ERROR,
-                        message: "Seems like your session has expired. Please refresh the page!"
+                        messages: ["Seems like your session has expired. Please refresh the page!"]
                     })
                 }
 
                 this.props.sendAlert({
                     alertType: alertTypes.ERROR,
-                    message: error.information
+                    messages: [error.information]
                 });
             })
     }
@@ -43,14 +43,14 @@ export class InternalRequestLister extends React.Component {
             .then(() => {
                 this.props.sendAlert({
                     alertType: alertTypes.SUCCESS,
-                    message: "The post has been deleted successfully!"
+                    messages: ["The post has been deleted successfully!"]
                 });
                 this.getPosts();
             })
             .catch(error => {
                 this.props.sendAlert({
                     alertType: alertTypes.ERROR,
-                    message: error.information
+                    messages: [error.information]
                 });
             })
     }

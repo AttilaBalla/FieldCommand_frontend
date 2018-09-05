@@ -1,7 +1,7 @@
 import React from "react";
 import {Tab, TabList, TabPanel, Tabs} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import {Alert} from "../../../util/Alert";
+import {Alert, alertTypes} from "../../../util/Alert";
 import {NewsLister} from "./NewsLister";
 import {NewsCreator} from "./NewsCreator";
 
@@ -21,10 +21,17 @@ export class NewsFeedAdmin extends React.Component {
     }
 
     setAlert(alert) {
+
+        let newTabIndex = this.state.tabIndex;
+
+        if(alert.alertType === alertTypes.SUCCESS) {
+            newTabIndex = 0;
+        }
+
         this.setState({
             alertType: alert.alertType,
-            message: alert.message,
-            tabIndex: 0,
+            messages: alert.messages,
+            tabIndex: newTabIndex,
         })
     }
 
@@ -39,7 +46,7 @@ export class NewsFeedAdmin extends React.Component {
     render() {
 
         let alert = (this.state.alertType)
-            ? <Alert alertType={this.state.alertType} message={this.state.message}/>
+            ? <Alert alertType={this.state.alertType} messages={this.state.messages}/>
             : null;
 
         return(

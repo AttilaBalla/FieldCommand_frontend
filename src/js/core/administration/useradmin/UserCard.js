@@ -76,14 +76,14 @@ export class UserCard extends React.Component {
                 .then(() => {
                     this.props.sendAlert({
                         alertType: alertTypes.SUCCESS,
-                        message: "Your changes have been saved successfully!"
+                        messages: ["Your changes have been saved successfully!"]
                     });
                     this.setState({buttonsDisabled: false});
 
                 }).catch(error => {
                     this.props.sendAlert({
                         alertType: alertTypes.ERROR,
-                        message: error.information
+                        messages: [error.information]
                     });
                     this.setState({buttonsDisabled: false});
                 }
@@ -96,13 +96,13 @@ export class UserCard extends React.Component {
             .then(() => {
                 this.props.sendAlert({
                     alertType: alertTypes.SUCCESS,
-                    message: "Account reset successful!"
+                    messages: ["Account reset successful!"]
                 });
 
             }).catch(error => {
                 this.props.sendAlert({
                     alertType: alertTypes.ERROR,
-                    message: error.information
+                    messages: [error.information]
                 });
         })
     }

@@ -25,7 +25,7 @@ export class NewsLister extends React.Component {
             .catch(error => {
                 this.props.sendAlert({
                     alertType: alertTypes.ERROR,
-                    message: error.information
+                    messages: [error.information]
                 });
             })
     }
@@ -35,14 +35,14 @@ export class NewsLister extends React.Component {
             .then(() => {
                 this.props.sendAlert({
                     alertType: alertTypes.SUCCESS,
-                    message: "The post has been deleted successfully!"
+                    messages: ["The post has been deleted successfully!"]
                 });
                 this.getPosts();
             })
             .catch(error => {
                 this.props.sendAlert({
                     alertType: alertTypes.ERROR,
-                    message: error.information
+                    messages: [error.information]
                 });
             })
     }

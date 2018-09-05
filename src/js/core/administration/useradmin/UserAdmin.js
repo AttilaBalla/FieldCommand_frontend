@@ -20,7 +20,7 @@ export class UserAdmin extends React.Component {
     setAlert(alert) {
         this.setState({
             alertType: alert.alertType,
-            message: alert.message,
+            messages: alert.messages,
         })
     }
 
@@ -33,7 +33,7 @@ export class UserAdmin extends React.Component {
     render() {
 
         let alert = (this.state.alertType)
-            ? <Alert alertType={this.state.alertType} message={this.state.message}/>
+            ? <Alert alertType={this.state.alertType} messages={this.state.messages}/>
             : null;
 
         return (

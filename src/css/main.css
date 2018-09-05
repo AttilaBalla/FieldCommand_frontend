@@ -267,6 +267,12 @@ footer p {
     transition: 0.5s;
 }
 
+.plain-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
 .popup-alert.show {
     opacity: 1;
     visibility: visible;

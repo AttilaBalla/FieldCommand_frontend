@@ -15,6 +15,7 @@ export class NewsEditor extends React.Component {
             id: "", // newspost data
             title: "",
             date: "",
+            summary: "",
             content: "",
             owner: "",
             visible: false,
@@ -34,6 +35,7 @@ export class NewsEditor extends React.Component {
                     id: response.id,
                     title: response.title,
                     date: response.date,
+                    summary: response.summary,
                     content: response.content,
                     owner: response.owner,
                     visible: response.visible,
@@ -43,7 +45,7 @@ export class NewsEditor extends React.Component {
                 this.setState({
                     redirect: true,
                     alertType: alertTypes.ERROR,
-                    message: error.information
+                    messages: [error.information]
                 });
         })
     }
@@ -51,7 +53,7 @@ export class NewsEditor extends React.Component {
     setAlert(alert) {
         this.setState({
             alertType: alert.alertType,
-            message: alert.message,
+            messages: [alert.messages],
         })
     }
 
@@ -73,13 +75,13 @@ export class NewsEditor extends React.Component {
                 .then(() => {
                     this.setState({
                         alertType: alertTypes.SUCCESS,
-                        message: "Your post has been updated successfully!"
+                        messages: ["Your post has been updated successfully!"]
                     });
 
                 }).catch(error => {
                 this.setState({
                     alertType: alertTypes.ERROR,
-                    message: error.information
+                    message: [error.information]
                 });
             })
         }
@@ -99,6 +101,7 @@ export class NewsEditor extends React.Component {
             editor = <QuillEditor
                 editMode={true}
                 title={this.state.title}
+                summary={this.state.summary}
                 content={this.state.content}
                 visible={(this.state.visible)}
                 sendAlert={this.setAlert}
@@ -111,7 +114,7 @@ export class NewsEditor extends React.Component {
         }
 
         let alert = (this.state.alertType)
-            ? <Alert alertType={this.state.alertType} message={this.state.message}/>
+            ? <Alert alertType={this.state.alertType} messages={this.state.messages}/>
             : null;
 
         return(
@@ -120,6 +123,7 @@ export class NewsEditor extends React.Component {
                     <div className="col-9 text_box">
                         <NewsFeedPost title={this.state.title}
                                       owner={this.state.owner}
+                                      summary={this.state.summary}
                                       date={this.state.date}
                                       content={this.state.content}
                         />

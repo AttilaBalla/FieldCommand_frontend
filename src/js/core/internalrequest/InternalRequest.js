@@ -24,16 +24,16 @@ export class InternalRequest extends React.Component {
 
     setAlert(alert) {
 
-        let tabIndex = 0;
+        let newTabIndex = this.state.tabIndex;
 
-        if(alert.alertType === alertTypes.NEUTRAL) {
-            tabIndex = 0
+        if(alert.alertType === alertTypes.SUCCESS) {
+            newTabIndex = 0;
         }
 
         this.setState({
             alertType: alert.alertType,
-            message: alert.message,
-            tabIndex: tabIndex,
+            messages: alert.messages,
+            tabIndex: newTabIndex,
         })
     }
 
@@ -41,14 +41,14 @@ export class InternalRequest extends React.Component {
         this.setState({
             tabIndex: tabIndex,
             alertType: "",
-            message: ""
+            messages: ""
         })
     }
 
     render() {
 
         let alert = (this.state.alertType)
-            ? <Alert alertType={this.state.alertType} message={this.state.message}/>
+            ? <Alert alertType={this.state.alertType} messages={this.state.messages}/>
             : null;
 
         return(

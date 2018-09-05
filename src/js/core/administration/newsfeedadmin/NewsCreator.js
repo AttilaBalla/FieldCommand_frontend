@@ -13,37 +13,52 @@ export class NewsCreator extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    validateNewsPost(newsPost) {
+
+        let errors = [];
+
+        if(newsPost.title === "" || newsPost.summary === "" || newsPost.content === "") {
+            errors.push("All fields are required!");
+        }
+
+        if(newsPost.title.length < 6 || newsPost.summary.length < 6 || newsPost.content.length < 20) {
+            errors.push("This post appears to be too short!");
+        }
+
+        return errors;
+    }
+
 
     handleSubmit(newsPost) {
 
-        let newsPostData = newsPost;
+        let validationResult = this.validateNewsPost(newsPost);
 
-        if(newsPostData.title.length < 6 || newsPostData.content.length < 20) {
-            this.props.sendAlert({
-                alertType: alertTypes.NEUTRAL,
-                message: "This post appears to be too short."
-            });
-
-        } else {
+        if(validationResult.length === 0) {
 
             this.setState({pendingRequest: true});
 
-            sendNewsPost(newsPostData)
+            sendNewsPost(newsPost)
                 .then(() => {
                     this.props.sendAlert({
                         alertType: alertTypes.SUCCESS,
-                        message: "Your post has been saved successfully!"
+                        messages: ["Your post has been saved successfully!"]
                     });
                     this.setState({pendingRequest: false})
 
                 }).catch(error => {
                     this.props.sendAlert({
                         alertType: alertTypes.ERROR,
-                        message: error.information
+                        messages: [error.information]
                     });
                     this.setState({pendingRequest: false})
                 }
             )
+        } else {
+
+            this.props.sendAlert({
+                alertType: alertTypes.NEUTRAL,
+                messages: validationResult
+            });
         }
     }
 

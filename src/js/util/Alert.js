@@ -69,7 +69,13 @@ export class Alert extends React.Component {
 
         return (
             <div className={"alert popup-alert " + classElement} role="alert">
-                {this.props.message}
+                <ul className="plain-list">
+                    {this.props.messages.map((element, key) => {
+                        return(
+                            <li key={key}>{element}</li>
+                        )
+                    })}
+                </ul>
             </div>
         )
     }

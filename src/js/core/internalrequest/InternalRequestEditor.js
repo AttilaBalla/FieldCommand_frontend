@@ -51,7 +51,7 @@ export class InternalRequestEditor extends React.Component {
             .catch(error => {
                 this.setState({
                     alertType: alertTypes.ERROR,
-                    message: error.information
+                    messages: [error.information]
                 });
             });
     }
@@ -59,7 +59,7 @@ export class InternalRequestEditor extends React.Component {
     setAlert(alert) {
         this.setState({
             alertType: alert.alertType,
-            message: alert.message,
+            messages: alert.messages,
         })
     }
 
@@ -70,7 +70,7 @@ export class InternalRequestEditor extends React.Component {
         if(internalRequestData.title.length < 6 || internalRequestData.content.length < 20) {
             this.setState({
                 alertType: alertTypes.NEUTRAL,
-                message: "This post appears to be too short."
+                messages: ["This post appears to be too short."]
             });
 
         } else {
@@ -81,13 +81,13 @@ export class InternalRequestEditor extends React.Component {
                 .then(() => {
                     this.setState({
                         alertType: alertTypes.SUCCESS,
-                        message: "Your post has been updated successfully!"
+                        messages: ["Your post has been updated successfully!"]
                     });
 
                 }).catch(error => {
                 this.setState({
                     alertType: alertTypes.ERROR,
-                    message: error.information
+                    messages: [error.information]
                 });
             })
         }
@@ -112,7 +112,7 @@ export class InternalRequestEditor extends React.Component {
         }
 
         let alert = (this.state.alertType)
-            ? <Alert alertType={this.state.alertType} message={this.state.message}/>
+            ? <Alert alertType={this.state.alertType} messages={this.state.messages}/>
             : null;
 
         return(

@@ -29,15 +29,15 @@ export class IRSupportModule extends React.Component {
 
                 this.props.sendAlert({
                     alertType: alertTypes.SUCCESS,
-                    message: (this.state.isSupportingRequest)
-                        ? "You are supporting this request!"
-                        : "You are no longer supporting this request."
+                    messages: (this.state.isSupportingRequest)
+                        ? ["You are supporting this request!"]
+                        : ["You are no longer supporting this request."]
                 });
 
             }).catch(error => {
             this.props.sendAlert({
                 alertType: alertTypes.ERROR,
-                message: error.information
+                messages: [error.information]
             });
         });
     }

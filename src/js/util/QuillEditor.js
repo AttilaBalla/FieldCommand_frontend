@@ -25,7 +25,7 @@ export class QuillEditor extends React.Component {
             title: (props.editMode) ? props.title : "",
             summary: (props.editMode) ? props.summary : "",
             content: (props.editMode) ? props.content : "",
-            visible: (props.editMode) ? props.visible : null,
+            visible: (props.editMode) ? props.visible : false,
             projectName: (props.editMode) ? props.project : "ROTR"
         };
 

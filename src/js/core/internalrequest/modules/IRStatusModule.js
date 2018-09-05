@@ -86,7 +86,7 @@ export class IRStatusModule extends React.Component {
 
                 this.props.sendAlert({
                     alertType: alertTypes.SUCCESS,
-                    message: "The status of this request has been updated!"
+                    messages: ["The status of this request has been updated!"]
                 });
 
                 //avoid overwriting the response with "" if it's not updated next time
@@ -102,10 +102,9 @@ export class IRStatusModule extends React.Component {
                 }
             })
             .catch(error => {
-                console.log(error.information);
                 this.props.sendAlert({
                     alertType: alertTypes.ERROR,
-                    message: error.information
+                    messages: [error.information]
                 });
             });
     }
