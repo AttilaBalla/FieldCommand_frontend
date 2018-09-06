@@ -1,6 +1,6 @@
 import React from "react";
-import {NewsFeedPost} from "./NewsfeedPost";
 import {getAllNewsPosts} from "../../util/APIUtils";
+import {NewsFeedSummary} from "./NewsfeedSummary";
 
 export class Newsfeed extends React.Component {
 
@@ -29,6 +29,8 @@ export class Newsfeed extends React.Component {
     }
 
     render() {
+
+        console.log(this.state.newsPosts);
 
         if(this.state.status === "LOADING") {
 
@@ -70,12 +72,13 @@ export class Newsfeed extends React.Component {
 
                     return (
                         (newsPost.visible) ?
-                        <NewsFeedPost
+                        <NewsFeedSummary
                             key={key}
+                            id={newsPost.id}
                             title={newsPost.title}
                             owner={newsPost.owner}
                             date={newsPost.date}
-                            content={newsPost.summary}
+                            summary={newsPost.summary}
                         /> : null
                     )
                 })}

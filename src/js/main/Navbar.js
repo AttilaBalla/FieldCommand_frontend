@@ -38,7 +38,7 @@ function NavbarLinks(props) {
     return (
     <ul className="navbar-nav main_navbar">
         <li className="nav-item">
-            <Link className="nav-link" to="/"> <i className="fa fa-bars"></i>News</Link>
+            <Link className="nav-link" to="/news"> <i className="fa fa-bars"></i>News</Link>
         </li>
         <li className="nav-item">
             <Link className="nav-link" to="/about"><i className="fa fa-info"></i>About</Link>

@@ -188,6 +188,18 @@ p, label {
     border-bottom: thin solid lightgray;
 }
 
+.newsfeed_link {
+    text-decoration: none;
+    color: #313131;
+    transition: color 0.8s
+}
+
+.newsfeed_link:hover {
+    text-decoration: none;
+    color: #0188fe;
+    transition: color 0.2s;
+}
+
 .post_date {
     margin-left: 5px;
     color: darkgray;

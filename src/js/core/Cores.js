@@ -11,6 +11,7 @@ import '../../css/sidebar.css';
 import '../../css/admin.css';
 import {InternalRequestEditor} from "./internalrequest/InternalRequestEditor";
 import {InternalRequest} from "./internalrequest/InternalRequest";
+import {NewsPage} from "./news/NewsPage";
 
 
 export class Main extends Component {
@@ -21,6 +22,7 @@ export class Main extends Component {
                 <Navbar/>
                     <Route exact path="/" component={HomeContainer}/>
                     <Route exact path="/about" component={AboutContainer}/>
+                    <Route exact path="/news" component={NewsContainer}/>
                     <Route exact path="/administration/*" component={AdminContainer}/>
                     <Route exact path="/requests" component={InternalRequestContainer}/>
                     <Route exact path="/requests/:id" component={InternalRequestEditor} />
@@ -55,6 +57,17 @@ class AboutContainer extends React.Component {
         return (
             <div className="container-fluid">
                 <AboutContent/>
+            </div>
+        )
+    }
+}
+
+class NewsContainer extends React.Component {
+
+    render() {
+        return (
+            <div className="container-fluid">
+                <NewsPage/>
             </div>
         )
     }

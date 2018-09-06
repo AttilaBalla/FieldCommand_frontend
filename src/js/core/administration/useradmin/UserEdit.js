@@ -28,7 +28,7 @@ export class UserEdit extends React.Component {
     componentDidMount() {
         this.getUserData();
     }
-
+    
     render() {
 
         return(
