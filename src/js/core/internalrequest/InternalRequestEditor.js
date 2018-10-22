@@ -7,6 +7,7 @@ import {ProjectBadge} from "../../util/ProjectBadge";
 import {IRSupportModule} from "./modules/IRSupportModule";
 import {IRStatusModule} from "./modules/IRStatusModule";
 import {Redirect} from "react-router-dom";
+import {messages} from "../../util/messages";
 
 export class InternalRequestEditor extends React.Component {
 
@@ -70,7 +71,7 @@ export class InternalRequestEditor extends React.Component {
         if(internalRequestData.title.length < 6 || internalRequestData.content.length < 20) {
             this.setState({
                 alertType: alertTypes.NEUTRAL,
-                messages: ["This post appears to be too short."]
+                messages: [messages.err_post_short]
             });
 
         } else {
@@ -81,7 +82,7 @@ export class InternalRequestEditor extends React.Component {
                 .then(() => {
                     this.setState({
                         alertType: alertTypes.SUCCESS,
-                        messages: ["Your post has been updated successfully!"]
+                        messages: [messages.info_post_saved]
                     });
 
                 }).catch(error => {

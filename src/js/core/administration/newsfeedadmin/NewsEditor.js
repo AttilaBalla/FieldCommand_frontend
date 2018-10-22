@@ -4,6 +4,7 @@ import {getSingleNewsPost, updateNewsPost} from "../../../util/APIUtils";
 import {Alert, alertTypes} from "../../../util/Alert";
 import {QuillEditor} from "../../../util/QuillEditor";
 import {NewsFeedPost} from "../../newsfeed/NewsfeedPost";
+import {messages} from "../../../util/messages";
 
 export class NewsEditor extends React.Component {
 
@@ -64,7 +65,7 @@ export class NewsEditor extends React.Component {
         if(newsPostData.title.length < 6 || newsPostData.content.length < 20) {
             this.setState({
                 alertType: alertTypes.NEUTRAL,
-                message: "This post appears to be too short."
+                message: messages.err_post_short
             });
 
         } else {
@@ -75,7 +76,7 @@ export class NewsEditor extends React.Component {
                 .then(() => {
                     this.setState({
                         alertType: alertTypes.SUCCESS,
-                        messages: ["Your post has been updated successfully!"]
+                        messages: [messages.info_changes_saved]
                     });
 
                 }).catch(error => {

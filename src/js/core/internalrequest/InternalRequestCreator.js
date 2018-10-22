@@ -2,6 +2,7 @@ import React from "react";
 import {QuillEditor} from "../../util/QuillEditor";
 import {alertTypes} from "../../util/Alert";
 import {sendInternalRequest} from "../../util/APIUtils";
+import {messages} from "../../util/messages";
 
 export class InternalRequestCreator extends React.Component {
 
@@ -19,7 +20,7 @@ export class InternalRequestCreator extends React.Component {
         if(internalRequestData.title.length < 6 || internalRequestData.content.length < 20) {
             this.props.sendAlert({
                 alertType: alertTypes.NEUTRAL,
-                messages: ["This post appears to be too short."]
+                messages: [messages.err_post_short]
             });
 
         } else {
@@ -28,14 +29,14 @@ export class InternalRequestCreator extends React.Component {
                 .then(() => {
                     this.props.sendAlert({
                         alertType: alertTypes.SUCCESS,
-                        messages: ["Your post has been saved successfully!"]
+                        messages: [messages.info_post_saved]
                     });
 
                 }).catch(error => {
                 this.props.sendAlert({
                     alertType: alertTypes.ERROR,
                     messages: (error.information === undefined)
-                        ? ["A server error occured, please notify the owner!"]
+                        ? [messages.err_server_error]
                         : [error.information]
                 });
             })

@@ -1,4 +1,5 @@
 import React from 'react';
+import {messages} from "./messages";
 
 /**
  * @return {null}
@@ -9,10 +10,10 @@ export function StatusMessage(props) {
 
     switch(props.message) {
         case "expiredToken":
-            infoMessage = "Your session has expired, please log in again.";
+            infoMessage = messages.err_session_expired;
             break;
         case "serverError":
-            infoMessage = "There is a connection or internal server issue. Please notify the site-owner.";
+            infoMessage = messages.err_server_error;
             break;
         default:
             infoMessage = props.message; // if no templates match, use the text provided

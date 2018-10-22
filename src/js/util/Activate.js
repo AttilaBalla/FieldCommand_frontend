@@ -4,6 +4,7 @@ import {activateUser, validateActivationKey} from './APIUtils';
 import {ErrorTooltip} from "./ErrorTooltip";
 import {PW_LENGTH} from "./Constants";
 import {StatusMessage} from "./StatusMessage";
+import {messages} from "./messages";
 
 function LoginInput(props) {
 
@@ -97,9 +98,6 @@ export class Activate extends React.Component {
             short = true;
         }
 
-        let usernameInfo = `Your username will be displayed to others and will be required when logging in.
-            You may modify it here if you wish. Afterwards it can only be modified by admins.`;
-
         return (
             <div className="login_container">
                 <form onSubmit={this.handleSubmit}>
@@ -109,7 +107,7 @@ export class Activate extends React.Component {
                         <ErrorTooltip error={this.state.errorMessage}/>
                     </h5>
                     <div className="w-90 m-auto">
-                        <StatusMessage type="info" message={usernameInfo}/>
+                        <StatusMessage type="info" message={messages.info_username}/>
                     </div>
                     <div className="input_field">
                         <label>

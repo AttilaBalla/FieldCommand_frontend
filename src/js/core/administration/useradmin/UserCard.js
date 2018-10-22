@@ -7,6 +7,7 @@ import {UserCardForm} from "./UserCardForm";
 import {UserCardHeader} from "./UserCardHeader";
 import {projectBadges} from "../../../util/ProjectBadge";
 import {UserProjectsElement} from "./UserProjectsElement";
+import {messages} from "../../../util/messages";
 
 export class UserCard extends React.Component {
 
@@ -62,7 +63,7 @@ export class UserCard extends React.Component {
         if(this.state.username === "" || this.state.email === "") {
             this.props.sendAlert({
                 alertType: alertTypes.ERROR,
-                message: "The input fields cannot be empty!"
+                message: messages.err_field_required
             });
         } else {
 
@@ -76,7 +77,7 @@ export class UserCard extends React.Component {
                 .then(() => {
                     this.props.sendAlert({
                         alertType: alertTypes.SUCCESS,
-                        messages: ["Your changes have been saved successfully!"]
+                        messages: [messages.info_changes_saved]
                     });
                     this.setState({buttonsDisabled: false});
 
@@ -96,7 +97,7 @@ export class UserCard extends React.Component {
             .then(() => {
                 this.props.sendAlert({
                     alertType: alertTypes.SUCCESS,
-                    messages: ["Account reset successful!"]
+                    messages: [messages.acc_reset_success]
                 });
 
             }).catch(error => {

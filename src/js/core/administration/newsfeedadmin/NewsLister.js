@@ -2,6 +2,7 @@ import React from "react";
 import {deleteNewsPost, getAllNewsPosts} from "../../../util/APIUtils";
 import {NewsItem} from "./NewsItem";
 import {alertTypes} from "../../../util/Alert";
+import {messages} from "../../../util/messages";
 
 export class NewsLister extends React.Component {
     constructor(props) {
@@ -35,7 +36,7 @@ export class NewsLister extends React.Component {
             .then(() => {
                 this.props.sendAlert({
                     alertType: alertTypes.SUCCESS,
-                    messages: ["The post has been deleted successfully!"]
+                    messages: [messages.info_post_deleted]
                 });
                 this.getPosts();
             })

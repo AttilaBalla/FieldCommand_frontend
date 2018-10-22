@@ -1,6 +1,7 @@
 import React from "react";
 import {alertTypes} from "../../../util/Alert";
 import {sendEmailInvite} from "../../../util/APIUtils";
+import {messages} from "../../../util/messages";
 
 export class UserInvite extends React.Component {
 
@@ -27,7 +28,7 @@ export class UserInvite extends React.Component {
         this.setState({pending: true});
         this.props.sendAlert({
             alertType: alertTypes.NEUTRAL,
-            messages: ["Sending, please wait..."]
+            messages: [messages.info_email_sending]
         });
 
         sendEmailInvite({"username":this.state.username, "email": this.state.email})
@@ -36,7 +37,7 @@ export class UserInvite extends React.Component {
                 if(response["success"]) {
                     this.props.sendAlert({
                         alertType: alertTypes.SUCCESS,
-                        messages: ["The email has been sent successfully!"]
+                        messages: [messages.info_email_sent]
                     });
 
                     this.props.sendUpdate(true);

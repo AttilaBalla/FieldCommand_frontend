@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactTooltip from 'react-tooltip'
+import {messages} from "./messages";
 
 /**
  * @return {null}
@@ -10,13 +11,13 @@ export function ErrorTooltip(props) {
 
     switch(props.error) {
         case "serverError":
-            errorMessage = "Internal error occurred. If this alert persists, contact the site owner.";
+            errorMessage = messages.err_server_error;
             break;
         case "swrNetError":
-            errorMessage = "Unable to retrieve status. This might be due to Fieldcommand's backend or SWR.net's backend.";
+            errorMessage = messages.err_swr_api;
             break;
         case "activationError":
-            errorMessage = "Unable to activate the account. The key provided is invalid!";
+            errorMessage = messages.acc_cannot_activate;
             break;
         default:
             errorMessage = props.error; // if no templates match, use the text provided

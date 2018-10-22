@@ -2,6 +2,7 @@ import React from "react";
 import {deleteInternalRequest, getInternalRequests} from "../../util/APIUtils";
 import {alertTypes} from "../../util/Alert";
 import {InternalRequestItem} from "./InternalRequestItem";
+import {messages} from "../../util/messages";
 
 export class InternalRequestLister extends React.Component {
     constructor(props) {
@@ -27,7 +28,7 @@ export class InternalRequestLister extends React.Component {
                 if(error.status === 401) {
                     this.props.sendAlert({
                         alertType: alertTypes.ERROR,
-                        messages: ["Seems like your session has expired. Please refresh the page!"]
+                        messages: [messages.err_session_expired]
                     })
                 }
 
@@ -43,7 +44,7 @@ export class InternalRequestLister extends React.Component {
             .then(() => {
                 this.props.sendAlert({
                     alertType: alertTypes.SUCCESS,
-                    messages: ["The post has been deleted successfully!"]
+                    messages: [messages.info_post_deleted]
                 });
                 this.getPosts();
             })
