@@ -7,7 +7,7 @@ import {UserCardForm} from "./UserCardForm";
 import {UserCardHeader} from "./UserCardHeader";
 import {projectBadges} from "../../../util/ProjectBadge";
 import {UserProjectsElement} from "./UserProjectsElement";
-import {messages} from "../../../util/messages";
+import {messages} from "../../../util/Messages";
 
 export class UserCard extends React.Component {
 

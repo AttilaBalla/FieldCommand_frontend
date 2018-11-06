@@ -4,7 +4,7 @@ import {getSingleNewsPost, updateNewsPost} from "../../../util/APIUtils";
 import {Alert, alertTypes} from "../../../util/Alert";
 import {QuillEditor} from "../../../util/QuillEditor";
 import {NewsFeedPost} from "../../newsfeed/NewsfeedPost";
-import {messages} from "../../../util/messages";
+import {messages} from "../../../util/Messages";
 
 export class NewsEditor extends React.Component {
 

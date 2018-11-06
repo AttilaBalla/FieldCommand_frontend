@@ -2,7 +2,8 @@ import React from "react";
 import {deleteNewsPost, getAllNewsPosts} from "../../../util/APIUtils";
 import {NewsItem} from "./NewsItem";
 import {alertTypes} from "../../../util/Alert";
-import {messages} from "../../../util/messages";
+import {messages} from "../../../util/Messages";
+import {ContentTable} from "../../../util/ContentTable";
 
 export class NewsLister extends React.Component {
     constructor(props) {
@@ -49,19 +50,20 @@ export class NewsLister extends React.Component {
     }
 
     render() {
+
+        let headers =
+            <React.Fragment>
+                <th className="w-40">Title</th>
+                <th className="w-20">Date and time</th>
+                <th className="w-10">Owner</th>
+                <th className="w-10">Visibility</th>
+                <th className="text-right">Actions</th>
+            </React.Fragment>;
+
         return (
-            <section>
-                <ul className="list-group list-group-flush">
-                    <li className="list-group-item main_color_dark">
-                        <div className="d-flex">
-                            <span className="w-40">Title</span>
-                            <span className="w-20">Date and time</span>
-                            <span className="w-10">Owner</span>
-                            <span className="w-10">Visibility</span>
-                            <span className="ml-auto mr-3">Actions</span>
-                        </div>
-                    </li>
-                    {this.state.newsPosts.map((newsPost, key) => {
+            <ContentTable headers={headers}>
+                {this.state.newsPosts.map(
+                    (newsPost, key) => {
                         return (
                             <NewsItem
                                 key={key}
@@ -72,13 +74,10 @@ export class NewsLister extends React.Component {
                                 visible={(newsPost.visible)}
                                 deletePost={this.deletePost}
                             />
-
                         )
-                    })}
-                </ul>
-            </section>
+                    })
+                }
+            </ContentTable>
         )
-
     }
-
 }

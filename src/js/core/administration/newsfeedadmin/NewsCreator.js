@@ -2,7 +2,7 @@ import React from "react";
 import {sendNewsPost} from "../../../util/APIUtils";
 import {QuillEditor} from "../../../util/QuillEditor";
 import {alertTypes} from "../../../util/Alert";
-import {messages} from "../../../util/messages";
+import {messages} from "../../../util/Messages";
 
 export class NewsCreator extends React.Component {
 

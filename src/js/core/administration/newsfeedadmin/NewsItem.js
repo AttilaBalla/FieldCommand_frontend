@@ -39,38 +39,36 @@ export class NewsItem extends React.Component {
                                 </React.Fragment>;
 
         let editButton = <Link to={"newseditor/" + this.props.id}>
-                            <button className="btn btn-warning mr-1">
+                            <button className="btn btn-info mr-1">
                                 <i className="fa fa-pencil" aria-hidden="true"></i>
                             </button>
                         </Link>;
 
         return(
-            <li className="list-group-item">
-                <div className="d-flex justify-content-between">
-                    <span className="w-40 no-overflow">{this.props.title}</span>
-                    <span className="w-20">{this.props.date}</span>
-                    <span className="w-10">{this.props.owner}</span>
-                    <span className="w-10">{
-                        (this.props.visible)
-                            ? <i className="fa fa-eye mr-1 text-primary" aria-hidden="true"></i>
-                            : <i className="fa fa-eye-slash mr-1" aria-hidden="true"></i>
+            <tr className="bg-white">
+                <td className="w-40 no-overflow">{this.props.title}</td>
+                <td className="w-20">{this.props.date}</td>
+                <td className="w-10">{this.props.owner}</td>
+                <td className="w-10 text-center">{
+                    (this.props.visible)
+                        ? <i className="fa fa-eye mr-1 text-primary" aria-hidden="true"></i>
+                        : <i className="fa fa-eye-slash mr-1" aria-hidden="true"></i>
+                }
+                </td>
+                <td className="text-right">
+                    {(this.state.confirmedDelete)
+                        ? cancelDeleteButton
+                        : editButton
                     }
-                    </span>
-                    <span className="ml-auto">
+                    <button className="btn btn-danger"  onClick={this.sendDelete}>
                         {(this.state.confirmedDelete)
-                            ? cancelDeleteButton
-                            : editButton
+                            ? <i className="fa fa-check" aria-hidden="true"></i>
+                            : <i className="fa fa-trash" aria-hidden="true"></i>
                         }
-                        <button className="btn btn-danger"  onClick={this.sendDelete}>
-                            {(this.state.confirmedDelete)
-                                ? <i className="fa fa-check" aria-hidden="true"></i>
-                                : <i className="fa fa-trash" aria-hidden="true"></i>
-                            }
 
-                        </button>
-                    </span>
-                </div>
-            </li>
+                    </button>
+                </td>
+            </tr>
         )
     }
 }

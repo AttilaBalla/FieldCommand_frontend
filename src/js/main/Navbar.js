@@ -70,15 +70,11 @@ export class Navbar extends React.Component {
         return(
             <UserContext.Consumer>
                 {value => {
-                    const {user, logout, error} = value;
+                    let {user, logout, error} = value;
                     let userPanel, userName = null;
 
-                    if(error === null) {
-
-                        userName = (user) ? user.username : "";
-                        userPanel = (userName) ? <UsernamePanel username={userName} logout={logout}/> : "";
-
-                    } else {
+                    if(error != null) {
+                        user = null;
                         switch(error) {
                             case "expiredToken":
                                 userPanel = <StatusMessage type="info" message={error}/>;
@@ -87,6 +83,9 @@ export class Navbar extends React.Component {
                                 userPanel = <StatusMessage type="error" message={error}/>;
                                 break;
                         }
+                    } else {
+                        userName = (user) ? user.username : "";
+                        userPanel = (userName) ? <UsernamePanel username={userName} logout={logout}/> : "";
                     }
 
                     return(

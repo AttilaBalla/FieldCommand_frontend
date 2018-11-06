@@ -2,7 +2,7 @@ import React from "react";
 import {QuillEditor} from "../../util/QuillEditor";
 import {alertTypes} from "../../util/Alert";
 import {sendInternalRequest} from "../../util/APIUtils";
-import {messages} from "../../util/messages";
+import {messages} from "../../util/Messages";
 
 export class InternalRequestCreator extends React.Component {
 

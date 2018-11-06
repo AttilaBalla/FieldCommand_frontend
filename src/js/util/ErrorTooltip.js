@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactTooltip from 'react-tooltip'
-import {messages} from "./messages";
+import {messages} from "./Messages";
 
 /**
  * @return {null}

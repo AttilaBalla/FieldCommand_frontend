@@ -7,7 +7,7 @@ import {ProjectBadge} from "../../util/ProjectBadge";
 import {IRSupportModule} from "./modules/IRSupportModule";
 import {IRStatusModule} from "./modules/IRStatusModule";
 import {Redirect} from "react-router-dom";
-import {messages} from "../../util/messages";
+import {messages} from "../../util/Messages";
 
 export class InternalRequestEditor extends React.Component {
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {messages} from "./messages";
+import {messages} from "./Messages";
 
 /**
  * @return {null}

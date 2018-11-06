@@ -1,6 +1,6 @@
 import React from "react";
 import {UserCardIcon} from "./UserCardIcon";
-import {messages} from "../../../util/messages";
+import {messages} from "../../../util/Messages";
 
 export class UserCardForm extends React.Component {
 

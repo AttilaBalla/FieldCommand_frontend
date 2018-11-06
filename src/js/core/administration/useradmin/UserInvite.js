@@ -1,7 +1,7 @@
 import React from "react";
 import {alertTypes} from "../../../util/Alert";
 import {sendEmailInvite} from "../../../util/APIUtils";
-import {messages} from "../../../util/messages";
+import {messages} from "../../../util/Messages";
 
 export class UserInvite extends React.Component {
 

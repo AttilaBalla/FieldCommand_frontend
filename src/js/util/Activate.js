@@ -4,7 +4,7 @@ import {activateUser, validateActivationKey} from './APIUtils';
 import {ErrorTooltip} from "./ErrorTooltip";
 import {PW_LENGTH} from "./Constants";
 import {StatusMessage} from "./StatusMessage";
-import {messages} from "./messages";
+import {messages} from "./Messages";
 
 function LoginInput(props) {
 
